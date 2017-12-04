@@ -1,10 +1,6 @@
 import * as express from 'express';
 import * as bodyParser from 'body-parser';
 import * as path from 'path';
-const prerender = require('prerender-node');
-
-prerender.set('prerenderServiceUrl', 'http://localhost:1337/');
-prerender.set('prerenderToken', process.env.PRERENDER_TOKEN);
 
 import api from './api';
 import * as routing from './middleware/routing.mw';
