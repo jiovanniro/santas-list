@@ -1,4 +1,4 @@
-angular.module('myStore.services', [])    
+angular.module('santaList.services', [])    
 .service('SEOService', ['$rootScope', function($rootScope) {
     this.setSEO = function(data) {
         $rootScope.seo = {}; 

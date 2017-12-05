@@ -1,4 +1,4 @@
-var app = angular.module('myStore', ['ngRoute', 'ngResource', 'myStore.controllers', 'myStore.factories', 'myStore.directive','myStore.services']);
+var app = angular.module('santaList', ['ngRoute', 'ngResource', 'santaList.factories', 'santaList.directive','santaList.services']);
 
 app.config(['$routeProvider', '$locationProvider', function($routeProvider, $locationProvider){
 
@@ -9,35 +9,26 @@ $routeProvider
         templateUrl: 'views/home.html',
     })
 
-    .when('/checkout', {
-        templateUrl: 'views/checkout.html', 
+    .when('/adults', {
+        templateUrl: 'views/adults.html', 
         controller: 'cartController'
     })
 
-    .when('/cart', {
-        templateUrl: 'views/cart.html', 
+    .when('/kids', {
+        templateUrl: 'views/kids.html', 
         controller: 'cartController'
     })
 
-    .when('/contact', {
-        templateUrl: 'views/contact.html', 
+    .when('/akidreturnpage', {
+        templateUrl: 'views/akidreturnpage.html', 
         controller: 'contactController'
     })
 
-    .when('/products/:id', {
-        templateUrl: 'views/products.html',
+    .when('/thankyou', {
+        templateUrl: 'views/thankyou.html',
         controller: 'productsController',
     })
-
-    .when('/misc/:id', {
-        templateUrl: 'views/misc.html', 
-        controller: 'productsController'
-    })
     
-    .when('/single/:id', {
-        templateUrl: 'views/single.html', 
-        controller: 'singleController'
-    })
     .otherwise({
         redirectTo: '/'
     });

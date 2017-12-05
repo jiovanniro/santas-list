@@ -1,21 +1,17 @@
-var app = angular.module('myStore.factories', []);
+var app = angular.module('santaList.factories', []);
 
-app.factory('Products', ['$resource', function($resource){
-    return $resource('/api/products/:id', { id: '@id' });  
+app.factory('adults', ['$resource', function($resource){
+    return $resource('/api/adults/:id', { id: '@id' });  
 }]);
 
-app.factory('Cart', ['$resource', function($resource){
-    return $resource('/api/cart/:id', { id: '@id' });
+app.factory('akidreturnpage', ['$resource', function($resource){
+    return $resource('/api/akidreturnpage/:id', { id: '@id' });
 }]); 
 
-app.factory('Checkout', ['$resource', function($resource){
-    return $resource('/api/checkout/:id', { id: '@id' });
+app.factory('kids', ['$resource', function($resource){
+    return $resource('/api/kids/:id', { id: '@id' });
 }]); 
 
-app.factory('Contact', ['$resource', function($resource){
-    return $resource('/api/contact/:id', { id: '@id' });
-}]);
-
-app.factory('Single', ['$resource', function($resource){
-    return $resource('/api/single/:id', { id: '@id' })
+app.factory('thankyou', ['$resource', function($resource){
+    return $resource('/api/thankyou/:id', { id: '@id' });
 }]);
