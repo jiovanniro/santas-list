@@ -7,6 +7,7 @@ declare namespace models {
         user: any;
         email: string;
         password?: any;
+        fam_role: number;
     }
     interface ICourse {
         id: number; 
