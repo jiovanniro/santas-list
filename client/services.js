@@ -1,4 +1,8 @@
+<<<<<<< HEAD
+angular.module('santaList.services', [])    
+=======
 angular.module('santasList.services', [])    
+>>>>>>> 6e0e05a2a611d1321c23ae69c3b350bb7c9d85ee
 .service('SEOService', ['$rootScope', function($rootScope) {
     this.setSEO = function(data) {
         $rootScope.seo = {}; 

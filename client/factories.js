@@ -1,3 +1,21 @@
+<<<<<<< HEAD
+var app = angular.module('santaList.factories', []);
+
+app.factory('adults', ['$resource', function($resource){
+    return $resource('/api/adults/:id', { id: '@id' });  
+}]);
+
+app.factory('akidreturnpage', ['$resource', function($resource){
+    return $resource('/api/akidreturnpage/:id', { id: '@id' });
+}]); 
+
+app.factory('kids', ['$resource', function($resource){
+    return $resource('/api/kids/:id', { id: '@id' });
+}]); 
+
+app.factory('thankyou', ['$resource', function($resource){
+    return $resource('/api/thankyou/:id', { id: '@id' });
+=======
 var app = angular.module('santasList.factories', []);
     
  app.factory('User', ['$resource', function($resource){
@@ -14,4 +32,5 @@ app.factory('Adult', ['$resource', function($resource){
 
 app.factory('ChildLogin', ['$resource', function($resource) {
         return $resource('/api/childLogin/:id', { id: '@id' });
+>>>>>>> 6e0e05a2a611d1321c23ae69c3b350bb7c9d85ee
 }]);
