@@ -3,6 +3,14 @@ angular.module('santasList.controllers', [])
         console.log('in login controller');
     }])
 
-    .controller('UserController', ['$scope', 'User', '$location', '$routeParams','SEOService', function($scope, User, $location, $routeParams, SEOService) {
-        console.log('UserController');
+    .controller('AdultController', ['$scope', 'Adult', '$location', '$routeParams','SEOService', function($scope, Adult, $location, $routeParams, SEOService) {
+        console.log('AdultController');
+    }])
+    
+    .controller('ChildController', ['$scope', 'Child', '$location', '$routeParams','SEOService', function($scope, Child, $location, $routeParams, SEOService) {
+        console.log('ChildController');
+    }])
+    
+    .controller('ChildLoginController', ['$scope', 'ChildLogin', 'User', '$location', '$routeParams','SEOService', function($scope, ChildLogin, User, $location, $routeParams, SEOService) {
+        console.log('ChildLoginController');
     }]);

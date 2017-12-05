@@ -6,16 +6,36 @@ $locationProvider.html5Mode(true);
 
 $routeProvider
     .when('/', {
-        templateUrl: 'views/home.html',
+        templateUrl: 'views/home.html'
     })
 
-    .when('/adult', {
-        templateUrl: 'views/adult_signin.html'
+    .when('/adultSignIn', {
+        templateUrl: 'views/adult_signin.html',
+        controller: 'LoginController'
     })
 
-    .when('/kid', {
-        templateUrl: 'views/kid_signup.html'
+    .when('/kidSignUp', {
+        templateUrl: 'views/kid_signup.html',
+        controller: 'ChildLoginController'
+    })
     
+    .when('/kidSignIn', {
+        templateUrl: 'views/kid_signin.html',
+        controller: 'ChildLoginController'
+    })
+    
+    .when('/kidView', {
+        templateUrl: 'views/kid.html',
+        controller: 'ChildController'    
+    })
+    
+    .when('/adultView', {
+        templateUrl: 'views/adult.html',
+        controller: 'AdultController'
+    })
+    
+    .when('/thankYou', {
+        templateUrl: 'views/thankyou.html'
     })
 
     .otherwise({
