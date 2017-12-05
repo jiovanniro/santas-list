@@ -35,11 +35,11 @@ angular.module('santasList.services', [])
         $location.replace().path('/login').search('dest', current);
     }
 
-    this.login = function(email, password) {
+    this.login = function(username, password) {
         return $http({
             method: 'POST', 
             url: '/api/users/login',
-            data: {email: email, password: password}
+            data: {username: username, password: password}
         }).then(function(response) {
             currentUser = response.data; //useful info returned from promise
             return currentUser;
