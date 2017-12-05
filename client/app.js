@@ -1,8 +1,5 @@
 var app = angular.module('santaList', ['ngRoute', 'ngResource', 'santaList.factories', 'santaList.directive','santaList.services']);
-<<<<<<< HEAD
 var app = angular.module('santasList', ['ngRoute', 'ngResource', 'santasList.controllers', 'santasList.factories', 'santasList.directive','santasList.services']);
-=======
->>>>>>> d61113b2340edc2460d5eda596d2e4b1029e5785
 
 app.config(['$routeProvider', '$locationProvider', function($routeProvider, $locationProvider){
 
@@ -13,7 +10,6 @@ $routeProvider
         templateUrl: 'views/home.html'
     })
 
-<<<<<<< HEAD
     .when('/adults', {
         templateUrl: 'views/adults.html', 
         controller: 'cartController'
@@ -24,8 +20,6 @@ $routeProvider
         controller: 'cartController'
     })
 
-=======
->>>>>>> d61113b2340edc2460d5eda596d2e4b1029e5785
     .when('/akidreturnpage', {
         templateUrl: 'views/akidreturnpage.html', 
         controller: 'contactController',
