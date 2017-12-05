@@ -1,7 +1,5 @@
-angular.module('santaList.directive', [])
-.directive('santaNav', [function() {
 angular.module('santasList.directive', [])
-.directive('listNav', [function() {
+.directive('santaNav', [function() {
     return {
         restrict: 'E', //Element
         templateUrl: '/views/nav.html'
