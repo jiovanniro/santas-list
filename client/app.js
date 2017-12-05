@@ -1,8 +1,5 @@
-<<<<<<< HEAD
 var app = angular.module('santaList', ['ngRoute', 'ngResource', 'santaList.factories', 'santaList.directive','santaList.services']);
-=======
 var app = angular.module('santasList', ['ngRoute', 'ngResource', 'santasList.controllers', 'santasList.factories', 'santasList.directive','santasList.services']);
->>>>>>> 6e0e05a2a611d1321c23ae69c3b350bb7c9d85ee
 
 app.config(['$routeProvider', '$locationProvider', function($routeProvider, $locationProvider){
 
@@ -13,7 +10,6 @@ $routeProvider
         templateUrl: 'views/home.html'
     })
 
-<<<<<<< HEAD
     .when('/adults', {
         templateUrl: 'views/adults.html', 
         controller: 'cartController'
@@ -33,8 +29,11 @@ $routeProvider
         templateUrl: 'views/thankyou.html',
         controller: 'productsController',
     })
+    .when('/adultsSignUp', {
+        templateUrl: 'views/adult_signup.html',
+        controller: 'LoginController',
+    })
     
-=======
     .when('/adultSignIn', {
         templateUrl: 'views/adult_signin.html',
         controller: 'LoginController'
@@ -64,7 +63,6 @@ $routeProvider
         templateUrl: 'views/thankyou.html'
     })
 
->>>>>>> 6e0e05a2a611d1321c23ae69c3b350bb7c9d85ee
     .otherwise({
         redirectTo: '/'
     });
