@@ -54,11 +54,11 @@ angular.module('santasList.controllers', [])
         console.log('ChildController');
     }])
     
-    .controller('ChildLoginController', ['$scope', 'ChildLogin', 'User', '$location', '$routeParams', 'UserService','SEOService', function($scope, ChildLogin, User, $location, $routeParams, UserService, SEOService) {
+    .controller('ChildLoginController', ['$scope', 'Child', 'User', '$location', '$routeParams', 'UserService','SEOService', function($scope, Child, User, $location, $routeParams, UserService, SEOService) {
         console.log('ChildLoginController');
 
         $scope.createChildUser = function() {
-            var u = new User({
+            var u = new Child({
                 username: $scope.firstname,
                 password: $scope.password,
                 adultId:  UserService.adultId() //check to make sure this works
