@@ -1,4 +1,4 @@
-var app = angular.module('myStore.factories', []);
+var app = angular.module('santasList.factories', []);
 
 app.factory('Products', ['$resource', function($resource){
     return $resource('/api/products/:id', { id: '@id' });  
