@@ -10,12 +10,12 @@ $routeProvider
     })
 
     .when('/adult', {
-        templateUrl: 'views/adults.html'
+        templateUrl: 'views/adult_signin.html'
     })
 
     .when('/kid', {
-        templateUrl: 'views/kids.html', 
-        controller: 'cartController'
+        templateUrl: 'views/kid_signup.html'
+    
     })
 
     .otherwise({
