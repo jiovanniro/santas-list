@@ -4,9 +4,10 @@
 declare namespace models {
     interface IUser {
         id: number; 
-        user: string;
+        user: any;
         email: string;
         password?: any;
+        fam_role: number;
     }
     interface ICourse {
         id: number; 

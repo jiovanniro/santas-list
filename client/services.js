@@ -1,8 +1,4 @@
-<<<<<<< HEAD
-angular.module('santaList.services', [])    
-=======
 angular.module('santasList.services', [])    
->>>>>>> 6e0e05a2a611d1321c23ae69c3b350bb7c9d85ee
 .service('SEOService', ['$rootScope', function($rootScope) {
     this.setSEO = function(data) {
         $rootScope.seo = {}; 
@@ -30,13 +26,6 @@ angular.module('santasList.services', [])
         } else {
             return false;
         }
-    }
-
-    this.loginRedirect = function() {
-        //get current location
-        let current = $location.path();
-        //send the user to login and set a search param call dest so we can send them back there after login
-        $location.replace().path('/login').search('dest', current);
     }
 
     this.login = function(username, password) {

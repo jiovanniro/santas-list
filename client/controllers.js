@@ -28,6 +28,12 @@ angular.module('santasList.controllers', [])
       password.onchange = validatePassword;
       confirm_password.onkeyup = validatePassword;
 
+        function redirect() { //might need to be changed later on
+            var dest = $location.search().dest;
+            if (!dest) { dest = '/adult' }
+            $location.replace().path(dest).search('dest', null);
+        }
+
     }])
 
     .controller('AdultController', ['$scope', 'Adult', '$location', '$routeParams','SEOService', function($scope, Adult, $location, $routeParams, SEOService) {
