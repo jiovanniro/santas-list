@@ -1,6 +1,8 @@
 import * as express from 'express';
 import * as bodyParser from 'body-parser';
 import * as path from 'path';
+import * as socketIO from 'socket.io';
+
 
 import api from './api';
 import * as routing from './middleware/routing.mw';
