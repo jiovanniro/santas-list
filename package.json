@@ -2,7 +2,7 @@
   "name": "santaslist",
   "version": "1.0.0",
   "description": "christmas-list-for-kids",
-  "main": "index.js",
+  "main": "build/index.js",
   "scripts": {
     "test": "source variables && npm run dev",
     "build:ts": "tsc -p . ",
