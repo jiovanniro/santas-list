@@ -11,17 +11,35 @@ import * as userProc from '../procedures/users.proc';
 import {pool} from './db';
 
 export default function configurePassport(app: express.Express) {
+    let fam_role: number = 0;
     //Setting up LocalStrategy
     passport.use(new LocalStrategy( {//telling passport to use LocalStrategy for authentication
         usernameField: 'name',   //'name' will be the usernameField
         passwordField: 'password' //'password' will be the passwordField
     },  (name, password, done) => {
         let loginError = "Invalid Login Credentials";
-        //NEED TO BRAINSTORM ON THE VALUE TO BE PASSED TO THE PROCEDURE FACTORY
         userProc.read(name).then((user) => { //user is the result of the stored procedure / call to db
             //if no user that matches typed email address
-            if (!user) {
-                return done(null, false); //done is calling the function in users.ctrl
+            if (!user) {              
+                //Child username
+                userProc.readChild(name).then((user) => { //user is the result of the stored procedure / call to db
+                    //if no user that matches typed email address
+                    if (!user) {
+                        return done(null, false); //done is calling the function in users.ctrl
+                    }
+
+                    return utils.checkPassword(password, user.password)
+                    .then((matches) => {
+                        if (matches) {
+                            delete user.password; 
+                            return done(null, user);
+                        } else { 
+                            return done(null, false, {message: loginError});
+                        }
+                    });
+                }).catch((err) => { 
+                    return done(err); 
+                });
             }
 
             return utils.checkPassword(password, user.password)
@@ -30,14 +48,28 @@ export default function configurePassport(app: express.Express) {
                     delete user.password; 
                     return done(null, user);
                 } else { 
-                    return done(null, false, {message: loginError});
-                }
+                    userProc.readChild(name).then((user) => { //user is the result of the stored procedure / call to db
+                        //if no user that matches typed email address
+                        if (!user) {
+                            return done(null, false); //done is calling the function in users.ctrl
+                        }
+    
+                        return utils.checkPassword(password, user.password)
+                        .then((matches) => {
+                            if (matches) {
+                                delete user.password; 
+                                return done(null, user);
+                            } else { 
+                                return done(null, false, {message: loginError});
+                            }
+                        });
+                    }
+                )}
             });
         }).catch((err) => { 
             return done(err); 
         });
     }));
-
 
     /*Passport can associate a session with a particular user
     to do that it needs to know how to Serialize and Deserialize the user*/
@@ -49,13 +81,23 @@ export default function configurePassport(app: express.Express) {
 
     //Deserialized: take a unique identifier and retrieving the full user object
     //when a cookie is read this happens
-    passport.deserializeUser(function (id: number, done) {
-        userProc.read(id).then(function (user) {
-            done (null, user);
-        }, function(err) {
-            done(err);
+    if (fam_role === 1) {
+        passport.deserializeUser(function (id: string, done) {
+            userProc.read(id).then(function (user: any) {
+                done (null, user);
+            }, function(err) {
+                done(err);
+            });
         });
-    });
+    } else {
+        passport.deserializeUser(function (id: string, done) {
+            userProc.readChild(id).then(function (user: any) {
+                done (null, user);
+            }, function(err) {
+                done(err);
+            });
+        });
+    }
 
     //Configuring MySQLStore
     let sessionStore = new MySQLStore({
