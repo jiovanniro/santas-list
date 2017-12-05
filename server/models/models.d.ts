@@ -4,6 +4,7 @@
 declare namespace models {
     interface IUser {
         id: number; 
+        user: string;
         email: string;
         password?: any;
     }

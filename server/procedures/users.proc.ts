@@ -4,8 +4,8 @@ export function all(): Promise<Array<models.IUser>> {
     return rows('GetUsers',[]);
 }
 
-export function read(id: number): Promise<models.IUser> {
-    return row('GetUser', [id]);
+export function read(user: string): Promise<models.IUser> {
+    return row('get_user_by_username', [user]);
 }
 
 export function create(firstname: string, lastname: string, email: string, password: string, role: string) {
