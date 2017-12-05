@@ -44,3 +44,7 @@ router.get('/logout', (req, res) => {
         });
     }
 });
+
+router.get('/me', function(req, res){
+    res.send(req.user);
+});
