@@ -34,6 +34,16 @@ angular.module('santasList.controllers', [])
             $location.replace().path(dest).search('dest', null);
         }
 
+
+        $scope.createUser = function() {
+            var u = new User($scope.newUser); //information all needs to have a ng-model of newUser
+            u.$save(function(success){
+                console.log(success);
+            }, function(err){
+                console.log(err);
+            })
+        }
+
     }])
 
     .controller('AdultController', ['$scope', 'Adult', '$location', '$routeParams','SEOService', function($scope, Adult, $location, $routeParams, SEOService) {
@@ -44,6 +54,19 @@ angular.module('santasList.controllers', [])
         console.log('ChildController');
     }])
     
-    .controller('ChildLoginController', ['$scope', 'ChildLogin', 'User', '$location', '$routeParams','SEOService', function($scope, ChildLogin, User, $location, $routeParams, SEOService) {
+    .controller('ChildLoginController', ['$scope', 'ChildLogin', 'User', '$location', '$routeParams', 'UserService','SEOService', function($scope, ChildLogin, User, $location, $routeParams, UserService, SEOService) {
         console.log('ChildLoginController');
+
+        $scope.createChildUser = function() {
+            var u = new User({
+                username: $scope.firstname,
+                password: $scope.password,
+                adultId:  UserService.adultId() //check to make sure this works
+            });
+            u.$save(function(success){
+                console.log(success);
+            }, function(err){
+                console.log(err);
+            })
+        }
     }]);

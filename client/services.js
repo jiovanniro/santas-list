@@ -61,4 +61,8 @@ angular.module('santasList.services', [])
             });
         }
     }
+
+    this.adultId = function() {
+        return currentUser.id;
+    }
 }])
