@@ -62,7 +62,7 @@ angular.module('santasList.services', [])
         }
     }
 
-    this.adultId = function() {
+    this.userId = function() {
         return currentUser.id;
     }
 }])

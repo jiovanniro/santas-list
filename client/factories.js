@@ -11,3 +11,8 @@ app.factory('Child', ['$resource', function($resource){
 app.factory('Adult', ['$resource', function($resource){
         return $resource('/api/adult/:id', { id: '@id' });  
 }]);
+
+//might not need this factory
+app.factory('ChildUser', ['$resource', function($resource){
+        return $resource('/api/child/createChild/:id', { id: '@id' });  
+}]);
