@@ -2,10 +2,10 @@ import * as mySql from 'mysql';
 
 export let pool =  mySql.createPool({
     connectionLimit: 10,
-    host: '',
-    user: '',
-    password: '',
-    database: ''
+    host: 'localhost',
+    user: 'santaListUser',
+    password: 'checkingItTwice',
+    database: 'santa_list'
 });
 
 
