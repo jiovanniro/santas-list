@@ -7,6 +7,20 @@ import * as utils from '../utils';
 
 const router = express.Router();
 
+router.post('/', auth.isAdmin, (req, res) => {
+    utils.encryptPassword(req.body.password)
+    .then((hash) => {
+        return procedures.create(req.body.username, req.body.email, hash);
+    })
+    .then((id: object) => {
+
+        res.status(201).send(id);
+    }).catch((err: any) => {
+        console.log(err);
+        res.sendStatus(500);
+    });
+})
+
 router.get('*', auth.isLoggedIn);
 
 
@@ -48,3 +62,19 @@ router.get('/logout', (req, res) => {
 router.get('/me', function(req, res){
     res.send(req.user);
 });
+
+
+//create child user might need to be in another ctrl
+router.post('/createChild', function(req, res){
+    utils.encryptPassword(req.body.password)
+    .then((hash) => {
+        return procedures.create(req.body.username, hash, req.body.adultId);
+    })
+    .then((id: object) => {
+
+        res.status(201).send(id);
+    }).catch((err: any) => {
+        console.log(err);
+        res.sendStatus(500);
+    });
+})
