@@ -15,19 +15,6 @@ angular.module('santasList.controllers', [])
         $scope.logout = function(){
             UserService.logout().then($location.path('/'));
         };
-        let password = document.getElementById("inputPassword");
-        let confirm_password = document.getElementById("confirmPassword");
-      
-      function validatePassword(){
-        if(password.value != confirm_password.value) {
-          confirm_password.setCustomValidity("Passwords Don't Match");
-        } else {
-          confirm_password.setCustomValidity('');
-        }
-      }
-      
-    //   password.onchange = validatePassword;
-    //   confirm_password.onkeyup = validatePassword;
 
         function redirect() { //might need to be changed later on
             var dest = $location.search().dest;
@@ -48,10 +35,13 @@ angular.module('santasList.controllers', [])
                 u.$save(function(err){
                     console.log(err);
                 }, function(success){
-                    console.log(success)
+                    console.log(success);
                 });
             } else {
-                alert("Your password and confirm password do not match");
+                bootbox.alert({
+                    message: "Passwords Do Not Match",
+                    backdrop: true
+                });
             }
         };
 
