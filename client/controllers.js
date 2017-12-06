@@ -92,8 +92,8 @@ angular.module('santasList.controllers', [])
         $scope.SendComments = function(){
             var comment = new Adult({
                 message: $scope.message,
-                commentName: $scope.name,
-                itemId: UserService.userId() 
+                itemId: UserService.userId(),
+                commentName: $scope.name
             });
             comment.$save(function(success){
                 console.log(success);
