@@ -1,11 +1,12 @@
 angular.module('santasList.controllers', [])
-    .controller('LoginController', ['$scope', '$location', '$routeParams', 'Products', function($scope, $location, $routeParams, Products){
+    .controller('LoginController', ['$scope', '$location', '$routeParams', 'UserService', 'User', function($scope, $location, $routeParams, UserService, User){
         console.log('in login controller');
 
         $scope.login = function() {
             UserService.login($scope.Username, $scope.Password)
             .then(() => {
-                redirect();
+                console.log('Boomsauce');
+                //redirect();
             }, (err) => {
                 alert("Incorrect Username/Password");
                 console.log("error");
@@ -25,8 +26,8 @@ angular.module('santasList.controllers', [])
         }
       }
       
-      password.onchange = validatePassword;
-      confirm_password.onkeyup = validatePassword;
+    //   password.onchange = validatePassword;
+    //   confirm_password.onkeyup = validatePassword;
 
         function redirect() { //might need to be changed later on
             var dest = $location.search().dest;
@@ -34,14 +35,20 @@ angular.module('santasList.controllers', [])
             $location.replace().path(dest).search('dest', null);
         }
 
-            //create user
+            //create user dont believe those console lies
         $scope.CreateUser = function() {
+            console.log('pressed create user btn');
             if ($scope.NewUser.password === $scope.ConfirmPassword) {
-                var u = new User($scope.newUser); //information all needs to have a ng-model of newUser
-                u.$save(function(success){
-                    console.log(success);
-                }, function(err){
+                var u = new User({
+                    username: $scope.NewUser.username,
+                    email: $scope.NewUser.email,
+                    password: $scope.NewUser.password
+                    }); //information all needs to have a ng-model of newUser
+                console.log(u);
+                u.$save(function(err){
                     console.log(err);
+                }, function(success){
+                    console.log(success)
                 });
             } else {
                 alert("Your password and confirm password do not match");

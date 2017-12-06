@@ -7,7 +7,9 @@ import * as utils from '../utils';
 
 const router = express.Router();
 
-router.post('/', auth.isAdmin, (req, res) => {
+//create adult user
+router.post('/', (req, res) => {
+    console.log('In the user.ctrl');
     utils.encryptPassword(req.body.password)
     .then((hash) => {
         return procedures.create(req.body.username, req.body.email, hash);
@@ -20,8 +22,6 @@ router.post('/', auth.isAdmin, (req, res) => {
         res.sendStatus(500);
     });
 })
-
-router.get('*', auth.isLoggedIn);
 
 
 router.post('/login', (req, res, next) => {
@@ -78,3 +78,5 @@ router.post('/createChild', function(req, res){
         res.sendStatus(500);
     });
 })
+
+export default router;

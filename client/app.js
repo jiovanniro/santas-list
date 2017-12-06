@@ -10,9 +10,9 @@ $routeProvider
     })
 
     .when('/thankyou', {
-        templateUrl: 'views/thankyou.html',
-        controller: 'productsController',
-        requiresLogin: true
+        templateUrl: 'views/thankyou.html'
+        //controller: 'productsController'
+        // requiresLogin: true
     })
     .when('/adultSignUp', {
         templateUrl: 'views/adult_signup.html',
