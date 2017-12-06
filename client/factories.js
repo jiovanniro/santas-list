@@ -1,7 +1,8 @@
 var app = angular.module('santasList.factories', []);
     
 app.factory('User', ['$resource', function($resource){
-        return $resource('/api/users/:id', { id: '@id' });  
+        console.log('In User factory');
+        return $resource('/api/users/:id', { id: '@id' }); 
 }]);
 
 app.factory('Child', ['$resource', function($resource){

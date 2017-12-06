@@ -10,18 +10,18 @@ $routeProvider
     })
 
     .when('/thankyou', {
-        templateUrl: 'views/thankyou.html',
-        controller: 'productsController'
+        templateUrl: 'views/thankyou.html'
+        //controller: 'productsController'
         // requiresLogin: true
     })
     .when('/adultSignUp', {
-        templateUrl: 'views/adult_signup.html'
-        // controller: 'LoginController',
+        templateUrl: 'views/adult_signup.html',
+        controller: 'LoginController'
     })
     
     .when('/adultSignIn', {
-        templateUrl: 'views/adult_signin.html'
-        // controller: 'LoginController'
+        templateUrl: 'views/adult_signin.html',
+        controller: 'LoginController'
     })
 
     .when('/kidSignUp', {

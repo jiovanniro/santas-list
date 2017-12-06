@@ -15,7 +15,7 @@ export function readChild(user: string): Promise<models.IUser> {
 }
 
 export function create(username: string, email: string, password: string) {
-    return rows('CreateUser', [username, email, password]);
+    return rows('create_username', [username, email, password]);
 }
 
 export function destroy(id: number) {

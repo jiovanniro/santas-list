@@ -1,11 +1,13 @@
 import * as express from 'express'; 
 //import controllers 
-import posts from './controllers/posts.ctrl';
-import single from './controllers/single.ctrl';
+import users from './controllers/users.ctrl';
+import child from './controllers/child.ctrl';
+import adult from './controllers/adult.ctrl';
 
 const router = express.Router();
 
-router.use('/products', posts);
-router.use('/single', single);
+router.use('/users', users);
+router.use('/child', child);
+router.use('/adult', adult);
 
 export default router;
