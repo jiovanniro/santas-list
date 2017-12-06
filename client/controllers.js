@@ -107,7 +107,7 @@ angular.module('santasList.controllers', [])
         console.log('ChildController');
 
             // * post item needs more work. Only set up for one item to pass through.
-        $scope.createChildUser = function() {
+        $scope.sendItem = function() {
             var item = new Child({
                 itemName: $scope.Items
             });
