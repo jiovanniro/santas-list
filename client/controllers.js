@@ -41,8 +41,8 @@ angular.module('santasList.controllers', [])
                 console.log(success);
             }, function(err){
                 console.log(err);
-            })
-        }
+            });
+        };
 
     }])
 
@@ -132,6 +132,6 @@ angular.module('santasList.controllers', [])
                 console.log(success);
             }, function(err){
                 console.log(err);
-            })
-        }
+            });
+        };
     }]);
