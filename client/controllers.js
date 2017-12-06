@@ -3,7 +3,7 @@ angular.module('santasList.controllers', [])
         console.log('in login controller');
 
         $scope.login = function() {
-            UserService.login($scope.username, $scope.password)
+            UserService.login($scope.Username, $scope.Password)
             .then(() => {
                 redirect();
             }, (err) => {
@@ -35,13 +35,17 @@ angular.module('santasList.controllers', [])
         }
 
             //create user
-        $scope.createUser = function() {
-            var u = new User($scope.newUser); //information all needs to have a ng-model of newUser
-            u.$save(function(success){
-                console.log(success);
-            }, function(err){
-                console.log(err);
-            });
+        $scope.CreateUser = function() {
+            if ($scope.NewUser.password === $scope.ConfirmPassword) {
+                var u = new User($scope.newUser); //information all needs to have a ng-model of newUser
+                u.$save(function(success){
+                    console.log(success);
+                }, function(err){
+                    console.log(err);
+                });
+            } else {
+                alert("Your password and confirm password do not match");
+            }
         };
 
     }])
@@ -107,7 +111,7 @@ angular.module('santasList.controllers', [])
         console.log('ChildController');
 
             // * post item needs more work. Only set up for one item to pass through.
-        $scope.createChildUser = function() {
+        $scope.sendItem = function() {
             var item = new Child({
                 itemName: $scope.Items
             });
