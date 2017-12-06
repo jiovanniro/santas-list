@@ -1,7 +1,7 @@
 import * as express from 'express';
 import * as bodyParser from 'body-parser';
 import * as path from 'path';
-
+import configurePassport from './config/passport';
 
 import api from './api';
 import * as routing from './middleware/routing.mw';
@@ -10,6 +10,8 @@ let PORT = process.env.PORT || 3000;
 let app = express(); 
 let clientPath = path.join(__dirname, '../client');
 app.use(bodyParser.json()); 
+
+configurePassport(app);
 
 app.use(express.static(clientPath));
 
@@ -23,7 +25,3 @@ app.listen(PORT, function (){
 
 
 //Does not handle passport. Can be added later if req
-
-
-
-
