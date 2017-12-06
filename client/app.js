@@ -27,7 +27,7 @@ $routeProvider
     .when('/kidSignUp', {
         templateUrl: 'views/kid_signup.html',
         controller: 'ChildLoginController'
-        //This might need requiresAdmin and requiresLogin
+        // This might need requiresAdmin and requiresLogin
     })
     
     .when('/kidSignIn', {
@@ -37,31 +37,30 @@ $routeProvider
     
     .when('/kid', {
         templateUrl: 'views/kid.html',
-        controller: 'ChildController'
-        // requiresLogin: true
+        controller: 'ChildController',
+        requiresLogin: true
     })
     
     .when('/adult', {
         templateUrl: 'views/adult.html',
-        controller: 'AdultController'
-        // requiresLogin: true,
-        // requiresAdmin: true
+        controller: 'AdultController',
+        requiresLogin: true,
+        requiresAdmin: true
+    })
+    
+    .otherwise({
+        redirectTo: '/'
     });
-
-
-    // .otherwise({
-    //     redirectTo: '/'
-    // });
-}]);
+}])
     // * set for redirect path. This might be editted out later on. *
-// .run(['$rootScope', '$location', 'UserService', function($rootScope, $location, UserService){
-//     $rootScope.$on('$rootChangeStart', function(event, nextRoute, previousRoute){
-//         if (nextRoute.$$route.requiresLogin && !UserService.isLoggedIn()) {
-//             event.preventDefault();
-//             UserService.loginRedirect();
-//         } else if (nextRoute.$$route.requiresAdmin && !UserService.isAdmin()){
-//             event.preventDefault();
-//             $location.replace().path('/adult');
-//         }
-//     })
-// }])
+.run(['$rootScope', '$location', 'UserService', function($rootScope, $location, UserService){
+    $rootScope.$on('$rootChangeStart', function(event, nextRoute, previousRoute){
+        if (nextRoute.$$route.requiresLogin && !UserService.isLoggedIn()) {
+            event.preventDefault();
+            UserService.loginRedirect();
+        } else if (nextRoute.$$route.requiresAdmin && !UserService.isAdmin()){
+            event.preventDefault();
+            $location.replace().path('/adult');
+        }
+    });
+}]);
