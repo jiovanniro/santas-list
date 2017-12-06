@@ -14,7 +14,7 @@ export default function configurePassport(app: express.Express) {
     let fam_role: number;
     //Setting up LocalStrategy
     passport.use(new LocalStrategy( {//telling passport to use LocalStrategy for authentication
-        usernameField: 'name',   //'name' will be the usernameField
+        usernameField: 'username',   //'name' will be the usernameField
         passwordField: 'password' //'password' will be the passwordField
     },  (name, password, done) => {
         let loginError = "Invalid Login Credentials";
