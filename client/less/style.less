@@ -265,3 +265,96 @@
 	     -o-transition: 50ms linear;
 	        transition: 50ms linear;
 }
+/*
+##    ## #### ########       ######  #### 
+##   ##   ##  ##     ##     ##    ##  ##  
+##  ##    ##  ##     ##     ##        ##  
+#####     ##  ##     ##      ######   ##  
+##  ##    ##  ##     ##           ##  ##  
+##   ##   ##  ##     ## ### ##    ##  ##  
+##    ## #### ########  ###  ######  #### 
+*/
+.kidBG {
+    background: url(../images/kidBackground.jpg) no-repeat center center fixed;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover; 
+    min-height: 100vh;
+}
+.centered-form {
+    position: absolute;
+    left: 75%;
+    transform: translateX(-75%);
+    padding: 3em 0;
+
+    label {
+        color: white;
+        font-family: 'Lobster', cursive;
+        font-size: 26px;
+    }
+
+    h3 {
+        color: white;
+        font-family: 'Lobster', cursive;
+        font-size: 36px;
+    }
+
+    input {
+        background-color: #ca0000;
+        font-family: Comic Sans MS, Arial;
+        font-size: 14px;
+        border-style: none;
+        padding: 10px 20px 10px 20px;
+        background-image: url(../images/candyfieldbkgd.png);
+        height: 45px;
+        width: 305px;
+        color: #ca0000;
+        border-radius: 25px;
+    }
+}
+.led-box {
+    height: 30px;
+    width: 25%;
+    margin: 10px 0;
+    float: left;
+}
+.led-red {
+    margin: 0 auto;
+    width: 24px;
+    height: 24px;
+    background-color: #F00;
+    border-radius: 50%;
+    box-shadow: rgba(0, 0, 0, 0.2) 0 -1px 7px 1px, inset #441313 0 -1px 9px, rgba(255, 0, 0, 0.5) 0 2px 12px;
+    -webkit-animation: blinkRed 0.5s infinite;
+    -moz-animation: blinkRed 0.5s infinite;
+    -ms-animation: blinkRed 0.5s infinite;
+    -o-animation: blinkRed 0.5s infinite;
+    animation: blinkRed 0.5s infinite;
+}
+  
+  @-webkit-keyframes blinkRed {
+      from { background-color: #F00; }
+      50% { background-color: #A00; box-shadow: rgba(0, 0, 0, 0.2) 0 -1px 7px 1px, inset #441313 0 -1px 9px, rgba(255, 0, 0, 0.5) 0 2px 0;}
+      to { background-color: #F00; }
+  }
+  @-moz-keyframes blinkRed {
+      from { background-color: #F00; }
+      50% { background-color: #A00; box-shadow: rgba(0, 0, 0, 0.2) 0 -1px 7px 1px, inset #441313 0 -1px 9px, rgba(255, 0, 0, 0.5) 0 2px 0;}
+      to { background-color: #F00; }
+  }
+  @-ms-keyframes blinkRed {
+      from { background-color: #F00; }
+      50% { background-color: #A00; box-shadow: rgba(0, 0, 0, 0.2) 0 -1px 7px 1px, inset #441313 0 -1px 9px, rgba(255, 0, 0, 0.5) 0 2px 0;}
+      to { background-color: #F00; }
+  }
+  @-o-keyframes blinkRed {
+      from { background-color: #F00; }
+      50% { background-color: #A00; box-shadow: rgba(0, 0, 0, 0.2) 0 -1px 7px 1px, inset #441313 0 -1px 9px, rgba(255, 0, 0, 0.5) 0 2px 0;}
+      to { background-color: #F00; }
+  }
+  @keyframes blinkRed {
+      from { background-color: #F00; }
+      50% { background-color: #A00; box-shadow: rgba(0, 0, 0, 0.2) 0 -1px 7px 1px, inset #441313 0 -1px 9px, rgba(255, 0, 0, 0.5) 0 2px 0;}
+      to { background-color: #F00; }
+  }
