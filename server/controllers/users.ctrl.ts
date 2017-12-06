@@ -30,13 +30,11 @@ router.post('/login', (req, res, next) => {
 
     //authenticating the request
     passport.authenticate('local', (err: any, user: models.IUser, info: any) => {
-        console.log("The User is: " + user);
         if (err) {
             console.log(err); 
             return res.sendStatus(500);
         } 
         if (!user) {
-            console.log(err);
             return res.status(401).send(info);//info is message sent from passport.ts
         }
         req.logIn(user, (err) => {

@@ -14,7 +14,7 @@ export default function configurePassport(app: express.Express) {
     let fam_role: number;
     //Setting up LocalStrategy
     passport.use(new LocalStrategy( {//telling passport to use LocalStrategy for authentication
-        usernameField: 'name',   //'name' will be the usernameField
+        usernameField: 'username',   //'name' will be the usernameField
         passwordField: 'password' //'password' will be the passwordField
     },  (name, password, done) => {
         let loginError = "Invalid Login Credentials";
@@ -32,7 +32,7 @@ export default function configurePassport(app: express.Express) {
                     .then((matches) => {
                         if (matches) {
                             delete user.password; 
-                            fam_role = user.fam_role;
+                            fam_role = 2;
                             return done(null, user);
                         } else { 
                             return done(null, false, {message: loginError});
@@ -47,7 +47,7 @@ export default function configurePassport(app: express.Express) {
             .then((matches) => {
                 if (matches) {
                     delete user.password; 
-                    fam_role = user.fam_role;
+                    fam_role = 1;
                     return done(null, user);
                 } else { 
                     userProc.readChild(name).then((user) => { //user is the result of the stored procedure / call to db
@@ -60,7 +60,7 @@ export default function configurePassport(app: express.Express) {
                         .then((matches) => {
                             if (matches) {
                                 delete user.password; 
-                                fam_role = user.fam_role;
+                                fam_role = 2;
                                 return done(null, user);
                             } else { 
                                 return done(null, false, {message: loginError});
@@ -85,21 +85,21 @@ export default function configurePassport(app: express.Express) {
     //Deserialized: take a unique identifier and retrieving the full user object
     //when a cookie is read this happens
     passport.deserializeUser(function (id: string, done) {
-        if(fam_role === 1) {
+        // if(fam_role === 1) {
             userProc.read(id).then(function (user: any) {
                 done (null, user);
             }, function(err) {
                 done(err);
             });
-        } else if (fam_role === 2) {
-            userProc.readChild(id).then(function (user: any) {
-                done (null, user);
-            }, function(err) {
-                done(err);
-            });
-        } else {
-            console.log('Error in deserialize');
-        }
+        // } else if (fam_role === 2) {
+        //     userProc.readChild(id).then(function (user: any) {
+        //         done (null, user);
+        //     }, function(err) {
+        //         done(err);
+        //     });
+        // } else {
+        //     console.log('Error in deserialize');
+        // }
     });
 
     //Configuring MySQLStore

@@ -6,10 +6,9 @@ angular.module('santasList.controllers', [])
             UserService.login($scope.Username, $scope.Password)
             .then(() => {
                 console.log('Boomsauce');
-                //redirect();
+                loginRedirect(); //might need to change this ot redirect function
             }, (err) => {
                 alert("Incorrect Username/Password");
-                console.log("error");
             });
         };
         $scope.logout = function(){
@@ -21,6 +20,17 @@ angular.module('santasList.controllers', [])
             if (!dest) { dest = '/adult' }
             $location.replace().path(dest).search('dest', null);
         }
+
+
+        function loginRedirect() {
+            if (UserService.isAdmin === true){
+                $location.path('/adult');
+            } else {
+                $location.path('/kid');
+            }
+        }
+
+
 
             //create user dont believe those console lies
         $scope.CreateUser = function() {
