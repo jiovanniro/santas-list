@@ -7,14 +7,13 @@
 ##    ## ##        ##       ##     ## ##    ## ##     ## 
  ######  ##        ######## ##     ##  ######  ##     ##
  */
-html {
+.homeBG {
+  background: url(../images/homeBackground.jpg) no-repeat center center fixed;
   -webkit-background-size: cover;
   -moz-background-size: cover;
   -o-background-size: cover;
   background-size: cover;
-}
-.homeBG {
-  background: url(../images/homeBackground.jpg) no-repeat center center fixed;
+  min-height: 100vh;
 }
 .parentPost {
   position: absolute;
