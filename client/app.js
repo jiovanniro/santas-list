@@ -26,7 +26,7 @@ $routeProvider
 
     .when('/kidSignUp', {
         templateUrl: 'views/kid_signup.html',
-        controller: 'ChildLoginController'
+        controller: 'ChildController'
         // This might need requiresAdmin and requiresLogin
     })
     
@@ -47,6 +47,11 @@ $routeProvider
         requiresLogin: true,
         requiresAdmin: true
     })
+
+    .when('/kidSignUpAdult', {
+        templateUrl: 'views/kid_signup_adult.html',
+        controller: 'ChildSignUpController'
+    })
     
     .otherwise({
         redirectTo: '/'
@@ -60,7 +65,7 @@ $routeProvider
             UserService.loginRedirect();
         } else if (nextRoute.$$route.requiresAdmin && !UserService.isAdmin()){
             event.preventDefault();
-            $location.replace().path('/adult');
+            $location.replace().path('/kid');
         }
     });
 }]);

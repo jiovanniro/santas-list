@@ -31,10 +31,14 @@ angular.module('santasList.controllers', [])
                     password: $scope.NewUser.password
                     }); //information all needs to have a ng-model of newUser
                 console.log(u);
-                u.$save(function(err){
-                    console.log(err);
-                }, function(success){
+                u.$save(function(success){
                     console.log(success);
+                    var adultId = JSON.stringify(success.id);
+                    localStorage.setItem('adultId', adultId); 
+                    createKidProfile();
+                }, function(err){
+                    console.log(err);
+                    
                 });
             } else {
                 bootbox.alert({
@@ -44,7 +48,37 @@ angular.module('santasList.controllers', [])
             }
         };
 
+        
+        function createKidProfile() { //might need to be changed later on
+            var dest = $location.search().dest;
+            if (!dest) { dest = '/kidSignUpAdult' }
+            $location.replace().path(dest).search('dest', null);
+        }    
+
+
     }])
+
+
+    .controller('ChildSignUpController', ['$scope', 'ChildUser', '$location', '$routeParams','SEOService', function($scope, ChildUser, $location, $routeParams, SEOService){
+        $scope.createChildUser = function() {
+            var userId = localStorage.getItem('adultId');
+            var userIdParse = JSON.parse(userId);
+            var u = new ChildUser({
+                username: $scope.NewUser.username,
+                password: $scope.NewUser.password,
+                adultId:  userIdParse //check to make sure this works
+            });
+            u.$save(function(success){
+                console.log(success);
+                localStorage.removeItem('adultId');
+                $location.path('/');
+            }, function(err){
+                console.log(err);
+            });
+        };
+    }])
+
+
 
     .controller('AdultController', ['$scope', 'Adult', 'ChildUser', 'Child', 'UserService', '$location', '$routeParams','SEOService', function($scope, Adult, ChildUser, Child, UserService, $location, $routeParams, SEOService) {
     
@@ -52,16 +86,18 @@ angular.module('santasList.controllers', [])
 
         //get child within the adult id
         function getChildList() {
+            let adultId = UserService.user().id;
             $scope.childList = Adult.get({id: adultId}, function(success){
                     console.log('working');
                     return success;
                 }, function(err){
-                    redirect();
+                    console.log('no kids in list');
+                    createKidProfile();
                 }
             );
         }
 
-        function redirect() { //might need to be changed later on
+        function createKidProfile() { //might need to be changed later on
             var dest = $location.search().dest;
             if (!dest) { dest = '/kidSignUp' }
             $location.replace().path(dest).search('dest', null);
@@ -103,8 +139,20 @@ angular.module('santasList.controllers', [])
 
     }])
     
-    .controller('ChildController', ['$scope', 'Child', '$location', '$routeParams', 'UserService','SEOService', function($scope, Child, $location, $routeParams, UserService, SEOService) {
-        console.log('ChildController');
+    .controller('ChildLoginController', ['$scope', 'Child', '$location', '$routeParams', 'UserService','SEOService', function($scope, Child, $location, $routeParams, UserService, SEOService) {
+
+        console.log('In the childLoginController');
+
+        $scope.login = function() {
+            UserService.loginChild($scope.Username, $scope.Password)
+            .then(() => {
+                console.log('boomsauce!!!!!!!!');
+                // redirect(); //might need to change this to redirect function
+            }, (err) => {
+                alert("Incorrect Username/Password");
+            });
+        };
+
 
         // * post item needs more work. Only set up for one item to pass through.
         $scope.sendItem = function() {
@@ -119,19 +167,27 @@ angular.module('santasList.controllers', [])
         }
     }])
     
-    .controller('ChildLoginController', ['$scope', 'ChildUser', 'User', '$location', '$routeParams', 'UserService','SEOService', function($scope, ChildUser, User, $location, $routeParams, UserService, SEOService) {
+    .controller('ChildController', ['$scope', 'ChildUser', 'User', 'UserService', '$location', '$routeParams', 'UserService','SEOService', function($scope, ChildUser, User, UserService, $location, $routeParams, UserService, SEOService) {
 
-            //create child user
+        //create child user
         $scope.createChildUser = function() {
+            let userId = UserService.user().id;
             var u = new ChildUser({
-                username: $scope.firstname,
-                password: $scope.password,
-                adultId:  UserService.adultId() //check to make sure this works
+                username: $scope.NewUser.username,
+                password: $scope.NewUser.password,
+                adultId:  userId 
             });
             u.$save(function(success){
                 console.log(success);
+                goToAdultPage(); //Might just set location to this
             }, function(err){
                 console.log(err);
             });
         };
+
+        function goToAdultPage() { //might need to be changed later on
+            var dest = $location.search().dest;
+            if (!dest) { dest = '/adult' }
+            $location.replace().path(dest).search('dest', null);
+        }  
     }]);

@@ -17,6 +17,10 @@ export function readChild(user: string): Promise<models.IUser> {
     return row('get_childUser_by_username', [user]);
 }
 
+export function readChildById(id: number): Promise<models.IUser> {
+    return row('get_childUser_by_id', [id]);
+}
+
 export function create(username: string, email: string, password: string) {
     return row('create_username', [username, email, password]);
 }

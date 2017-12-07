@@ -5,5 +5,5 @@ export function addComment(message: string, name: string, id: number){
 }
 
 export function getFamList(id: number) {
-    return rows('get_family_list', [id]);
+    return row('get_family_list', [id]);
 }

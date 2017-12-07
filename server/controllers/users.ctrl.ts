@@ -29,7 +29,7 @@ router.post('/login', (req, res, next) => {
     console.log(req.body);
 
     //authenticating the request
-    passport.authenticate('local', (err: any, user: models.IUser, info: any) => {
+    passport.authenticate('local-adult', (err: any, user: models.IUser, info: any) => {
         if (err) {
             console.log(err); 
             return res.sendStatus(500);

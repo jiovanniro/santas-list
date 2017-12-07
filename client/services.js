@@ -39,6 +39,17 @@ angular.module('santasList.services', [])
         });
     }
 
+    this.loginChild = function(username, password) {
+        return $http({
+            method: 'POST', 
+            url: '/api/child/login',
+            data: {username: username, password: password}
+        }).then(function(response) {
+            currentUser = response.data; //useful info returned from promise
+            return currentUser;
+        });
+    }
+
     this.logout = function() {
         return $http({
             method: 'GET', 
