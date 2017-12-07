@@ -32,7 +32,7 @@ export default function configurePassport(app: express.Express) {
                     .then((matches) => {
                         if (matches) {
                             delete user.password; 
-                            fam_role = 2;
+                            fam_role = 2; //sets flag for child
                             return done(null, user);
                         } else { 
                             return done(null, false, {message: loginError});
@@ -47,7 +47,7 @@ export default function configurePassport(app: express.Express) {
             .then((matches) => {
                 if (matches) {
                     delete user.password; 
-                    fam_role = 1;
+                    fam_role = 1; //sets flag for adult
                     return done(null, user);
                 } else { 
                     userProc.readChild(name).then((user) => { //user is the result of the stored procedure / call to db
@@ -82,36 +82,35 @@ export default function configurePassport(app: express.Express) {
         done(null, user.id);
     });
 
-    passport.deserializeUser(function (id: number, done) {
-        userProc.readById(id).then(function (user) {
-            done (null, user);
-        }, function(err) {
-            done(err);
-        });
-    });
+    // passport.deserializeUser(function (id: number, done) {
+    //     userProc.readById(id).then(function (user) {
+    //         done (null, user);
+    //     }, function(err) {
+    //         done(err);
+    //     });
+    // });
+
     //Deserialized: take a unique identifier and retrieving the full user object
     //when a cookie is read this happens
 
     /*uncomment this*/
-    // passport.deserializeUser(function (id: string, done) {
-    //     // if(fam_role === 1) {
-    //         userProc.readbyHash(id).then(function (user: any) {
-    //             done (null, user);
-    //         }, function(err) {
-    //             done(err);
-    //         });
-
-
-        // } else if (fam_role === 2) {
-        //     userProc.readChild(id).then(function (user: any) {
-        //         done (null, user);
-        //     }, function(err) {
-        //         done(err);
-        //     });
-        // } else {
-        //     console.log('Error in deserialize');
-        // }
-    // });
+    passport.deserializeUser(function (id: number, done) {
+        if (fam_role === 1) {
+            userProc.readById(id).then(function (user: any) {
+                done (null, user);
+            }, function(err) {
+                done(err);
+            });
+        } else if (fam_role === 2) {
+            userProc.readChildById(id).then(function (user: any) {
+                done (null, user);
+            }, function(err) {
+                done(err);
+            });
+        } else {
+            console.log('Error in deserialize');
+        }
+    });
 
     //Configuring MySQLStore
     let sessionStore = new MySQLStore({
