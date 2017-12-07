@@ -21,7 +21,7 @@ angular.module('santasList.services', [])
     }
 
     this.isAdmin = function() {
-        if (currentUser && currentUser.role === 'admin') {
+        if (currentUser && currentUser.role === 'Admin') {
             return true;
         } else {
             return false;
@@ -34,7 +34,11 @@ angular.module('santasList.services', [])
             url: '/api/users/login',
             data: {username: username, password: password}
         }).then(function(response) {
+            console.log('inside the user service - longin'); 
+            console.log(response);
             currentUser = response.data; //useful info returned from promise
+            console.log('inside the user service - long'); 
+            console.log(currentUser);
             return currentUser;
         });
     }
