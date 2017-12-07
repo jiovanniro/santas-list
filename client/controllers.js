@@ -143,7 +143,7 @@ angular.module('santasList.controllers', [])
             UserService.loginChild($scope.Username, $scope.Password)
             .then(() => {
                 console.log('boomsauce!!!!!!!!');
-                redirect(); //might need to change this to redirect function
+                // redirect(); //might need to change this to redirect function
             }, (err) => {
                 alert("Incorrect Username/Password");
             });
@@ -165,14 +165,15 @@ angular.module('santasList.controllers', [])
     
     .controller('ChildLoginController', ['$scope', 'ChildUser', 'User', 'UserService', '$location', '$routeParams', 'UserService','SEOService', function($scope, ChildUser, User, UserService, $location, $routeParams, UserService, SEOService) {
 
-        let adultId = UserService.user().id;
+        let userId = UserService.user().id;
+        console.log(userId)
         //create child user
         $scope.createChildUser = function() {
             
             var u = new ChildUser({
                 username: $scope.NewUser.username,
                 password: $scope.NewUser.password,
-                adultId:  adultId //check to make sure this works
+                adultId:  userId //check to make sure this works
             });
             u.$save(function(success){
                 console.log(success);
