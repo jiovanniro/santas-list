@@ -86,10 +86,12 @@ angular.module('santasList.controllers', [])
 
         //get child within the adult id
         function getChildList() {
+            let adultId = UserService.user().id;
             $scope.childList = Adult.get({id: adultId}, function(success){
                     console.log('working');
                     return success;
                 }, function(err){
+                    console.log('no kids in list');
                     createKidProfile();
                 }
             );
@@ -137,9 +139,11 @@ angular.module('santasList.controllers', [])
 
     }])
     
-    .controller('ChildController', ['$scope', 'Child', '$location', '$routeParams', 'UserService','SEOService', function($scope, Child, $location, $routeParams, UserService, SEOService) {
+    .controller('ChildLoginController', ['$scope', 'Child', '$location', '$routeParams', 'UserService','SEOService', function($scope, Child, $location, $routeParams, UserService, SEOService) {
 
-        $scope.login = function() {
+        console.log('In the childLoginController');
+
+        $scope.Login = function() {
             UserService.loginChild($scope.Username, $scope.Password)
             .then(() => {
                 console.log('boomsauce!!!!!!!!');
@@ -163,21 +167,19 @@ angular.module('santasList.controllers', [])
         }
     }])
     
-    .controller('ChildLoginController', ['$scope', 'ChildUser', 'User', 'UserService', '$location', '$routeParams', 'UserService','SEOService', function($scope, ChildUser, User, UserService, $location, $routeParams, UserService, SEOService) {
+    .controller('ChildController', ['$scope', 'ChildUser', 'User', 'UserService', '$location', '$routeParams', 'UserService','SEOService', function($scope, ChildUser, User, UserService, $location, $routeParams, UserService, SEOService) {
 
-        let userId = UserService.user().id;
-        console.log(userId)
         //create child user
         $scope.createChildUser = function() {
-            
+            let userId = UserService.user().id;
             var u = new ChildUser({
                 username: $scope.NewUser.username,
                 password: $scope.NewUser.password,
-                adultId:  userId //check to make sure this works
+                adultId:  userId 
             });
             u.$save(function(success){
                 console.log(success);
-                goToAdultPage();
+                goToAdultPage(); //Might just set location to this
             }, function(err){
                 console.log(err);
             });
