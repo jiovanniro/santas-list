@@ -1,3 +1,5 @@
+import { create } from "domain";
+
 angular.module('santasList.controllers', [])
     .controller('LoginController', ['$scope', '$location', '$routeParams', 'UserService', 'User', function($scope, $location, $routeParams, UserService, User){
         console.log('in login controller');
@@ -31,10 +33,12 @@ angular.module('santasList.controllers', [])
                     password: $scope.NewUser.password
                     }); //information all needs to have a ng-model of newUser
                 console.log(u);
-                u.$save(function(err){
-                    console.log(err);
-                }, function(success){
+                u.$save(function(success){
                     console.log(success);
+                    createKidProfile();
+                }, function(err){
+                    console.log(err);
+                    
                 });
             } else {
                 bootbox.alert({
@@ -43,6 +47,13 @@ angular.module('santasList.controllers', [])
                 });
             }
         };
+
+        function createKidProfile() { //might need to be changed later on
+            var dest = $location.search().dest;
+            if (!dest) { dest = '/kidSignUp' }
+            $location.replace().path(dest).search('dest', null);
+        }    
+
 
     }])
 
@@ -56,12 +67,12 @@ angular.module('santasList.controllers', [])
                     console.log('working');
                     return success;
                 }, function(err){
-                    redirect();
+                    createKidProfile();
                 }
             );
         }
 
-        function redirect() { //might need to be changed later on
+        function createKidProfile() { //might need to be changed later on
             var dest = $location.search().dest;
             if (!dest) { dest = '/kidSignUp' }
             $location.replace().path(dest).search('dest', null);
