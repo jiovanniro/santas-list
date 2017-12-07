@@ -16,9 +16,9 @@ export default function configurePassport(app: express.Express) {
     passport.use(new LocalStrategy( {//telling passport to use LocalStrategy for authentication
         usernameField: 'username',   //'name' will be the usernameField
         passwordField: 'password' //'password' will be the passwordField
-    },  (name, password, done) => {
+    },  (username, password, done) => {
         let loginError = "Invalid Login Credentials";
-        userProc.read(name).then((user) => { //user is the result of the stored procedure / call to db
+        userProc.read(username).then((user) => { //user is the result of the stored procedure / call to db
             //if no user that matches typed email address
             if (!user) {              
                 //Child username
@@ -82,15 +82,26 @@ export default function configurePassport(app: express.Express) {
         done(null, user.id);
     });
 
+    passport.deserializeUser(function (id: number, done) {
+        userProc.readById(id).then(function (user) {
+            done (null, user);
+        }, function(err) {
+            done(err);
+        });
+    });
     //Deserialized: take a unique identifier and retrieving the full user object
     //when a cookie is read this happens
-    passport.deserializeUser(function (id: string, done) {
-        // if(fam_role === 1) {
-            userProc.read(id).then(function (user: any) {
-                done (null, user);
-            }, function(err) {
-                done(err);
-            });
+
+    /*uncomment this*/
+    // passport.deserializeUser(function (id: string, done) {
+    //     // if(fam_role === 1) {
+    //         userProc.readbyHash(id).then(function (user: any) {
+    //             done (null, user);
+    //         }, function(err) {
+    //             done(err);
+    //         });
+
+
         // } else if (fam_role === 2) {
         //     userProc.readChild(id).then(function (user: any) {
         //         done (null, user);
@@ -100,7 +111,7 @@ export default function configurePassport(app: express.Express) {
         // } else {
         //     console.log('Error in deserialize');
         // }
-    });
+    // });
 
     //Configuring MySQLStore
     let sessionStore = new MySQLStore({

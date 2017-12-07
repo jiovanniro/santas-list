@@ -21,7 +21,7 @@ angular.module('santasList.services', [])
     }
 
     this.isAdmin = function() {
-        if (currentUser && currentUser.role === 'admin') {
+        if (currentUser && currentUser.role === 'Admin') {
             return true;
         } else {
             return false;
@@ -62,7 +62,7 @@ angular.module('santasList.services', [])
         }
     }
 
-    this.userId = function() {
-        return currentUser.id;
+    this.user = function() {
+        return currentUser;
     }
 }])

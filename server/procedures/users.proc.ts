@@ -8,6 +8,9 @@ export function read(user: string): Promise<models.IUser> {
     return row('get_user_by_username', [user]);
 }
 
+export function readById(id: number): Promise<models.IUser> {
+    return row('get_user_by_id', [id]);
+}
 
 //Added for checking if child is logging in
 export function readChild(user: string): Promise<models.IUser> {
@@ -15,7 +18,7 @@ export function readChild(user: string): Promise<models.IUser> {
 }
 
 export function create(username: string, email: string, password: string) {
-    return rows('create_username', [username, email, password]);
+    return row('create_username', [username, email, password]);
 }
 
 export function destroy(id: number) {

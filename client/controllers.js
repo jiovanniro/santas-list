@@ -5,13 +5,13 @@ angular.module('santasList.controllers', [])
         $scope.login = function() {
             UserService.login($scope.Username, $scope.Password)
             .then(() => {
-                console.log('Boomsauce');
-                loginRedirect(); //might need to change this ot redirect function
+                console.log('boomsauce');
+                redirect(); //might need to change this to redirect function
             }, (err) => {
                 alert("Incorrect Username/Password");
             });
         };
-        $scope.logout = function(){
+        $scope.logout = function() {
             UserService.logout().then($location.path('/'));
         };
 
@@ -20,17 +20,6 @@ angular.module('santasList.controllers', [])
             if (!dest) { dest = '/adult' }
             $location.replace().path(dest).search('dest', null);
         }
-
-
-        function loginRedirect() {
-            if (UserService.isAdmin === true){
-                $location.path('/adult');
-            } else {
-                $location.path('/kid');
-            }
-        }
-
-
 
             //create user dont believe those console lies
         $scope.CreateUser = function() {
@@ -57,30 +46,30 @@ angular.module('santasList.controllers', [])
 
     }])
 
-    .controller('AdultController', ['$scope', 'Adult', 'ChildUser', 'Child', '$location', '$routeParams','SEOService', function($scope, Adult, ChildUser, Child, $location, $routeParams, SEOService) {
+    .controller('AdultController', ['$scope', 'Adult', 'ChildUser', 'Child', 'UserService', '$location', '$routeParams','SEOService', function($scope, Adult, ChildUser, Child, UserService, $location, $routeParams, SEOService) {
     
-            //get child within the adult id
+        let adultId = UserService.user().id;
+
+        //get child within the adult id
         function getChildList() {
-            $scope.childList = Adult.get({id: UserService.adultId()}, function(success){
+            $scope.childList = Adult.get({id: adultId}, function(success){
                     console.log('working');
                     return success;
                 }, function(err){
-                    console.log('error');
+                    redirect();
                 }
             );
         }
 
-        getChildList();
-
-            //if no children in list then send to child sign up
-        if (getChildList.id.length === undefined || 0) {
-                //might need to be changed later on
+        function redirect() { //might need to be changed later on
             var dest = $location.search().dest;
             if (!dest) { dest = '/kidSignUp' }
             $location.replace().path(dest).search('dest', null);
         }
 
-            //get items
+       getChildList();
+
+        //get items
         $scope.Items = function(childId) {
             ChildUser.get({id: childId}, function(success){
                 console.log('working');
@@ -89,7 +78,7 @@ angular.module('santasList.controllers', [])
             });
         }
 
-            //get comments
+        //get comments
         $scope.Comments = function(itemId) {
             Child.get({id: itemId}, function(success){
                 console.log('working');
@@ -98,7 +87,7 @@ angular.module('santasList.controllers', [])
             });
         };
 
-            //post comment
+        //post comment
         $scope.SendComments = function(){
             var comment = new Adult({
                 message: $scope.message,
@@ -117,7 +106,7 @@ angular.module('santasList.controllers', [])
     .controller('ChildController', ['$scope', 'Child', '$location', '$routeParams', 'UserService','SEOService', function($scope, Child, $location, $routeParams, UserService, SEOService) {
         console.log('ChildController');
 
-            // * post item needs more work. Only set up for one item to pass through.
+        // * post item needs more work. Only set up for one item to pass through.
         $scope.sendItem = function() {
             var item = new Child({
                 itemName: $scope.Items
