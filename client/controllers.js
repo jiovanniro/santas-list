@@ -1,5 +1,3 @@
-import { create } from "domain";
-
 angular.module('santasList.controllers', [])
     .controller('LoginController', ['$scope', '$location', '$routeParams', 'UserService', 'User', function($scope, $location, $routeParams, UserService, User){
         console.log('in login controller');
@@ -35,7 +33,6 @@ angular.module('santasList.controllers', [])
                 console.log(u);
                 u.$save(function(success){
                     console.log(success);
-                    createKidProfile();
                 }, function(err){
                     console.log(err);
                     
@@ -130,19 +127,29 @@ angular.module('santasList.controllers', [])
         }
     }])
     
-    .controller('ChildLoginController', ['$scope', 'ChildUser', 'User', '$location', '$routeParams', 'UserService','SEOService', function($scope, ChildUser, User, $location, $routeParams, UserService, SEOService) {
+    .controller('ChildLoginController', ['$scope', 'ChildUser', 'User', 'UserService', '$location', '$routeParams', 'UserService','SEOService', function($scope, ChildUser, User, UserService, $location, $routeParams, UserService, SEOService) {
 
-            //create child user
+        console.log("in child login controller");
+
+        let adultId = UserService.user().id;
+        //create child user
         $scope.createChildUser = function() {
             var u = new ChildUser({
-                username: $scope.firstname,
-                password: $scope.password,
-                adultId:  UserService.adultId() //check to make sure this works
+                username: $scope.NewUser.username,
+                password: $scope.NewUser.password,
+                adultId:  adultId //check to make sure this works
             });
             u.$save(function(success){
                 console.log(success);
+                goToAdultPage();
             }, function(err){
                 console.log(err);
             });
         };
+
+        function goToAdultPage() { //might need to be changed later on
+            var dest = $location.search().dest;
+            if (!dest) { dest = '/adult' }
+            $location.replace().path(dest).search('dest', null);
+        }  
     }]);

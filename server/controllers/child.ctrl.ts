@@ -10,7 +10,7 @@ const router = express.Router();
 router.post('/createChild', function(req, res){
     utils.encryptPassword(req.body.password)
     .then((hash) => {
-        return procedures.create(req.body.username, hash, req.body.adultId);
+        return procedures.create(req.body.adultId, req.body.username, hash);
     })
     .then((id: object) => {
 
