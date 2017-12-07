@@ -47,6 +47,11 @@ $routeProvider
         requiresLogin: true,
         requiresAdmin: true
     })
+
+    .when('/kidSignUpAdult', {
+        templateUrl: 'views/kid_signup_adult.html',
+        controller: 'ChildSignUpController'
+    })
     
     .otherwise({
         redirectTo: '/'

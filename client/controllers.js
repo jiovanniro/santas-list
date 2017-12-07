@@ -1,5 +1,5 @@
 angular.module('santasList.controllers', [])
-    .controller('LoginController', ['$scope', '$location', '$routeParams', 'UserService', 'ChildUser', 'User', function($scope, $location, $routeParams, UserService, ChildUser, User){
+    .controller('LoginController', ['$scope', '$location', '$routeParams', 'UserService', 'User', function($scope, $location, $routeParams, UserService, User){
         console.log('in login controller');
 
         $scope.login = function() {
@@ -48,27 +48,37 @@ angular.module('santasList.controllers', [])
             }
         };
 
-            //create kid profile on signup test
+        
         function createKidProfile() { //might need to be changed later on
-            $location.path('/kidSignUp');                
-            var userId = localStorage.getItem('adultId');
-            var userIdParse = JSON.parse(userId);    
-            var u = new ChildUser({
-                    username: $scope.NewUser.username,
-                    password: $scope.NewUser.password,
-                    adultId:  userIdParse //check to make sure this works
-                });
-                u.$save(function(success){
-                    console.log(success);
-                    localStorage.removeItem('adultId');
-                    $location.path('/');
-                }, function(err){
-                    console.log(err);
-                });
-            };   
+            var dest = $location.search().dest;
+            if (!dest) { dest = '/kidSignUpAdult' }
+            $location.replace().path(dest).search('dest', null);
+        }    
 
 
     }])
+
+
+    .controller('ChildSignUpController', ['$scope', 'ChildUser', '$location', '$routeParams','SEOService', function($scope, ChildUser, $location, $routeParams, SEOService){
+        $scope.createChildUser = function() {
+            var userId = localStorage.getItem('adultId');
+            var userIdParse = JSON.parse(userId);
+            var u = new ChildUser({
+                username: $scope.NewUser.username,
+                password: $scope.NewUser.password,
+                adultId:  userIdParse //check to make sure this works
+            });
+            u.$save(function(success){
+                console.log(success);
+                localStorage.removeItem('adultId');
+                $location.path('/');
+            }, function(err){
+                console.log(err);
+            });
+        };
+    }])
+
+
 
     .controller('AdultController', ['$scope', 'Adult', 'ChildUser', 'Child', 'UserService', '$location', '$routeParams','SEOService', function($scope, Adult, ChildUser, Child, UserService, $location, $routeParams, SEOService) {
     
@@ -147,7 +157,7 @@ angular.module('santasList.controllers', [])
 
         console.log("in child login controller");
 
-        // let adultId = UserService.user().id;
+        let adultId = UserService.user().id;
         //create child user
         $scope.createChildUser = function() {
             
