@@ -1,5 +1,5 @@
 angular.module('santasList.controllers', [])
-    .controller('LoginController', ['$scope', '$location', '$routeParams', 'UserService', 'User', function($scope, $location, $routeParams, UserService, User){
+    .controller('LoginController', ['$scope', '$location', '$routeParams', 'UserService', 'ChildUser', 'User', function($scope, $location, $routeParams, UserService, ChildUser, User){
         console.log('in login controller');
 
         $scope.login = function() {
@@ -33,6 +33,9 @@ angular.module('santasList.controllers', [])
                 console.log(u);
                 u.$save(function(success){
                     console.log(success);
+                    var adultId = JSON.stringify(success.id);
+                    localStorage.setItem('adultId', adultId); 
+                    createKidProfile();
                 }, function(err){
                     console.log(err);
                     
@@ -45,11 +48,24 @@ angular.module('santasList.controllers', [])
             }
         };
 
+            //create kid profile on signup test
         function createKidProfile() { //might need to be changed later on
-            var dest = $location.search().dest;
-            if (!dest) { dest = '/kidSignUp' }
-            $location.replace().path(dest).search('dest', null);
-        }    
+            $location.path('/kidSignUp');                
+            var userId = localStorage.getItem('adultId');
+            var userIdParse = JSON.parse(userId);    
+            var u = new ChildUser({
+                    username: $scope.NewUser.username,
+                    password: $scope.NewUser.password,
+                    adultId:  userIdParse //check to make sure this works
+                });
+                u.$save(function(success){
+                    console.log(success);
+                    localStorage.removeItem('adultId');
+                    $location.path('/');
+                }, function(err){
+                    console.log(err);
+                });
+            };   
 
 
     }])
@@ -131,9 +147,10 @@ angular.module('santasList.controllers', [])
 
         console.log("in child login controller");
 
-        let adultId = UserService.user().id;
+        // let adultId = UserService.user().id;
         //create child user
         $scope.createChildUser = function() {
+            
             var u = new ChildUser({
                 username: $scope.NewUser.username,
                 password: $scope.NewUser.password,

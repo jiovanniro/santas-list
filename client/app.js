@@ -26,7 +26,7 @@ $routeProvider
 
     .when('/kidSignUp', {
         templateUrl: 'views/kid_signup.html',
-        controller: 'ChildLoginController'
+        controller: 'LoginController'
         // This might need requiresAdmin and requiresLogin
     })
     
