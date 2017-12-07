@@ -7,6 +7,30 @@ import * as utils from '../utils';
 const router = express.Router();
 
 //might need to change location if it does not work
+router.post('/login', (req, res, next) => {
+    console.log("inside of child ctrl login");
+    console.log(req.body);
+
+    //authenticating the request
+    passport.authenticate('local-child', (err: any, user: models.IUser, info: any) => {
+        if (err) {
+            console.log(err); 
+            return res.sendStatus(500);
+        } 
+        if (!user) {
+            return res.status(401).send(info);//info is message sent from passport.ts
+        }
+        req.logIn(user, (err) => {
+            if (err) {
+                return res.sendStatus(500);
+            } else {
+                return res.send(user);//send user to passport to be serialized or deserialized
+            }
+        });
+    })(req, res, next);
+});
+
+
 router.post('/createChild', function(req, res){
     utils.encryptPassword(req.body.password)
     .then((hash) => {
@@ -47,28 +71,5 @@ router.get('/:id', function(req, res){
         res.status(500).send(err);
     });
 })
-
-router.post('/login', (req, res, next) => {
-    console.log("inside of child ctrl login");
-    console.log(req.body);
-
-    //authenticating the request
-    passport.authenticate('local-child', (err: any, user: models.IUser, info: any) => {
-        if (err) {
-            console.log(err); 
-            return res.sendStatus(500);
-        } 
-        if (!user) {
-            return res.status(401).send(info);//info is message sent from passport.ts
-        }
-        req.logIn(user, (err) => {
-            if (err) {
-                return res.sendStatus(500);
-            } else {
-                return res.send(user);//send user to passport to be serialized or deserialized
-            }
-        });
-    })(req, res, next);
-});
 
 export default router;

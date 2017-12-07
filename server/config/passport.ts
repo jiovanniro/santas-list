@@ -12,6 +12,8 @@ import {pool} from './db';
 
 export default function configurePassport(app: express.Express) {
     let fam_role: number = 1;
+    
+    
     //Setting up LocalStrategy
     passport.use('local-adult', new LocalStrategy( {//telling passport to use LocalStrategy for authentication
         usernameField: 'username',   //'name' will be the usernameField
@@ -92,14 +94,12 @@ export default function configurePassport(app: express.Express) {
             }, function(err) {
                 done(err);
             });
-        } else if (fam_role === 2) { //child
+        } else { //child
             userProc.readChildById(id).then(function (user: any) {
                 done (null, user);
             }, function(err) {
                 done(err);
             });
-        } else {
-            console.log('Error in deserialize');
         }
     });
 

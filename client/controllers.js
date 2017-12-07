@@ -147,7 +147,8 @@ angular.module('santasList.controllers', [])
             UserService.loginChild($scope.Username, $scope.Password)
             .then(() => {
                 console.log('boomsauce!!!!!!!!');
-                // redirect(); //might need to change this to redirect function
+                //redirect(); //might need to change this to redirect function
+                $location.path('/kid');
             }, (err) => {
                 alert("Incorrect Username/Password");
             });
