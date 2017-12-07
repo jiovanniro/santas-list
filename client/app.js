@@ -60,7 +60,7 @@ $routeProvider
             UserService.loginRedirect();
         } else if (nextRoute.$$route.requiresAdmin && !UserService.isAdmin()){
             event.preventDefault();
-            $location.replace().path('/adult');
+            $location.replace().path('/kid');
         }
     });
 }]);
