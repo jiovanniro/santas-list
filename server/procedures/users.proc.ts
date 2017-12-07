@@ -5,9 +5,14 @@ export function all(): Promise<Array<models.IUser>> {
 }
 
 export function read(user: string): Promise<models.IUser> {
+    console.log('inside the user proc'); 
+    console.log(user);
     return row('get_user_by_username', [user]);
 }
 
+export function readByID(id: number): Promise<models.IUser> {
+    return row('get_user_by_id', [id]);
+}
 
 //Added for checking if child is logging in
 export function readChild(user: string): Promise<models.IUser> {
