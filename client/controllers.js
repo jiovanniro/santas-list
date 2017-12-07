@@ -138,7 +138,17 @@ angular.module('santasList.controllers', [])
     }])
     
     .controller('ChildController', ['$scope', 'Child', '$location', '$routeParams', 'UserService','SEOService', function($scope, Child, $location, $routeParams, UserService, SEOService) {
-        console.log('ChildController');
+
+        $scope.login = function() {
+            UserService.loginChild($scope.Username, $scope.Password)
+            .then(() => {
+                console.log('boomsauce!!!!!!!!');
+                redirect(); //might need to change this to redirect function
+            }, (err) => {
+                alert("Incorrect Username/Password");
+            });
+        };
+
 
         // * post item needs more work. Only set up for one item to pass through.
         $scope.sendItem = function() {
@@ -154,8 +164,6 @@ angular.module('santasList.controllers', [])
     }])
     
     .controller('ChildLoginController', ['$scope', 'ChildUser', 'User', 'UserService', '$location', '$routeParams', 'UserService','SEOService', function($scope, ChildUser, User, UserService, $location, $routeParams, UserService, SEOService) {
-
-        console.log("in child login controller");
 
         let adultId = UserService.user().id;
         //create child user

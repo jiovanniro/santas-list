@@ -48,4 +48,27 @@ router.get('/:id', function(req, res){
     });
 })
 
+router.post('/login', (req, res, next) => {
+    console.log("inside of child ctrl login");
+    console.log(req.body);
+
+    //authenticating the request
+    passport.authenticate('local-child', (err: any, user: models.IUser, info: any) => {
+        if (err) {
+            console.log(err); 
+            return res.sendStatus(500);
+        } 
+        if (!user) {
+            return res.status(401).send(info);//info is message sent from passport.ts
+        }
+        req.logIn(user, (err) => {
+            if (err) {
+                return res.sendStatus(500);
+            } else {
+                return res.send(user);//send user to passport to be serialized or deserialized
+            }
+        });
+    })(req, res, next);
+});
+
 export default router;
