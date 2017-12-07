@@ -34,11 +34,7 @@ angular.module('santasList.services', [])
             url: '/api/users/login',
             data: {username: username, password: password}
         }).then(function(response) {
-            console.log('inside the user service - longin'); 
-            console.log(response);
             currentUser = response.data; //useful info returned from promise
-            console.log('inside the user service - long'); 
-            console.log(currentUser);
             return currentUser;
         });
     }
@@ -66,7 +62,7 @@ angular.module('santasList.services', [])
         }
     }
 
-    this.userId = function() {
-        return currentUser.id;
+    this.user = function() {
+        return currentUser;
     }
 }])

@@ -83,7 +83,7 @@ export default function configurePassport(app: express.Express) {
     });
 
     passport.deserializeUser(function (id: number, done) {
-        userProc.readByID(id).then(function (user) {
+        userProc.readById(id).then(function (user) {
             done (null, user);
         }, function(err) {
             done(err);
