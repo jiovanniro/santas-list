@@ -143,7 +143,7 @@ angular.module('santasList.controllers', [])
 
         console.log('In the childLoginController');
 
-        $scope.Login = function() {
+        $scope.login = function() {
             UserService.loginChild($scope.Username, $scope.Password)
             .then(() => {
                 console.log('boomsauce!!!!!!!!');
