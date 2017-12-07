@@ -23,6 +23,7 @@ angular.module('santasList.controllers', [])
 
 
         function loginRedirect() {
+            console.log('in login redirect');
             if (UserService.isAdmin === true){
                 $location.path('/adult');
             } else {
