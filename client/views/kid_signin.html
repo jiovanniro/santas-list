@@ -1,15 +1,12 @@
-<div class="kidBG">
-    <div class="centered-form col-md-6">
-        <div class="centered-form__form">
-            <form>
-                <div class="form-field">
-                    <h3>Login to Santas List</h3>
-                </div>
-                <div class="form-field">
+<div class="kidBG container">
+    <!-- <div class="row">
+        <form class="col-md-12">
+            <div class="col-md-12">Login to Santas List</div>
+                <div id="kidUser" class="form-field">
                     <label class="label">Username</label>
                     <input type="text" name="user" autofocus placeholder="your name" ng-model="Username">
                 </div>
-                <div class="form-field">
+                <div id="kidPass" class="form-field">
                     <label class="label">Password</label>
                     <input type="text" name="password" placeholder="s3cr3t!" ng-model="Password">                
                 </div>
@@ -19,8 +16,30 @@
                 </div>
             </form>
         </div>
+    </div> -->
+    <div class="row">
+        <div class="kidHeader col-md-12 text-center">Log In To Santa's List!</div>
     </div>
-    <div class="led-box">
-        <div class="led-red"></div>
+    <div class="row">
+        <div class="col-md-6">
+            <label class="label text-center">Username:</label>
+        </div>
+        <div class="col-md-6 text-center">
+            <input id="kidUser" class="input" type="text" name="user" autofocus placeholder="your name" ng-model="Username">
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-6">
+            <label class="label text-center">Password:</label>
+        </div>
+        <div class="col-md-6 text-center">
+            <input id="kidPass" type="text" name="password" placeholder="s3cr3t!" ng-model="Password">
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12 text-center">
+            <button id="logButton" class="clickButton">Login</button>
+        </div>
     </div>
 </div>
+

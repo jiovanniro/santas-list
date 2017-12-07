@@ -23,7 +23,7 @@
 .kidPost {
     position: absolute;
     margin-left: 29.5em;
-    margin-top: 20.5em;
+    margin-top: -105px;
 }
 #snow{
     overflow: hidden;
@@ -115,87 +115,65 @@
 ##   ##   ##  ##     ## ### ##    ##  ##  
 ##    ## #### ########  ###  ######  #### 
 */
-.centered-form {
-    position: absolute;
-    left: 75%;
-    transform: translateX(-75%);
-    padding: 15em 0;
+// .centered-form {
+//     position: absolute;
+//     left: 75%;
+//     transform: translateX(-75%);
+//     padding: 0;
+//     min-height: 100vh;
 
-    h3 {
-        color: white;
-        font-family: 'Lobster', cursive;
-        font-size: 60px;
-    }
+//     h3 {
+//         color: white;
+//         font-family: 'Lobster', cursive;
+//         font-size: 90px;
+//     }
 
-    input {
-        background-color: #ca0000;
-        font-family: Comic Sans MS, Arial;
-        font-size: 14px;
-        border-style: none;
-        padding: 10px 20px 10px 20px;
-        background-image: url(../images/candyfieldbkgd.png);
-        height: 45px;
-        width: 305px;
-        color: #ca0000;
-        border-radius: 25px;
-    }
+//     input {
+//         background-color: #ca0000;
+//         font-family: Comic Sans MS, Arial;
+//         font-size: 26px;
+//         border-style: none;
+//         padding: 10px 20px 10px 20px;
+//         background-image: url(../images/candyfieldbkgd.png);
+//         background-repeat: no-repeat;
+//         background-size: cover;
+//         height: 70px;
+//         width: 490px;
+//         color: #ca0000;
+//         border-radius: 25px;
+//         margin-top: 90px;
+//     }
+// }
+.col-md-12 {
+    height: 100px;
+    color: white;
+    border: 2px solid pink;
 }
-#signButton {
-    position: absolute;
-    margin-left: 310px;
-    margin-top: 106px;
-    transform: rotate(-20deg)
+.col-md-6 {
+    height: 100px;
+    color: white;
+    border: 2px solid pink;
+}
+#kidUser, #kidPass {
+    background-color: #ca0000;
+    font-family: Comic Sans MS, Arial;
+    font-size: 16px;
+    border-style: none;
+    padding: 10px 20px 10px 20px;
+    background-image: url(../images/candyfieldbkgd.png);
+    background-repeat: no-repeat;
+    background-size: cover;
+    height: 45px;
+    width: 305px;
+    color: #ca0000;
+    border-radius: 25px;
+    margin-top: 25px;
 }
 #logButton {
-    position: absolute;
-    margin-top: 128px;
-    margin-left: 15px;
-    transform: rotate(-33deg)
+    margin-top: 15px;
 }
-.led-box {
-    height: 35px;
-    width: 25%;
-    margin: 10px 0;
-    position: absolute;
-    top: 41.1em;
-    right: 7.2em;
-}
-.led-red {
-    margin: 0 auto;
-    width: 111px;
-    height: 90px;
-    transform: rotate(-17deg);
-    background-color: #F00;
-    border-radius: 50%;
-    box-shadow: rgba(0, 0, 0, 0.2) 0 -1px 7px 1px, inset #441313 0 -1px 9px, rgba(255, 0, 0, 0.5) 0 2px 12px;
-    -webkit-animation: blinkRed 0.5s infinite;
-    -moz-animation: blinkRed 0.5s infinite;
-    -ms-animation: blinkRed 0.5s infinite;
-    -o-animation: blinkRed 0.5s infinite;
-    animation: blinkRed 0.5s infinite;
-}
-@-webkit-keyframes blinkRed {
-    from { background-color: #F00; }
-    50% { background-color: #A00; box-shadow: rgba(0, 0, 0, 0.2) 0 -1px 7px 1px, inset #441313 0 -1px 9px, rgba(255, 0, 0, 0.5) 0 2px 0;}
-    to { background-color: #F00; }
-}
-@-moz-keyframes blinkRed {
-    from { background-color: #F00; }
-    50% { background-color: #A00; box-shadow: rgba(0, 0, 0, 0.2) 0 -1px 7px 1px, inset #441313 0 -1px 9px, rgba(255, 0, 0, 0.5) 0 2px 0;}
-    to { background-color: #F00; }
-}
-@-ms-keyframes blinkRed {
-    from { background-color: #F00; }
-    50% { background-color: #A00; box-shadow: rgba(0, 0, 0, 0.2) 0 -1px 7px 1px, inset #441313 0 -1px 9px, rgba(255, 0, 0, 0.5) 0 2px 0;}
-    to { background-color: #F00; }
-}
-@-o-keyframes blinkRed {
-    from { background-color: #F00; }
-    50% { background-color: #A00; box-shadow: rgba(0, 0, 0, 0.2) 0 -1px 7px 1px, inset #441313 0 -1px 9px, rgba(255, 0, 0, 0.5) 0 2px 0;}
-    to { background-color: #F00; }
-}
-@keyframes blinkRed {
-    from { background-color: #F00; }
-    50% { background-color: #A00; box-shadow: rgba(0, 0, 0, 0.2) 0 -1px 7px 1px, inset #441313 0 -1px 9px, rgba(255, 0, 0, 0.5) 0 2px 0;}
-    to { background-color: #F00; }
+.kidHeader {
+    color: #dd4330;
+    font-family: 'Mountains of Christmas', cursive;
+    font-size: 55px;
 }
