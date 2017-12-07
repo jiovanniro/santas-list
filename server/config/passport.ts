@@ -11,63 +11,54 @@ import * as userProc from '../procedures/users.proc';
 import {pool} from './db';
 
 export default function configurePassport(app: express.Express) {
-    let fam_role: number;
+    let fam_role: number = 1;
     //Setting up LocalStrategy
-    passport.use(new LocalStrategy( {//telling passport to use LocalStrategy for authentication
+    passport.use('local-adult', new LocalStrategy( {//telling passport to use LocalStrategy for authentication
         usernameField: 'username',   //'name' will be the usernameField
         passwordField: 'password' //'password' will be the passwordField
     },  (username, password, done) => {
         let loginError = "Invalid Login Credentials";
-        userProc.read(username).then((user) => { //user is the result of the stored procedure / call to db
+        userProc.read(username).then((user) => {
             //if no user that matches typed email address
-            if (!user) {              
-                //Child username
-                userProc.readChild(name).then((user) => { //user is the result of the stored procedure / call to db
-                    //if no user that matches typed email address
-                    if (!user) {
-                        return done(null, false); //done is calling the function in users.ctrl
-                    }
+            if (!user) {
+                return done(null, false); //done is calling the function in users.ctrl
+            }
 
-                    return utils.checkPassword(password, user.password)
-                    .then((matches) => {
-                        if (matches) {
-                            delete user.password; 
-                            fam_role = 2; //sets flag for child
-                            return done(null, user);
-                        } else { 
-                            return done(null, false, {message: loginError});
-                        }
-                    });
-                }).catch((err) => { 
-                    return done(err); 
-                });
+            return utils.checkPassword(password, user.password)
+            .then((matches) => {
+                if (matches) {
+                    delete user.password;
+                    fam_role === 1;
+                    return done(null, user);
+                } else { 
+                    return done(null, false, {message: loginError});
+                }
+            });
+        }).catch((err) => { 
+            return done(err); 
+        });
+    }));
+
+    passport.use('local-child', new LocalStrategy( {//telling passport to use LocalStrategy for authentication
+        usernameField: 'username',   //'name' will be the usernameField
+        passwordField: 'password' //'password' will be the passwordField
+    },  (username, password, done) => {
+        let loginError = "Invalid Login Credentials";
+        userProc.readChild(username).then((user) => {
+            //if no user that matches typed email address
+            if (!user) {
+                return done(null, false); //done is calling the function in users.ctrl
             }
 
             return utils.checkPassword(password, user.password)
             .then((matches) => {
                 if (matches) {
                     delete user.password; 
-                    fam_role = 1; //sets flag for adult
+                    fam_role === 2;
                     return done(null, user);
                 } else { 
-                    userProc.readChild(name).then((user) => { //user is the result of the stored procedure / call to db
-                        //if no user that matches typed email address
-                        if (!user) {
-                            return done(null, false); //done is calling the function in users.ctrl
-                        }
-    
-                        return utils.checkPassword(password, user.password)
-                        .then((matches) => {
-                            if (matches) {
-                                delete user.password; 
-                                fam_role = 2;
-                                return done(null, user);
-                            } else { 
-                                return done(null, false, {message: loginError});
-                            }
-                        });
-                    }
-                )}
+                    return done(null, false, {message: loginError});
+                }
             });
         }).catch((err) => { 
             return done(err); 
@@ -95,13 +86,13 @@ export default function configurePassport(app: express.Express) {
 
     /*uncomment this*/
     passport.deserializeUser(function (id: number, done) {
-        if (fam_role === 1) {
+        if (fam_role === 1) { //adult
             userProc.readById(id).then(function (user: any) {
                 done (null, user);
             }, function(err) {
                 done(err);
             });
-        } else if (fam_role === 2) {
+        } else if (fam_role === 2) { //child
             userProc.readChildById(id).then(function (user: any) {
                 done (null, user);
             }, function(err) {
