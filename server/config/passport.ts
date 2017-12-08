@@ -11,7 +11,6 @@ import * as userProc from '../procedures/users.proc';
 import {pool} from './db';
 
 export default function configurePassport(app: express.Express) {
-    let fam_role: number = 1;
     //Setting up LocalStrategy
     passport.use('local-adult', new LocalStrategy( {//telling passport to use LocalStrategy for authentication
         usernameField: 'username',   //'name' will be the usernameField
@@ -27,7 +26,6 @@ export default function configurePassport(app: express.Express) {
             .then((matches) => {
                 if (matches) {
                     delete user.password;
-                    fam_role === 1;
                     return done(null, user);
                 } else { 
                     return done(null, false, {message: loginError});
@@ -54,7 +52,6 @@ export default function configurePassport(app: express.Express) {
             .then((matches) => {
                 if (matches) {
                     delete user.password; 
-                    fam_role === 2;
                     return done(null, user);
                 } else { 
                     return done(null, false, {message: loginError});
