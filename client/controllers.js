@@ -6,6 +6,9 @@ angular.module('santasList.controllers', [])
         UserService.login($scope.Username, $scope.Password)
         .then(() => {
             console.log('boomsauce');
+            let userId = UserService.user().id
+            let userIdString = JSON.stringify(userId);
+            localStorage.setItem('famList', userIdString);
             redirect(); //might need to change this to redirect function
         }, (err) => {
             alert("Incorrect Username/Password");
@@ -82,12 +85,12 @@ angular.module('santasList.controllers', [])
 
 .controller('AdultController', ['$scope', 'Adult', 'ChildUser', 'Child', 'UserService', '$location', '$routeParams','SEOService', function($scope, Adult, ChildUser, Child, UserService, $location, $routeParams, SEOService) {
 
-    let adultId = UserService.user().id;
+    let adultId = localStorage.getItem('famList');
+    let adultIdParse = JSON.parse(adultId);
 
     //get child within the adult id
     function getChildList() {
-        let adultId = UserService.user().id;
-        $scope.childList = Adult.get({id: adultId}, function(success){
+        $scope.childList = Adult.query({id: adultIdParse}, function(success){
                 console.log('working');
                 return success;
             }, function(err){
@@ -106,18 +109,23 @@ angular.module('santasList.controllers', [])
    getChildList();
 
     //get items
-    $scope.Items = function(childId) {
-        ChildUser.get({id: childId}, function(success){
+    $scope.Items = function() {
+        var childId = document.getElementById('famList').value;
+        console.log('ChildId: ' + childId);
+        $scope.ItemList = ChildUser.query({id: childId}, function(success){
             console.log('working');
+            console.log(success);
         }, function(err){
             console.log('error');
+            console.log(err);
         });
     }
 
     //get comments
-    $scope.Comments = function(itemId) {
-        Child.get({id: itemId}, function(success){
-            console.log('working');
+    $scope.Comments = function() {
+        $scope.Comments = Child.get({id: 1}, function(success){
+            console.log('comments working');
+            console.log(success);
         }, function(err){
             console.log('error');
         });

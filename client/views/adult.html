@@ -1,0 +1,24 @@
+<div>
+    <select id="famList">
+        <option ng-repeat="kid in childList" value="{{kid.id}}">{{ kid.username }}</option>
+    </select>
+    <button type="submit" ng-click="Items()">Select</button>
+    <div ng-repeat="item in ItemList">
+        <h2>{{ item.item_name }}</h2>
+        <input type="checkbox">
+        <!-- add in the comments here -->
+        <div>
+            <div ng-repeat="comment in Comments">
+                <p>{{ comment.user }}</p>
+                <p>{{ comment.message }}</p>
+            </div>
+        </div>
+        <div>
+            <input type="text">
+            <br />
+            <textarea cols="50%" rows="4"></textarea>
+            <br />
+            <button type="submit">Add Comment</button>
+        </div>
+    </div>
+</div>
