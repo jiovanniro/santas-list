@@ -131,10 +131,6 @@ angular.module('santasList.controllers', [])
                 divComment.appendChild(textComment);
                 divContainer.appendChild(divComment);
             }
-            // var input = document.createElement("input");
-            // var inputAtt = document.createAttribute("type");
-            // inputAtt.value("text");
-            // input.setAttributeNode(inputAtt);
             document.getElementById("divContainer" + itemId).style.display = "";
             document.getElementById("btnComments" + itemId).style.display = "none";
             document.getElementById("btnHideComments" + itemId).style.display = "";
@@ -151,17 +147,24 @@ angular.module('santasList.controllers', [])
     };
 
     //post comment
-    $scope.SendComments = function(){
+    $scope.SendComment = function(item){
+        var messageScope = $scope.Message;
+        var userScope = $scope.Name;
         var comment = new Adult({
-            message: $scope.message,
-            itemId: UserService.userId(),
-            commentName: $scope.name
+            message: messageScope,
+            itemId: item,
+            user: userScope
         });
-        comment.$save(function(success){
-            console.log(success);
-        }, function(err){
-            console.log(err);
-        })
+        console.log(comment);
+        // comment.$save(function(success){
+        //     console.log(success);
+        //     var divComment = document.createElement("div");
+        //     var textComment = document.createTextNode(comment.user + ": " + comment.message + " ");
+        //     divComment.appendChild(textComment);
+        //     divContainer.appendChild(divComment);
+        // }, function(err){
+        //     console.log(err);
+        // })
     }
 
 }])
