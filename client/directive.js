@@ -1,7 +1,7 @@
 angular.module('santasList.directive', [])
-.directive('santaNav', [function() {
+.directive('santaFoot', [function() {
     return {
         restrict: 'E', //Element
-        templateUrl: '/views/nav.html'
+        templateUrl: '/views/footer.html'
     };
 }]);

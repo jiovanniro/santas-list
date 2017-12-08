@@ -6,12 +6,16 @@ angular.module('santasList.controllers', [])
         UserService.login($scope.Username, $scope.Password)
         .then(() => {
             console.log('boomsauce');
-            let userId = UserService.user().id
+            let userId = UserService.user().id;
             let userIdString = JSON.stringify(userId);
             localStorage.setItem('famList', userIdString);
             redirect(); //might need to change this to redirect function
         }, (err) => {
-            alert("Incorrect Username/Password");
+            bootbox.alert({
+                message: "Incorrect Username/Password",
+                backdrop: true,
+                closeButton: false
+            });
         });
     };
     $scope.logout = function() {
@@ -46,7 +50,8 @@ angular.module('santasList.controllers', [])
         } else {
             bootbox.alert({
                 message: "Passwords Do Not Match",
-                backdrop: true
+                backdrop: true,
+                closeButton: false
             });
         }
     };
@@ -179,7 +184,10 @@ angular.module('santasList.controllers', [])
             console.log('boomsauce!!!!!!!!');
             $location.path('/kid');
         }, (err) => {
-            alert("Incorrect Username/Password");
+            bootbox.alert({
+                message: "Incorrect Username/Password",
+                backdrop: true,
+            });
         });
     };
 

@@ -19,12 +19,14 @@
   background-color: transparent;
   border: none;
   outline: none;
+  cursor: pointer;
 }
 button:focus {
   outline: 0 !important;
 }
 .modal-header {
-  background-color: #8b8a8b;
+  background-color: black;
+  border-bottom: 1px solid black;
 }
 .modal-header .teamLogo {
   padding-left: 140px;
@@ -33,9 +35,13 @@ button:focus {
   color: #fbc000;
 }
 .modal-body {
-  background-color: #f2f2f2;
+  background-color: #8b8a8b;
 }
 .modal-body .modalH2 {
+  color: black;
+  font-family: 'Rock Salt', cursive;
+}
+.modal-body .modalH4 {
   color: black;
   font-family: 'Rock Salt', cursive;
 }
