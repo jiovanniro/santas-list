@@ -6,6 +6,7 @@ import * as utils from '../utils';
 
 const router = express.Router();
 
+//might need to change location if it does not work
 router.post('/login', (req, res, next) => {
     console.log("inside of child ctrl login");
     console.log(req.body);
@@ -29,7 +30,7 @@ router.post('/login', (req, res, next) => {
     })(req, res, next);
 });
 
-//might need to change location if it does not work
+
 router.post('/createChild', function(req, res){
     utils.encryptPassword(req.body.password)
     .then((hash) => {
@@ -70,7 +71,5 @@ router.get('/:id', function(req, res){
         res.status(500).send(err);
     });
 })
-
-
 
 export default router;

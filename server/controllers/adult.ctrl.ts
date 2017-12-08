@@ -6,8 +6,8 @@ import * as utils from '../utils';
 
 const router = express.Router();
 
-router.post('/:id', function(req, res){
-    procedures.addComment(req.body.message, req.body.commentName, req.body.itemId)
+router.post('/', function(req, res){
+    procedures.addComment(req.body.message, req.body.itemId, req.body.user)
     .then(function(item){
         res.send(item);
     }).catch(function(err){

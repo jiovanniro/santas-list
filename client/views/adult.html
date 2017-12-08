@@ -1,5 +1,30 @@
+<<<<<<< HEAD
 <footer class="footer">
         <div class="container-fluid">
                 © 2017  Built By: <img class="footIMG" src="images/TeamLogo.png" data-toggle="modal" data-target="#teamLogoModal">
         </div>
       </footer>
+=======
+<div>
+    <select id="famList">
+        <option ng-repeat="kid in childList" value="{{kid.id}}">{{ kid.username }}</option>
+    </select>
+    <button type="submit" ng-click="Items()">Select</button>
+    <div ng-repeat="item in ItemList">
+        <h2>{{ item.item_name }} <input type="checkbox"></h2>
+        <!-- add in the comments here -->
+        <button id="btnComments{{ item.id }}" ng-click="Comments(item.id)" style="display: visible">Veiw Comments</button>
+        <button id="btnHideComments{{ item.id }}" ng-click="HideComments(item.id)" style="display: none">Hide Comments</button>
+        <div id="divContainer{{item.id}}" style="display: none">
+            <div id="div{{ item.id }}id"  style="float: left; width: 25%"></div> 
+            <div>
+                <input type="text" ng-model="Name">
+                <br />
+                <textarea cols="50%" rows="4" ng-model="Message"></textarea>
+                <br />
+                <button type="submit" ng-click="SendComment(item.id)">Add Comment</button>
+            </div>
+        </div>
+    </div>
+</div>
+>>>>>>> 47ed7817925a72c2071ac768034446020225220d

@@ -11,7 +11,6 @@ import * as userProc from '../procedures/users.proc';
 import {pool} from './db';
 
 export default function configurePassport(app: express.Express) {
-    let fam_role: number = 1;
     //Setting up LocalStrategy
     passport.use('local-adult', new LocalStrategy( {//telling passport to use LocalStrategy for authentication
         usernameField: 'username',   //'name' will be the usernameField
@@ -23,12 +22,10 @@ export default function configurePassport(app: express.Express) {
             if (!user) {
                 return done(null, false); //done is calling the function in users.ctrl
             }
-
             return utils.checkPassword(password, user.password)
             .then((matches) => {
                 if (matches) {
                     delete user.password;
-                    fam_role === 1;
                     return done(null, user);
                 } else { 
                     return done(null, false, {message: loginError});
@@ -47,6 +44,7 @@ export default function configurePassport(app: express.Express) {
         userProc.readChild(username).then((user) => {
             //if no user that matches typed email address
             if (!user) {
+                console.log('child user does not exist');
                 return done(null, false); //done is calling the function in users.ctrl
             }
 
@@ -54,7 +52,6 @@ export default function configurePassport(app: express.Express) {
             .then((matches) => {
                 if (matches) {
                     delete user.password; 
-                    fam_role === 2;
                     return done(null, user);
                 } else { 
                     return done(null, false, {message: loginError});
@@ -73,34 +70,20 @@ export default function configurePassport(app: express.Express) {
         done(null, user.id);
     });
 
-    // passport.deserializeUser(function (id: number, done) {
-    //     userProc.readById(id).then(function (user) {
-    //         done (null, user);
-    //     }, function(err) {
-    //         done(err);
-    //     });
-    // });
-
     //Deserialized: take a unique identifier and retrieving the full user object
     //when a cookie is read this happens
-
-    /*uncomment this*/
-    passport.deserializeUser(function (id: number, done) {
-        if (fam_role === 1) { //adult
-            userProc.readById(id).then(function (user: any) {
-                done (null, user);
+    passport.deserializeUser(function(id: number, done) {
+        userProc.readById(id).then(function (user: any) {
+            if(user){
+              done(null, user);
+            } else {
+                userProc.readChildById(id).then(function (user: any) {
+                done(null, user);
             }, function(err) {
                 done(err);
             });
-        } else if (fam_role === 2) { //child
-            userProc.readChildById(id).then(function (user: any) {
-                done (null, user);
-            }, function(err) {
-                done(err);
-            });
-        } else {
-            console.log('Error in deserialize');
         }
+        });
     });
 
     //Configuring MySQLStore
