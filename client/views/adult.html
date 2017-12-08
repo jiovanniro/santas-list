@@ -4,21 +4,19 @@
     </select>
     <button type="submit" ng-click="Items()">Select</button>
     <div ng-repeat="item in ItemList">
-        <h2>{{ item.item_name }}</h2>
-        <input type="checkbox">
+        <h2>{{ item.item_name }} <input type="checkbox"></h2>
         <!-- add in the comments here -->
-        <div>
-            <div ng-repeat="comment in Comments">
-                <p>{{ comment.user }}</p>
-                <p>{{ comment.message }}</p>
+        <button id="btnComments{{ item.id }}" ng-click="Comments(item.id)" style="display: visible">Veiw Comments</button>
+        <button id="btnHideComments{{ item.id }}" ng-click="HideComments(item.id)" style="display: none">Hide Comments</button>
+        <div id="divContainer{{item.id}}" style="display: none">
+            <div id="div{{ item.id }}id"  style="float: left; width: 25%"></div> 
+            <div>
+                <input type="text">
+                <br />
+                <textarea cols="50%" rows="4"></textarea>
+                <br />
+                <button type="submit">Add Comment</button>
             </div>
-        </div>
-        <div>
-            <input type="text">
-            <br />
-            <textarea cols="50%" rows="4"></textarea>
-            <br />
-            <button type="submit">Add Comment</button>
         </div>
     </div>
 </div>

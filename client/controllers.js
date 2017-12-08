@@ -50,7 +50,6 @@ angular.module('santasList.controllers', [])
             });
         }
     };
-
     
     function createKidProfile() { //might need to be changed later on
         var dest = $location.search().dest;
@@ -122,13 +121,33 @@ angular.module('santasList.controllers', [])
     }
 
     //get comments
-    $scope.Comments = function() {
-        $scope.Comments = Child.get({id: 1}, function(success){
+    $scope.Comments = function(itemId) {
+        Child.query({id: itemId}, function(success){
             console.log('comments working');
-            console.log(success);
+            var divContainer = document.getElementById("div" + itemId + "id");
+            for (i = 0; i < success.length; i++) {
+                var divComment = document.createElement("div");
+                var textComment = document.createTextNode(success[i].user + ": " + success[i].message + " ");
+                divComment.appendChild(textComment);
+                divContainer.appendChild(divComment);
+            }
+            // var input = document.createElement("input");
+            // var inputAtt = document.createAttribute("type");
+            // inputAtt.value("text");
+            // input.setAttributeNode(inputAtt);
+            document.getElementById("divContainer" + itemId).style.display = "";
+            document.getElementById("btnComments" + itemId).style.display = "none";
+            document.getElementById("btnHideComments" + itemId).style.display = "";
         }, function(err){
-            console.log('error');
+            console.log('comments error');
         });
+    };
+
+    $scope.HideComments = function(itemId) {
+        document.getElementById("divContainer" + itemId).style.display = "none";
+        document.getElementById("div" + itemId + "id").innerHTML = '';
+        document.getElementById("btnComments" + itemId).style.display = "";
+        document.getElementById("btnHideComments" + itemId).style.display = "none";
     };
 
     //post comment
