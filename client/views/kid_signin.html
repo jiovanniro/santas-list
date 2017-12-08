@@ -33,12 +33,12 @@
             <label class="label text-center">Password:</label>
         </div>
         <div class="col-md-6 text-center">
-            <input id="kidPass" type="text" name="password" placeholder="s3cr3t!" ng-model="Password">
+            <input id="kidPass" type="password" name="password" placeholder="s3cr3t!" ng-model="Password">
         </div>
     </div>
     <div class="row">
         <div class="col-md-12 text-center">
-            <button id="logButton" class="clickButton">Login</button>
+            <button id="logButton" class="clickButton" ng-click='login()'>Login</button>
         </div>
     </div>
 </div>
