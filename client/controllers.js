@@ -153,23 +153,20 @@ angular.module('santasList.controllers', [])
 
     //post comment
     $scope.SendComment = function(item){
-        var messageScope = $scope.Message;
-        var userScope = $scope.Name;
         var comment = new Adult({
-            message: messageScope,
+            message: document.getElementById("message" + item).value,
             itemId: item,
-            user: userScope
+            user: document.getElementById("username" + item).value
         });
-        console.log(comment);
-        // comment.$save(function(success){
-        //     console.log(success);
-        //     var divComment = document.createElement("div");
-        //     var textComment = document.createTextNode(comment.user + ": " + comment.message + " ");
-        //     divComment.appendChild(textComment);
-        //     divContainer.appendChild(divComment);
-        // }, function(err){
-        //     console.log(err);
-        // })
+        comment.$save(function(success){
+            console.log(success);
+            var divComment = document.createElement("div");
+            var textComment = document.createTextNode(comment.user + ": " + comment.message + " ");
+            divComment.appendChild(textComment);
+            divContainer.appendChild(divComment);
+        }, function(err){
+            console.log(err);
+        })
     }
 
 }])
