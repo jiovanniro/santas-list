@@ -18,9 +18,6 @@ angular.module('santasList.controllers', [])
             });
         });
     };
-    $scope.logout = function() {
-        UserService.logout().then($location.path('/'));
-    };
 
     function redirect() { //might need to be changed later on
         var dest = $location.search().dest;
@@ -91,6 +88,16 @@ angular.module('santasList.controllers', [])
 
     let adultId = localStorage.getItem('famList');
     let adultIdParse = JSON.parse(adultId);
+
+    $scope.logout = function() {
+        console.log("Pressed logout");
+        UserService.logout().then($location.path('/'));
+    };
+
+    $scope.AddChild = function(){
+        $location.path('kidSignUp');
+    }
+
 
     //get child within the adult id
     function getChildList() {
@@ -267,7 +274,7 @@ angular.module('santasList.controllers', [])
 
     //create child user
     $scope.createChildUser = function() {
-        let userId = UserService.user().id;
+        let userId = localStorage.getItem("famList");
         var u = new ChildUser({
             username: $scope.NewUser.username,
             password: $scope.NewUser.password,
