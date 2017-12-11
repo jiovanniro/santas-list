@@ -96,12 +96,23 @@ angular.module('santasList.controllers', [])
     function getChildList() {
         $scope.childList = Adult.query({id: adultIdParse}, function(success){
                 console.log('working');
-                return success;
+                console.log(success[0]);
+                firstChildList(success[0].id); //find a way to make this work when page loads
             }, function(err){
                 console.log('no kids in list');
                 createKidProfile();
             }
         );
+    }
+
+    function firstChildList(kidId) {
+        $scope.ItemList = ChildUser.query({id: kidId}, function(success){
+            console.log(success);
+            console.log("success");
+        }, function(err){
+            console.log(err);
+            console.log("error");
+        });
     }
 
     function createKidProfile() { //might need to be changed later on
@@ -113,16 +124,49 @@ angular.module('santasList.controllers', [])
    getChildList();
 
     //get items
-    $scope.Items = function() {
+    function getItems() {
         var childId = document.getElementById('famList').value;
         console.log('ChildId: ' + childId);
         $scope.ItemList = ChildUser.query({id: childId}, function(success){
-            console.log('working');
             console.log(success);
+            console.log("success");
         }, function(err){
-            console.log('error');
             console.log(err);
+            console.log("error");
         });
+    }
+
+    $scope.Items = function(){
+        getItems();
+    }
+
+
+    //see if the item is purchased
+    $scope.Purchased = function(itemId){
+        var checkbox = document.getElementById("purchasedCheckBox" + itemId);
+        if(checkbox.checked){
+            console.log("checked");
+            var checked = new Adult({
+                id: itemId,
+                purchased: "true"
+            })
+            checked.$save({id: itemId}, function(success){
+                console.log("success");
+            }, function(err){
+                console.log(err);
+            })
+        } else{
+            console.log("not checked");
+            var checked = new Adult({
+                id: itemId,
+                purchased: "false"
+            })
+            checked.$save({id: itemId}, function(success){
+                console.log("success");
+            }, function(err){
+                console.log(err);
+            })
+        }
     }
 
     //get comments
@@ -160,14 +204,31 @@ angular.module('santasList.controllers', [])
         });
         comment.$save(function(success){
             console.log(success);
+            var divContainer = document.getElementById("div" + item + "id");
             var divComment = document.createElement("div");
-            var textComment = document.createTextNode(comment.user + ": " + comment.message + " ");
+            var textComment = document.createTextNode(document.getElementById("username" + item).value + ": " + document.getElementById("message" + item).value);
             divComment.appendChild(textComment);
             divContainer.appendChild(divComment);
         }, function(err){
             console.log(err);
         })
     }
+
+
+    $scope.RemoveItem = function(itemId){
+        if (confirm("Are you sure you wish to delete this item from the list?")){
+            var remove = new Adult({
+                id: itemId
+            });
+            remove.$delete({id: itemId}, function(success){
+                console.log('Item Deleted!');
+                getItems();
+            }, function(err){
+                console.log('error');
+            })
+        }
+    }
+
 
 }])
 
