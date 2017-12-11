@@ -51,6 +51,7 @@ router.post('/login', (req, res, next) => {
 
 router.get('/logout', (req, res) => {
     //making sure a session exist
+    console.log("req.session " + req.session);
     if (req.session) {
         req.session.destroy(() => {
             req.logOut();

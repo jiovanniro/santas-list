@@ -56,6 +56,7 @@ angular.module('santasList.services', [])
             url: '/api/users/logout'
         }).then(function() {
             currentUser = undefined;
+            console.log(currentUser);
         });
     }
 
