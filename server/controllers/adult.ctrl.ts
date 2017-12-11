@@ -24,4 +24,22 @@ router.get('/:id', function(req, res){
     });
 })
 
+router.post('/:id', function(req, res){
+    procedures.checked(req.params.id, req.body.purchased)
+    .then(function(item){
+        res.send(item);
+    }).catch(function(err){
+        res.status(500).send(err);
+    });
+})
+
+router.delete('/:id', function(req, res){
+    procedures.destroy(req.params.id)
+    .then(function(item){
+        res.send(item);
+    }).catch(function(err){
+        res.status(500).send(err);
+    });
+})
+
 export default router;

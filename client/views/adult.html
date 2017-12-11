@@ -1,19 +1,25 @@
-<div>
+<div class="container">
     <select id="famList">
         <option ng-repeat="kid in childList" value="{{kid.id}}">{{ kid.username }}</option>
     </select>
     <button type="submit" ng-click="Items()">Select</button>
-    <div ng-repeat="item in ItemList">
-        <h2>{{ item.item_name }} <input type="checkbox"></h2>
+    <!-- <h1>{{ childList.username }}</h1> -->
+    <div class="row" ng-repeat="item in ItemList">
+        <h5 style="width: 100%">{{ item.item_name }} 
+            <span style="float:right">
+                <h6> Purchased <input id="purchasedCheckBox{{ item.id }}" type="checkbox" ng-checked="{{ item.purchased }}" ng-click="Purchased(item.id)"> Remove <i class="fa fa-times-circle" ng-click="RemoveItem(item.id)"></i> </h6>
+            </span>
+        </h5>
         <!-- add in the comments here -->
         <button id="btnComments{{ item.id }}" ng-click="Comments(item.id)" style="display: visible">Veiw Comments</button>
         <button id="btnHideComments{{ item.id }}" ng-click="HideComments(item.id)" style="display: none">Hide Comments</button>
-        <div id="divContainer{{item.id}}" style="display: none">
-            <div id="div{{ item.id }}id"  style="float: left; width: 25%"></div> 
-            <div>
-                <input type="text" ng-model="Name">
+        <br />
+        <div class="container-fluid" id="divContainer{{item.id}}" style="display: none; width:100%">
+            <div class="col-md-6 col-sm-12 col-xs-12" id="div{{ item.id }}id"  style="float: left; overflow-y:scroll; height:10rem"></div> 
+            <div class="col-md-6 col-sm-12 col-xs-12" style="float:left;">
+                <input class="col-md-12 col-sm-12 col-xs-12" id="username{{ item.id }}" type="text">
                 <br />
-                <textarea cols="50%" rows="4" ng-model="Message"></textarea>
+                <textarea class="col-md-12 col-sm-12 col-xs-12" id="message{{ item.id }}" cols="40%" rows="4"></textarea>
                 <br />
                 <button type="submit" ng-click="SendComment(item.id)">Add Comment</button>
             </div>
