@@ -227,5 +227,30 @@ angular.module('santasList.controllers', [])
         var dest = $location.search().dest;
         if (!dest) { dest = '/adult' }
         $location.replace().path(dest).search('dest', null);
-    }  
+    }
+    $scope.counter = 1;
+    $scope.addInput = function(divName) {
+        let limit = 15;
+        
+        if ($scope.counter == limit) {
+            bootbox.alert({
+                message: "I think that's enough presents, don't you?",
+                backdrop: true,
+            });
+        } else {
+            let newdiv = document.createElement('div');
+            let input = document.createElement('input');
+            let newCount = $scope.counter + 1;
+
+            newdiv.className = 'col-6 col-sm-6';
+            input.placeholder = 'Present ' + newCount;
+            input.type = 'text';
+            input.id = 'newInput';
+
+            newdiv.appendChild(input);
+
+            document.getElementById(divName).appendChild(newdiv);
+            $scope.counter++;
+        }
+    };
 }]);
