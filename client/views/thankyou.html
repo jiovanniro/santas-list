@@ -8,22 +8,27 @@
         <p>I know the Elfs are making something special for you and I'm sure you're going to love it!</p>
         <p>Ruldolph and all the reindeer cant wait to visit you. Dont forget to leave out some carrots for them.</p>
 
-        <h3>Have a very Merry Christmas!</h3>
+        <h2>Have a very Merry Christmas,</h2>
+        <h4>Santa Claus</h4>
     </div>
 
-    <div class="thankyou-options">
+    <div class="thankyou-options" ng-hide="hideoptions">
         <label for="add">Did you forget to add something?</label>
-        <input type="button" name="add" class="add-item" value="Add A New Item">
+        <input type="button" name="add" class="add-item" value="Add A New Item" ng-click="addToList()">
     </div>
 
-    <div class="row add-new-items">
+    <div class="confirmation" ng-hide="hideconfirmation">
+        <p>Your new item is being sent to Santa!</p>
+    </div>
+
+    <div ng-hide="hidethis" class="row add-new-items">
         <div class="col-md-6">
             <div id="toy-list" class="row" ng-blur="removeFilteredItems()">
                 <div id="toy-items" class="col-6 col-sm-6">
                     <input type='text' id="item1" ng-model="gifts.item1" ng-keyup="search(gifts.item1, $event)" ng-enter="removeFilteredItems()">
                 </div>
                 <div id="list-group">
-                    <ul ng-hide="hidethis" style="color:#000">
+                    <ul ng-hide="hidesuggestions" style="color:#000">
                         <li class="list-group-item" style="color:#000" ng-repeat="item in filteredItems" ng-click="selectItem(item)">{{item}}</li>
                     </ul>
                 </div>

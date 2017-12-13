@@ -370,8 +370,114 @@ angular.module('santasList.controllers', [])
     }
 }])
 
-.controller('ThankyouController', ['$scope', 'ChildUser', '$location', '$routeParams', 'Gift', 'SEOService', function($scope, ChildUser, $location, $routeParams, Gift, SEOService){
+.controller('ThankyouController', ['$scope', '$parse', '$location', '$routeParams', 'Child', 'Adult', 'Gift', 'searchService', 'Letter', 'SEOService', function($scope, $parse, $location, $routeParams, Child, Adult, Gift, searchService, Letter, SEOService){
+    $scope.hidethis = true;
+    $scope.hidesuggestions = true;
+    $scope.hideconfirmation = true;
+    $scope.addToList = function() {
+        console.log('open the add div');
+        $scope.hidethis = false;
+    }
 
+    let x = 2; //initlal text box count
+    $scope.addNewToy = function() {
+        var max_fields = 10; //maximum input boxes allowed
+    
+        if(x < max_fields){ //max input box allowed
+            var $div = $(`<div><input type="text" id="item${x}" ng-model="gifts.item${x}" ng-keyup="search(gifts.item${x}, $event)" ng-enter="removeFilteredItems()"/></div>`); //add input box            
+            var $target = $("#toy-items");
+            angular.element($target).injector().invoke(function($compile) {
+                var $scope = angular.element($target).scope();
+                $target.append($compile($div)($scope));
+            });
+            x++; //text box increment
+        }
+    };
+
+
+    $scope.search = function(string, event) {
+        console.log('inside search');
+        let target = event.target.id; 
+        console.log(target);
+        
+
+        searchService.searchInput(string)
+        .then(function(data){
+            suggestions(data); 
+        });
+
+        function suggestions(data) {
+            $scope.hidesuggestions = false;            
+            var output = [];
+            angular.forEach(data, function(input) {
+                if(input.toLowerCase().indexOf(string.toLowerCase()) >= 0) {
+                    output.push(input);
+                }
+            });
+            $scope.filteredItems = output;
+        } 
+
+        $scope.selectItem = function(string) {
+            console.log('inside select item'); 
+            console.log(string);
+            var ref = `gifts.${target}`;
+            getter = $parse(ref);
+            getter.assign($scope, string);
+            $scope.hidesuggestions = true;
+        }
+
+        $scope.removeFilteredItems = function() {
+            $scope.hidethis = true;
+            $(`#${target}`).blur();
+            $('.letterBG').focus();
+        }
+        
+        $scope.sendToList = function(gifts) {
+            $scope.hidesuggestions = true;
+            $scope.item1 = "";
+            let userId = localStorage.getItem('famList');
+            
+            console.log('add to list');
+            wishListItems = Object.values(gifts);
+
+            wishListItems.forEach(function(item) {
+                var wishList = new Child({
+                    item: item,
+                    userId: userId
+                });
+
+                console.log("wishListItems: " + wishListItems);
+
+                wishList.$save({id: userId}, 
+                    function(success){
+                        $scope.hidethis = true;
+                        $scope.hideoptions = true;
+                        $scope.hideconfirmation = false;
+                        sendMessageToParent();
+                        console.log(success);
+                    }, function(err){
+                        console.log(err);
+                    })
+            });
+        }
+    }
+
+    function sendMessageToParent() {
+        let userId = localStorage.getItem("famList");
+        $scope.child = new Child.query({id: userId}); 
+        $scope.adult = new Adult.query({id: userId});
+
+        console.log('inside send message to parent');
+        console.log('userid: ' + userId);
+        console.log('child: ' + $scope.child); 
+        console.log('adult: ' +$scope.adult);
+        // let letterToSanta = new Letter({
+        //     name: , 
+        //     behavior: , 
+        //     message: , 
+        //     wishlist: 
+        // });
+    }
 }]);
 
 
