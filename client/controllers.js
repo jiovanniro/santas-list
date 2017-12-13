@@ -349,7 +349,7 @@ angular.module('santasList.controllers', [])
     }
 }])
 
-.controller('ChildController', ['$scope', 'ChildUser', 'User', 'UserService', '$location', '$routeParams', 'UserService','SEOService', function($scope, ChildUser, User, UserService, $location, $routeParams, UserService, SEOService) {
+.controller('ChildController', ['$scope', '$parse', '$location', '$routeParams', 'ChildUser', 'User', 'UserService', 'searchService', 'Child', 'Gift','SEOService', function($scope, $parse, $location, $routeParams, ChildUser, User, UserService, searchService, Child, Gift, SEOService) {
 
     //create child user
     $scope.createChildUser = function() {
@@ -372,29 +372,79 @@ angular.module('santasList.controllers', [])
         if (!dest) { dest = '/adult' }
         $location.replace().path(dest).search('dest', null);
     }
-    $scope.counter = 1;
-    $scope.addInput = function(divName) {
-        let limit = 15;
-        
-        if ($scope.counter == limit) {
-            bootbox.alert({
-                message: "I think that's enough presents, don't you?",
-                backdrop: true,
+
+    $scope.items = [{id: 'item1'}];
+    let x = 2; //initlal text box count
+
+    $scope.addNewToy = function() {
+        var max_fields = 10; //maximum input boxes allowed
+    
+        if(x < max_fields){ //max input box allowed
+            // $('#toy-items').append(`<div><input type="text" id="item${x}" ng-model="item${x}" ng-keyup="search(item${x}, $event)" my-enter="addToList(item${x})"/></div>`); //add input box
+            var $div = $(`<div><input type="text" id="item${x}" ng-model="item${x}" ng-keyup="search(item${x}, $event)" my-enter="addToList(item${x})"/></div>`); //add input box            
+            var $target = $("#toy-items");
+            angular.element($target).injector().invoke(function($compile) {
+                var $scope = angular.element($target).scope();
+                $target.append($compile($div)($scope));
             });
-        } else {
-            let newdiv = document.createElement('div');
-            let input = document.createElement('input');
-            let newCount = $scope.counter + 1;
-
-            newdiv.className = 'col-6 col-sm-6';
-            input.placeholder = 'Present ' + newCount;
-            input.type = 'text';
-            input.id = 'newInput';
-
-            newdiv.appendChild(input);
-
-            document.getElementById(divName).appendChild(newdiv);
-            $scope.counter++;
+            x++; //text box increment
         }
     };
+
+    $scope.search = function(string, event) {
+        console.log("inside search: " + string);            
+        let target = event.target.id; 
+        console.log("target: " + target);  
+
+        searchService.searchInput(string)
+        .then(function(data){
+            suggestions(data); 
+        });
+
+        function suggestions(data) {
+            console.log(data);
+            $scope.hidethis = false;
+            var output = [];
+            angular.forEach(data, function(input) {
+                if(input.toLowerCase().indexOf(string.toLowerCase()) >= 0) {
+                    output.push(input);
+                }
+            });
+            $scope.filteredItems = output;
+        } 
+
+        $scope.selectItem = function(string) {
+            var ref = target;
+            getter = $parse(ref);
+            getter.assign($scope, string);
+            $scope.hidethis = true;
+        }
+
+        $scope.removeFilteredItems = function() {
+            $scope.hidethis = true;
+        }
+        
+        $scope.addToList = function(item) {
+            $scope.hidethis = true;
+            $scope.item1 = "";
+            let userId = localStorage.getItem('famList');
+            
+            console.log('add to list');
+            console.log("item " + item);
+
+            var newItem = new Child({
+                item: item,
+                userId: userId
+            });
+
+           newItem.$save({id: userId}, 
+            function(success){
+                $scope.gifts = new Gift.query({id: userId});
+                console.log("Gifts: " + $scope.gifts);
+               console.log(success);
+           }, function(err){
+               console.log(err);
+           })
+        }
+    }
 }]);

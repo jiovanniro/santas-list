@@ -78,3 +78,15 @@ angular.module('santasList.services', [])
         return currentUser;
     }
 }])
+
+.service('searchService', ['$http', '$location', function($http, $location) {
+    return {
+        searchInput: function(input) {
+            return $http.get(`https://cors-anywhere.herokuapp.com/http://completion.amazon.com/search/complete?search-alias=aps&client=amazon-search-ui&mkt=1&q=${input}`)
+            .then(function(response) {
+                result = response.data; //useful info returned from promise
+                return result[1];
+            });
+        }
+    }
+}]);

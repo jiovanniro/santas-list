@@ -3,6 +3,7 @@ import * as procedures from '../procedures/child.proc';
 import * as auth from '../middleware/auth.mw';
 import * as passport from 'passport';
 import * as utils from '../utils';
+import configurePassport from '../config/passport';
 
 const router = express.Router();
 
@@ -43,8 +44,9 @@ router.post('/createChild', function(req, res){
         console.log(err);
         res.sendStatus(500);
     });
-})
-//might need to change location if it does not work
+});
+
+//are we calling the right procedure?
 router.get('/createChild/:id', function(req, res){
     procedures.getItems(req.params.id)
     .then(function(item){
@@ -52,16 +54,29 @@ router.get('/createChild/:id', function(req, res){
     }).catch(function(err){
         res.status(500).send(err);
     });
-})
+});
 
-router.post('/:id', function(req, res){
-    procedures.addItem(req.body, req.params.id)
+router.get('/gifts/:id', function(req, res){
+    console.log('inside getting gifts');
+    console.log(req.params.id);
+    procedures.getItems(req.params.id)
     .then(function(item){
         res.send(item);
     }).catch(function(err){
         res.status(500).send(err);
     });
-})
+});
+
+
+
+router.post('/:id', function(req, res){
+    procedures.addItem(req.body.item, req.body.userId)
+    .then(function(item){
+        res.send(item);
+    }).catch(function(err){
+        res.status(500).send(err);
+    });
+});
 
 router.get('/:id', function(req, res){
     procedures.getComments(req.params.id)
@@ -70,6 +85,6 @@ router.get('/:id', function(req, res){
     }).catch(function(err){
         res.status(500).send(err);
     });
-})
+});
 
 export default router;
