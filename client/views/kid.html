@@ -4,16 +4,16 @@
             <div id="salutation" class="col-md-12">Dear Santa,</div>
             <form>
                 <div class="form-row">
-                    <div class="form-group col-md-6">
-                        <label for="inputName">My name is</label>
+                    <div class="form-group col-md-6 text-center">
+                        <label id="eminem" for="inputName">My name is</label>
                     </div>  
                     <div class="form-group col-md-6">
                         <input type="name" class="form-control" ng-model="name" id="inputName" placeholder="Name">
                     </div>
                 </div>
                 <div class="form-row">
-                    <div class="form-group col-md-6">
-                        <label for="form-check-label">This year I have been</label>
+                    <div class="form-group col-md-6 text-center">
+                        <label id="naughtNice" for="form-check-label">This year I have been</label>
                     </div>
                     <div class="form-group col-md-6">
                         <div class="form-check">
@@ -73,14 +73,9 @@
     </div>
     <div class="row">
         <div class="col-md-6">
-            <div id="toy-list" class="row">
-                <div id="toy-items" class="col-6 col-sm-6">
-                    <input type='text' id="item1" ng-model="gifts.item1" ng-keyup="search(gifts.item1, $event)" ng-enter="removeFilteredItems()">
-                </div>
-                <div id="list-group">
-                    <ul ng-hide="hidethis" style="color:#000">
-                        <li class="list-group-item" style="color:#000" ng-repeat="item in filteredItems" ng-click="selectItem(item)">{{item}}</li>
-                    </ul>
+            <div id="toyList" class="row">
+                <div class="col-6 col-sm-6">
+                    <input id="kidInput" type="text" placeholder="Present 1">
                 </div>
             </div>
             <div class="add-new-toy col-md-12">
@@ -88,7 +83,7 @@
                 <input type="button" id="send-list" class="text-center" value="Send To Santa" ng-click="sendToList(gifts)">       
             </div> 
             <div class="col-md-12">
-                <p ng-repeat="gift in gifts">{{gift.item_name}}</p>
+                <input type="button" class="clickButton text-center" value="Add A New Toy" ng-click="addInput('toyList')">
             </div> 
         </div>         
         <div id="instructions" class="col-md-6">Instructions</div>

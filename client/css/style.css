@@ -190,18 +190,6 @@ button:focus {
 */
 #kidUser,
 #kidPass {
-  background-color: #ca0000;
-  font-family: Comic Sans MS, Arial;
-  font-size: 16px;
-  border-style: none;
-  padding: 10px 20px 10px 20px;
-  background-image: url(../images/candyfieldbkgd.png);
-  background-repeat: no-repeat;
-  background-size: cover;
-  height: 45px;
-  width: 305px;
-  color: #ca0000;
-  border-radius: 25px;
   margin-top: 25px;
 }
 #logButton {
@@ -221,20 +209,46 @@ button:focus {
 ##   ##   ##  ##     ##    ##        ##     ## ##    ##  ##       
 ##    ## #### ########     ##        ##     ##  ######   ######## 
 */
-.col-md-6 {
-  border: 1px solid black;
+#salutation {
+  color: white;
+  font-family: Henny Penny, cursive;
+  font-size: 400%;
+}
+#eminem {
+  color: white;
+  font-family: henny penny, cursive;
+  font-size: 200%;
+}
+#inputName {
+  width: 50%;
+}
+#naughtNice {
+  color: white;
+  font-family: henny penny, cursive;
+  font-size: 250%;
+}
+.form-check label {
+  color: white;
+  font-family: henny penny, cursive;
+  font-size: 170%;
+}
+.form-check input {
+  cursor: pointer;
+}
+#inputBody::placeholder {
+  font-size: 250%;
+  font-family: henny penny, cursive;
+  text-align: center;
 }
 .newToy {
-  border: 1px solid blue;
   width: inherit;
 }
 #newInput {
-  border: 1px solid blue;
   width: inherit;
 }
 .col-6 {
-  border: 1px solid green;
   float: left;
+  display: inline-table;
 }
 #toyList {
   display: inline;
