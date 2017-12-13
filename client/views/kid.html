@@ -73,9 +73,9 @@
     </div>
     <div class="row">
         <div class="col-md-6">
-            <div id="toyList" class="row" ng-blur="removeFilteredItems()">
+            <div id="toy-list" class="row">
                 <div id="toy-items" class="col-6 col-sm-6">
-                    <input type='text' id="item1" ng-model="item1" ng-keyup="search(item1, $event)" my-enter="addToList(item1)">
+                    <input type='text' id="item1" ng-model="gifts.item1" ng-keyup="search(gifts.item1, $event)" my-enter="removeFilteredItems">
                 </div>
                 <div>
                     <ul class="list-group" ng-hide="hidethis" style="color:#000">
@@ -84,7 +84,8 @@
                 </div>
             </div>
             <div class="add-new-toy col-md-12">
-                <input type="button" id="btn-new-toy" class="text-center" value="Add A New Toy" ng-click="addNewToy()">                    
+                <input type="button" id="new-field" class="text-center" value="Add A New Toy" ng-click="addNewToy()">
+                <input type="button" id="create-list" class="text-center" value="Send To Santa" ng-click="addToList(gifts)">       
                 <!-- <input type="button" class="newToy text-center" value="Add A New Toy" ng-click="addToy('toyList')"> -->
             </div> 
             <div class="col-md-12">

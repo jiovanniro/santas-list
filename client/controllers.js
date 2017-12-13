@@ -82,9 +82,13 @@ angular.module('santasList.controllers', [])
     };
 }])
 
+<<<<<<< HEAD
 
 
 .controller('AdultController', ['$scope', 'Adult', 'ChildUser', 'Child', 'UserService', '$location', '$routeParams' ,'SEOService', function($scope, Adult, ChildUser, Child, UserService, $location, $routeParams, SEOService) {
+=======
+.controller('AdultController', ['$scope', 'Adult', 'ChildUser', 'Child', 'UserService', '$location', '$routeParams','SEOService', function($scope, Adult, ChildUser, Child, UserService, $location, $routeParams, SEOService) {
+>>>>>>> 530b07ee6aaed055618c37d3389568d73dd3df79
 
     let adultId = localStorage.getItem('famList');
     let adultIdParse = JSON.parse(adultId);
@@ -184,24 +188,23 @@ angular.module('santasList.controllers', [])
             for (i = 0; i < success.length; i++) {
                 var divComment = document.createElement("div");
                 var textComment = document.createTextNode(success[i].user + ": " + success[i].message + " ");
-                var attribute = document.createAttribute("style");
-                attribute.value = "padding-bottom:3%";
                 divComment.appendChild(textComment);
-                divComment.setAttributeNode(attribute);
                 divContainer.appendChild(divComment);
             }
+            document.getElementById("divContainer" + itemId).style.display = "";
+            document.getElementById("btnComments" + itemId).style.display = "none";
+            document.getElementById("btnHideComments" + itemId).style.display = "";
         }, function(err){
             console.log('comments error');
         });
     };
 
-
-    // $scope.HideComments = function(itemId) {
-    //     document.getElementById("divContainer" + itemId).style.display = "none";
-    //     document.getElementById("div" + itemId + "id").innerHTML = '';
-    //     document.getElementById("btnComments" + itemId).style.display = "";
-    //     document.getElementById("btnHideComments" + itemId).style.display = "none";
-    // };
+    $scope.HideComments = function(itemId) {
+        document.getElementById("divContainer" + itemId).style.display = "none";
+        document.getElementById("div" + itemId + "id").innerHTML = '';
+        document.getElementById("btnComments" + itemId).style.display = "";
+        document.getElementById("btnHideComments" + itemId).style.display = "none";
+    };
 
     //post comment
     $scope.SendComment = function(item){
@@ -236,84 +239,6 @@ angular.module('santasList.controllers', [])
             })
         }
     }
-
-
-    //*CANVAS*
-        var c = document.getElementById('canvas');
-        canvas.width = window.innerWidth;
-        canvas.height = window.innerHeight;
-        console.log(c);
-        var ctx = c.getContext('2d');
-    
-        var w = window.innerWidth;
-        var h = window.innerHeight;
-        var rate = 50;
-        var arc = 500;
-        var time;
-        var count;
-        var size = 2;
-        var speed = 10;
-        var light = new Array;
-        var colors = ["#eee"];
-    
-
-        window.addEventListener('resize', function(){
-            canvas.width = window.innerWidth;
-            canvas.height = window.innerHeight;
-            w = canvas.width;
-            h = canvas.height;
-            init();
-        })
-
-        function init(){
-            time = 0;
-            count = 0;
-            
-            for(var i = 0; i < arc; i++) {
-                light[i] = {
-                    x: Math.ceil(Math.random() * w),
-                    y: Math.ceil(Math.random() * h),
-                    toX: Math.random() * 5 + 1,
-                    toY: Math.random() * 5 + 1,
-                    col: colors[Math.floor(Math.random()*colors.length)],
-                    size: Math.random() * size
-                }
-            }
-        }
-    
-        function bubble(){
-            ctx.clearRect(0,0,w,h);
-    
-            for(var i = 0; i < arc; i++) {
-                var li = light[i]
-    
-                ctx.beginPath();
-                ctx.arc(li.x,li.y,li.size,0,Math.PI*2,false);
-                ctx.fillStyle = li.col;
-                ctx.fill();
-    
-                li.x = li.x + li.toX * (time * 0.05);
-                li.y = li.y + li.toY * (time * 0.05);
-                
-                if(li.x > w) { li.x = 0; }
-                if(li.y > h) { li.y = 0; }
-                if(li.x < 0) { li.x = w; }
-                if(li.y < 0) { li.y = h; }
-            }
-            
-            if(time < speed) {
-                time++;
-            }
-    
-            timerID = setTimeout(bubble,1000/rate);
-        }
-        init();
-        bubble();
-    
-    
-    
-
-
 
 
 }])
@@ -373,15 +298,12 @@ angular.module('santasList.controllers', [])
         $location.replace().path(dest).search('dest', null);
     }
 
-    $scope.items = [{id: 'item1'}];
     let x = 2; //initlal text box count
-
     $scope.addNewToy = function() {
         var max_fields = 10; //maximum input boxes allowed
     
         if(x < max_fields){ //max input box allowed
-            // $('#toy-items').append(`<div><input type="text" id="item${x}" ng-model="item${x}" ng-keyup="search(item${x}, $event)" my-enter="addToList(item${x})"/></div>`); //add input box
-            var $div = $(`<div><input type="text" id="item${x}" ng-model="item${x}" ng-keyup="search(item${x}, $event)" my-enter="addToList(item${x})"/></div>`); //add input box            
+            var $div = $(`<div><input type="text" id="item${x}" ng-model="gifts.item${x}" ng-keyup="search(gifts.item${x}, $event)" ng-enter="removeFilteredItems()"/></div>`); //add input box            
             var $target = $("#toy-items");
             angular.element($target).injector().invoke(function($compile) {
                 var $scope = angular.element($target).scope();
@@ -392,17 +314,15 @@ angular.module('santasList.controllers', [])
     };
 
     $scope.search = function(string, event) {
-        console.log("inside search: " + string);            
-        let target = event.target.id; 
-        console.log("target: " + target);  
+        let target = event.target.id;
 
+        console.log('in search');
         searchService.searchInput(string)
         .then(function(data){
             suggestions(data); 
-        });
+         });
 
         function suggestions(data) {
-            console.log(data);
             $scope.hidethis = false;
             var output = [];
             angular.forEach(data, function(input) {
@@ -413,38 +333,158 @@ angular.module('santasList.controllers', [])
             $scope.filteredItems = output;
         } 
 
-        $scope.selectItem = function(string) {
-            var ref = target;
+        $scope.selectItem = function(item) {
+            console.log('inside select item'); 
+            console.log(item);
+            var ref = `gifts.${target}`;
             getter = $parse(ref);
-            getter.assign($scope, string);
+            getter.assign($scope, item);
             $scope.hidethis = true;
         }
 
         $scope.removeFilteredItems = function() {
             $scope.hidethis = true;
+            $(`#${target}`).blur();
+            $('.letterBG').focus();
         }
         
-        $scope.addToList = function(item) {
+        $scope.addToList = function(gifts) {
             $scope.hidethis = true;
             $scope.item1 = "";
             let userId = localStorage.getItem('famList');
             
             console.log('add to list');
-            console.log("item " + item);
+            wishListItems = Object.values(gifts);
 
-            var newItem = new Child({
-                item: item,
-                userId: userId
+            wishListItems.forEach(function(item) {
+                var wishList = new Child({
+                    item: item,
+                    userId: userId
+                });
+
+                console.log("wishListItems: " + wishListItems);
+
+                wishList.$save({id: userId}, 
+                    function(success){
+                    $location.path(`/thankyou/${userId}`);
+                        console.log(success);
+                    }, function(err){
+                        console.log(err);
+                    })
             });
-
-           newItem.$save({id: userId}, 
-            function(success){
-                $scope.gifts = new Gift.query({id: userId});
-                console.log("Gifts: " + $scope.gifts);
-               console.log(success);
-           }, function(err){
-               console.log(err);
-           })
         }
     }
+}])
+
+.controller('ThankyouController', ['$scope', '$parse', '$location', '$routeParams', 'Child', 'Adult', 'Gift', 'searchService', 'Letter', 'SEOService', function($scope, $parse, $location, $routeParams, Child, Adult, Gift, searchService, Letter, SEOService){
+    $scope.hidethis = true;
+    $scope.hidesuggestions = true;
+    $scope.hideconfirmation = true;
+    $scope.addToList = function() {
+        console.log('open the add div');
+        $scope.hidethis = false;
+    }
+
+    let x = 2; //initlal text box count
+    $scope.addNewToy = function() {
+        var max_fields = 10; //maximum input boxes allowed
+    
+        if(x < max_fields){ //max input box allowed
+            var $div = $(`<div><input type="text" id="item${x}" ng-model="gifts.item${x}" ng-keyup="search(gifts.item${x}, $event)" ng-enter="removeFilteredItems()"/></div>`); //add input box            
+            var $target = $("#toy-items");
+            angular.element($target).injector().invoke(function($compile) {
+                var $scope = angular.element($target).scope();
+                $target.append($compile($div)($scope));
+            });
+            x++; //text box increment
+        }
+    };
+
+
+    $scope.search = function(string, event) {
+        console.log('inside search');
+        let target = event.target.id; 
+        console.log(target);
+        
+
+        searchService.searchInput(string)
+        .then(function(data){
+            suggestions(data); 
+        });
+
+        function suggestions(data) {
+            $scope.hidesuggestions = false;            
+            var output = [];
+            angular.forEach(data, function(input) {
+                if(input.toLowerCase().indexOf(string.toLowerCase()) >= 0) {
+                    output.push(input);
+                }
+            });
+            $scope.filteredItems = output;
+        } 
+
+        $scope.selectItem = function(string) {
+            console.log('inside select item'); 
+            console.log(string);
+            var ref = `gifts.${target}`;
+            getter = $parse(ref);
+            getter.assign($scope, string);
+            $scope.hidesuggestions = true;
+        }
+
+        $scope.removeFilteredItems = function() {
+            $scope.hidethis = true;
+            $(`#${target}`).blur();
+            $('.letterBG').focus();
+        }
+        
+        $scope.sendToList = function(gifts) {
+            $scope.hidesuggestions = true;
+            $scope.item1 = "";
+            let userId = localStorage.getItem('famList');
+            
+            console.log('add to list');
+            wishListItems = Object.values(gifts);
+
+            wishListItems.forEach(function(item) {
+                var wishList = new Child({
+                    item: item,
+                    userId: userId
+                });
+
+                console.log("wishListItems: " + wishListItems);
+
+                wishList.$save({id: userId}, 
+                    function(success){
+                        $scope.hidethis = true;
+                        $scope.hideoptions = true;
+                        $scope.hideconfirmation = false;
+                        sendMessageToParent();
+                        console.log(success);
+                    }, function(err){
+                        console.log(err);
+                    })
+            });
+        }
+    }
+
+    function sendMessageToParent() {
+        let userId = localStorage.getItem("famList");
+        $scope.child = new Child.query({id: userId}); 
+        $scope.adult = new Adult.query({id: userId});
+
+        console.log('inside send message to parent');
+        console.log('userid: ' + userId);
+        console.log('child: ' + $scope.child); 
+        console.log('adult: ' +$scope.adult);
+        // let letterToSanta = new Letter({
+        //     name: , 
+        //     behavior: , 
+        //     message: , 
+        //     wishlist: 
+        // });
+    }
 }]);
+
+
+
