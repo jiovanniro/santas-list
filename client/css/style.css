@@ -188,17 +188,21 @@ button:focus {
 ##   ##   ##  ##     ## ### ##    ##  ##  
 ##    ## #### ########  ###  ######  #### 
 */
-#kidUser,
-#kidPass {
+.kidUser,
+.kidPass {
   margin-top: 25px;
 }
 #logButton {
   margin-top: 15px;
+  margin-left: 5em;
 }
 .kidHeader {
   color: #dd4330;
   font-family: 'Mountains of Christmas', cursive;
-  font-size: 55px;
+  font-size: 600%;
+  height: 1.5em;
+  position: relative;
+  text-shadow: 5px 5px white;
 }
 /*
 ##    ## #### ########     ########     ###     ######   ######## 
@@ -261,7 +265,7 @@ button:focus {
   height: 340px;
   background: #a0d5d3;
   position: absolute;
-  top: 50%;
+  top: 75%;
   left: 50%;
   border-radius: 50%;
   margin-top: -60px;
@@ -524,10 +528,10 @@ button:focus {
   -o-transform: rotate(10deg);
   transform: rotate(10deg);
 }
-.message {
+.bottomMessage {
   position: absolute;
   left: 50%;
-  top: 50%;
+  top: 75%;
   margin-top: 80px;
   -webkit-transform: translateX(-50%);
   -moz-transform: translateX(-50%);
@@ -537,7 +541,26 @@ button:focus {
   color: #f8e7dc;
   font-family: 'Mountains of Christmas';
 }
-.message h1 {
+.bottomMessage h1 {
+  font-style: normal;
+  font-size: 55px;
+  margin-top: 25px;
+  text-align: center;
+}
+.topMessage {
+  position: absolute;
+  left: 50%;
+  top: -9%;
+  margin-top: 80px;
+  -webkit-transform: translateX(-50%);
+  -moz-transform: translateX(-50%);
+  -ms-transform: translateX(-50%);
+  -o-transform: translateX(-50%);
+  transform: translateX(-50%);
+  color: #f8e7dc;
+  font-family: 'Mountains of Christmas';
+}
+.topMessage h1 {
   font-style: normal;
   font-size: 55px;
   margin-top: 25px;

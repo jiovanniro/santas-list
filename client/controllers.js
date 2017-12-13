@@ -307,16 +307,13 @@ angular.module('santasList.controllers', [])
         }
     };
 
-<<<<<<< HEAD
             newdiv.className = 'col-6 col-sm-6';
             input.placeholder = 'Present ' + newCount;
             input.type = 'text';
             input.id = 'kidInput';
-=======
     $scope.search = function(string, event) {
         console.log('inside search');
         let target = event.target.id; 
->>>>>>> 54e129e0c2c8fa72fae6cbd00220c8af31ff2938
 
         searchService.searchInput(string)
         .then(function(data){

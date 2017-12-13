@@ -42,6 +42,9 @@
             </form>
         </div>
         <div id="funnySanta" class="col-md-6">
+            <div class="topMessage">
+                    <h1>Merry</h1>
+            </div>
             <div class="window">
                 <div class="santa">
                     <div class="head">
@@ -62,18 +65,16 @@
                     <div class="body"></div>
                 </div>
             </div>
-            <div class="message">
-                    <h1>Merry Christmas!</h1>
+            <div class="bottomMessage">
+                    <h1>Christmas!</h1>
             </div>
         </div>
     </div>
     <div class="row">
         <div class="col-md-6">
-<<<<<<< HEAD
             <div id="toyList" class="row">
                 <div class="col-6 col-sm-6">
                     <input id="kidInput" type="text" placeholder="Present 1">
-=======
             <div id="toy-list" class="row">
                 <div id="toy-items" class="col-6 col-sm-6">
                     <input type='text' id="item1" ng-model="gifts.item1" ng-keyup="search(gifts.item1, $event)" ng-enter="removeFilteredItems()">
@@ -82,7 +83,6 @@
                     <ul ng-hide="hidethis" style="color:#000">
                         <li class="list-group-item" style="color:#000" ng-repeat="item in filteredItems" ng-click="selectItem(item)">{{item}}</li>
                     </ul>
->>>>>>> 54e129e0c2c8fa72fae6cbd00220c8af31ff2938
                 </div>
             </div>
             <div class="add-new-toy col-md-12">
@@ -90,13 +90,10 @@
                 <input type="button" id="send-list" class="text-center" value="Send To Santa" ng-click="sendToList(gifts)">       
             </div> 
             <div class="col-md-12">
-<<<<<<< HEAD
                 <input type="button" class="clickButton text-center" value="Add A New Toy" ng-click="addInput('toyList')">
-=======
                 <p ng-repeat="gift in gifts">{{gift.item_name}}</p>
->>>>>>> 54e129e0c2c8fa72fae6cbd00220c8af31ff2938
             </div> 
         </div>         
-        <div id="instructions" class="col-md-6">Instructions</div>
+        <div id="instructions" class="col-md-6"></div>
     </div>
 </div>
