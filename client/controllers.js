@@ -308,13 +308,13 @@ angular.module('santasList.controllers', [])
     };
 
     $scope.search = function(string, event) {
-        console.log('inside search');
-        let target = event.target.id; 
+        let target = event.target.id;
 
+        console.log('in search');
         searchService.searchInput(string)
         .then(function(data){
             suggestions(data); 
-        });
+         });
 
         function suggestions(data) {
             $scope.hidethis = false;
@@ -327,12 +327,12 @@ angular.module('santasList.controllers', [])
             $scope.filteredItems = output;
         } 
 
-        $scope.selectItem = function(string) {
+        $scope.selectItem = function(item) {
             console.log('inside select item'); 
-            console.log(string);
+            console.log(item);
             var ref = `gifts.${target}`;
             getter = $parse(ref);
-            getter.assign($scope, string);
+            getter.assign($scope, item);
             $scope.hidethis = true;
         }
 
