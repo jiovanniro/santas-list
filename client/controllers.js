@@ -295,14 +295,27 @@ angular.module('santasList.controllers', [])
     }
 
     $scope.items = [{id: 'item1'}];
+    let x = 2; //initlal text box count
 
-    $scope.addToy = function() {
-      var newItemNo = $scope.items.length+1;
-      $scope.items.push({'id':'item'+newItemNo});
+    $scope.addNewToy = function() {
+        var max_fields = 10; //maximum input boxes allowed
+    
+        if(x < max_fields){ //max input box allowed
+            // $('#toy-items').append(`<div><input type="text" id="item${x}" ng-model="item${x}" ng-keyup="search(item${x}, $event)" my-enter="addToList(item${x})"/></div>`); //add input box
+            var $div = $(`<div><input type="text" id="item${x}" ng-model="item${x}" ng-keyup="search(item${x}, $event)" my-enter="addToList(item${x})"/></div>`); //add input box            
+            var $target = $("#toy-items");
+            angular.element($target).injector().invoke(function($compile) {
+                var $scope = angular.element($target).scope();
+                $target.append($compile($div)($scope));
+            });
+            x++; //text box increment
+        }
     };
 
     $scope.search = function(string, event) {
-        let target = event.target.id;       
+        console.log("inside search: " + string);            
+        let target = event.target.id; 
+        console.log("target: " + target);  
 
         searchService.searchInput(string)
         .then(function(data){
@@ -310,6 +323,7 @@ angular.module('santasList.controllers', [])
         });
 
         function suggestions(data) {
+            console.log(data);
             $scope.hidethis = false;
             var output = [];
             angular.forEach(data, function(input) {
