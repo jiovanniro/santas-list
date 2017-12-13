@@ -185,20 +185,10 @@ angular.module('santasList.controllers', [])
                 divComment.appendChild(textComment);
                 divContainer.appendChild(divComment);
             }
-            document.getElementById("divContainer" + itemId).style.display = "";
-            document.getElementById("btnComments" + itemId).style.display = "none";
-            document.getElementById("btnHideComments" + itemId).style.display = "";
         }, function(err){
             console.log('comments error');
         });
     };
-
-    // $scope.HideComments = function(itemId) {
-    //     document.getElementById("divContainer" + itemId).style.display = "none";
-    //     document.getElementById("div" + itemId + "id").innerHTML = '';
-    //     document.getElementById("btnComments" + itemId).style.display = "";
-    //     document.getElementById("btnHideComments" + itemId).style.display = "none";
-    // };
 
     //post comment
     $scope.SendComment = function(item){
