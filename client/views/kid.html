@@ -69,13 +69,32 @@
     </div>
     <div class="row">
         <div class="col-md-6">
+<<<<<<< HEAD
             <div id="toyList" class="row">
                 <div class="col-6 col-sm-6">
                     <input id="kidInput" type="text" placeholder="Present 1">
+=======
+            <div id="toy-list" class="row">
+                <div id="toy-items" class="col-6 col-sm-6">
+                    <input type='text' id="item1" ng-model="gifts.item1" ng-keyup="search(gifts.item1, $event)" ng-enter="removeFilteredItems()">
+                </div>
+                <div id="list-group">
+                    <ul ng-hide="hidethis" style="color:#000">
+                        <li class="list-group-item" style="color:#000" ng-repeat="item in filteredItems" ng-click="selectItem(item)">{{item}}</li>
+                    </ul>
+>>>>>>> 54e129e0c2c8fa72fae6cbd00220c8af31ff2938
                 </div>
             </div>
+            <div class="add-new-toy col-md-12">
+                <input type="button" id="new-field" class="text-center" value="Add A New Toy" ng-click="addNewToy()">
+                <input type="button" id="send-list" class="text-center" value="Send To Santa" ng-click="sendToList(gifts)">       
+            </div> 
             <div class="col-md-12">
+<<<<<<< HEAD
                 <input type="button" class="clickButton text-center" value="Add A New Toy" ng-click="addInput('toyList')">
+=======
+                <p ng-repeat="gift in gifts">{{gift.item_name}}</p>
+>>>>>>> 54e129e0c2c8fa72fae6cbd00220c8af31ff2938
             </div> 
         </div>         
         <div id="instructions" class="col-md-6">Instructions</div>
