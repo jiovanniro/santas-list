@@ -73,13 +73,22 @@
     </div>
     <div class="row">
         <div class="col-md-6">
-            <div id="toyList" class="row">
+            <div id="toyList" class="row" ng-blur="removeFilteredItems()">
                 <div class="col-6 col-sm-6">
-                    <input id="newInput" type="text" placeholder="Present 1">
+                    <input type='text' id="item1" ng-model="item1" ng-keyup="search(item1, $event)" ng-enter="addToList(item1)">
+                </div>
+                <div>
+                    <ul class="list-group" ng-hide="hidethis" style="color:#000">
+                        <li class="list-group-item" style="color:#000" ng-repeat="item in filteredItems" ng-click="selectItem(item)">{{item}}</li>
+                    </ul>
                 </div>
             </div>
             <div class="col-md-12">
-                <input type="button" class="newToy text-center" value="Add A New Toy" ng-click="addInput('toyList')">
+                <input type="button" class="newToy text-center" value="Add A New Toy" ng-click="addToList(item1)">                    
+                <!-- <input type="button" class="newToy text-center" value="Add A New Toy" ng-click="addToy('toyList')"> -->
+            </div> 
+            <div class="col-md-12">
+                <p ng-repeat="gift in gifts">{{gift.item_name}}</p>
             </div> 
         </div>         
         <div id="instructions" class="col-md-6">Instructions</div>
