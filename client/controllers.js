@@ -82,13 +82,7 @@ angular.module('santasList.controllers', [])
     };
 }])
 
-<<<<<<< HEAD
-
-
-.controller('AdultController', ['$scope', 'Adult', 'ChildUser', 'Child', 'UserService', '$location', '$routeParams' ,'SEOService', function($scope, Adult, ChildUser, Child, UserService, $location, $routeParams, SEOService) {
-=======
 .controller('AdultController', ['$scope', 'Adult', 'ChildUser', 'Child', 'UserService', '$location', '$routeParams','SEOService', function($scope, Adult, ChildUser, Child, UserService, $location, $routeParams, SEOService) {
->>>>>>> 530b07ee6aaed055618c37d3389568d73dd3df79
 
     let adultId = localStorage.getItem('famList');
     let adultIdParse = JSON.parse(adultId);
@@ -199,12 +193,12 @@ angular.module('santasList.controllers', [])
         });
     };
 
-    $scope.HideComments = function(itemId) {
-        document.getElementById("divContainer" + itemId).style.display = "none";
-        document.getElementById("div" + itemId + "id").innerHTML = '';
-        document.getElementById("btnComments" + itemId).style.display = "";
-        document.getElementById("btnHideComments" + itemId).style.display = "none";
-    };
+    // $scope.HideComments = function(itemId) {
+    //     document.getElementById("divContainer" + itemId).style.display = "none";
+    //     document.getElementById("div" + itemId + "id").innerHTML = '';
+    //     document.getElementById("btnComments" + itemId).style.display = "";
+    //     document.getElementById("btnHideComments" + itemId).style.display = "none";
+    // };
 
     //post comment
     $scope.SendComment = function(item){
@@ -240,6 +234,77 @@ angular.module('santasList.controllers', [])
         }
     }
 
+    var c = document.getElementById('canvas');
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
+
+    var ctx = c.getContext('2d');
+
+    var w = window.innerWidth;
+    var h = window.innerHeight;
+    var rate = 50;
+    var arc = 500;
+    var time;
+    var count;
+    var size = 2;
+    var speed = 10;
+    var light = new Array;
+    var colors = ["#eee"];
+
+    window.addEventListener('resize', function(){
+        canvas.width = window.innerWidth;
+        canvas.height = window.innerHeight;
+        w = canvas.width;
+        h = canvas.height;
+        init();
+        bubble()
+    })
+
+    function init(){
+        time = 0;
+        count = 0;
+        
+        for(var i = 0; i < arc; i++) {
+            light[i] = {
+                x: Math.ceil(Math.random() * w),
+                y: Math.ceil(Math.random() * h),
+                toX: Math.random() * 5 + 1,
+                toY: Math.random() * 5 + 1,
+                col: colors[Math.floor(Math.random()*colors.length)],
+                size: Math.random() * size
+            }
+        }
+    }
+
+    function bubble(){
+        ctx.clearRect(0,0,w,h);
+
+        for(var i = 0; i < arc; i++) {
+            var li = light[i]
+
+            ctx.beginPath();
+            ctx.arc(li.x,li.y,li.size,0,Math.PI*2,false);
+            ctx.fillStyle = li.col;
+            ctx.fill();
+
+            li.x = li.x + li.toX * (time * 0.05);
+            li.y = li.y + li.toY * (time * 0.05);
+            
+            if(li.x > w) { li.x = 0; }
+            if(li.y > h) { li.y = 0; }
+            if(li.x < 0) { li.x = w; }
+            if(li.y < 0) { li.y = h; }
+        }
+        
+        if(time < speed) {
+            time++;
+        }
+
+        timerID = setTimeout(bubble,1000/rate);
+    }
+
+    init();
+    bubble();
 
 }])
 

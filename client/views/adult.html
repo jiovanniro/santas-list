@@ -2,7 +2,7 @@
     <canvas id="canvas" style="z-index:-2; position:absolute; background-color:rgb(87, 115, 230);"></canvas>
     <div class="container" style="height:80vh; overflow-x:hidden">
         <div class="container" style="background-color:rgba(252, 252, 252, 0);">
-                <select id="adultDropDown" style="text-align:center;">
+                <select id="adultDropDown">
                     <option ng-repeat="kid in childList" value="{{kid.id}}">{{ kid.username }}</option>
                 </select>
                 <button class="adultButton" id="submitFamListBtn" type="submit" ng-click="Items()" style="margin-top:10%">Select</button>
