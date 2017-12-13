@@ -8,7 +8,7 @@
                         <label for="inputName">My name is</label>
                     </div>  
                     <div class="form-group col-md-6">
-                        <input type="name" class="form-control" id="inputName" placeholder="Name">
+                        <input type="name" class="form-control" ng-model="name" id="inputName" placeholder="Name">
                     </div>
                 </div>
                 <div class="form-row">
@@ -18,26 +18,26 @@
                     <div class="form-group col-md-6">
                         <div class="form-check">
                             <label class="form-check-label">
-                            <input class="form-check-input" type="radio" name="naughtyNice" id="naughtyNice1">
+                            <input class="form-check-input" type="radio" value="1" name="naughtyNice" id="naughtyNice1" ng-model="behavior">
                             Good
                             </label>
                         </div>
                         <div class="form-check">
                             <label class="form-check-label">
-                            <input class="form-check-input" type="radio" name="naughtyNice" id="naughtyNice2">
+                            <input class="form-check-input" type="radio" value="2" name="naughtyNice" id="naughtyNice2" ng-model="behavior">
                             Very Good
                             </label>
                         </div>
                         <div class="form-check">
                             <label class="form-check-label">
-                            <input class="form-check-input" type="radio" name="naughtyNice" id="naughtyNice3">
+                            <input class="form-check-input" type="radio" value="3" name="naughtyNice" id="naughtyNice3" ng-model="behavior">
                             Only Sort of Good
                             </label>
                         </div>
                     </div>
                 </div>  
                 <div class="form-group">
-                    <textarea type="text" class="form-control" id="inputBody" rows="6"></textarea>
+                    <textarea type="text" class="form-control" id="inputBody" rows="6" ng-model="message"></textarea>
                 </div>
                 <div class="form-row">
                     <div class="form-group col-md-12">Thank you so much!
