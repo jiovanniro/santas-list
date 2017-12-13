@@ -310,7 +310,7 @@ angular.module('santasList.controllers', [])
             newdiv.className = 'col-6 col-sm-6';
             input.placeholder = 'Present ' + newCount;
             input.type = 'text';
-            input.id = 'newInput';
+            input.id = 'kidInput';
 
             newdiv.appendChild(input);
 
