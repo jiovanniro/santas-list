@@ -84,7 +84,7 @@ angular.module('santasList.controllers', [])
 
 
 
-.controller('AdultController', ['$scope', 'Adult', 'ChildUser', 'Child', 'UserService', '$location', '$routeParams','SEOService', function($scope, Adult, ChildUser, Child, UserService, $location, $routeParams, SEOService) {
+.controller('AdultController', ['$scope', 'Adult', 'ChildUser', 'Child', 'UserService', '$location', '$routeParams' ,'SEOService', function($scope, Adult, ChildUser, Child, UserService, $location, $routeParams, SEOService) {
 
     let adultId = localStorage.getItem('famList');
     let adultIdParse = JSON.parse(adultId);
@@ -132,7 +132,7 @@ angular.module('santasList.controllers', [])
 
     //get items
     function getItems() {
-        var childId = document.getElementById('famList').value;
+        var childId = document.getElementById('adultDropDown').value;
         console.log('ChildId: ' + childId);
         $scope.ItemList = ChildUser.query({id: childId}, function(success){
             console.log(success);

@@ -180,6 +180,80 @@ button:focus {
   padding: 0 2em;
 }
 /*
+   ###    ########  ##     ## ##       ######## 
+  ## ##   ##     ## ##     ## ##          ##    
+ ##   ##  ##     ## ##     ## ##          ##    
+##     ## ##     ## ##     ## ##          ##    
+######### ##     ## ##     ## ##          ##   
+##     ## ##     ## ##     ## ##          ##    
+##     ## ########   #######  ########    ##   
+*/
+
+.adultButton{
+  cursor: pointer;
+  box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2), 0 3px 10px 0 rgba(0,0,0,0.19);
+  background: rgb(238, 233, 233);
+  border: none;
+  border-radius: 5%
+}
+
+#adultDropDown{
+  cursor: pointer;
+  box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2), 0 3px 10px 0 rgba(0,0,0,0.19);
+}
+
+#logoutBtn {
+  float: right; 
+  margin-top:5%
+}
+#addChildBtn {
+  float: right;
+  margin-right:1%;
+  margin-top:5%
+}
+#purchaseRemove {
+  float: right;
+}
+
+@media screen and (max-width: 600px){
+  #purchaseRemove{
+    float: none;
+    text-align: center; 
+  }
+  #itemNameHeading{
+    text-align: center;
+  }
+}
+
+
+@media screen and (max-width: 400px) {
+  #logoutBtn {
+    margin: auto;
+    float: none;
+    margin-top: 5%;
+    width: 100%;
+    border-radius: 1%;
+  }
+  #addChildBtn {
+    margin: auto;
+    float: none;
+    margin-top: 5%;
+    width: 100%;
+    border-radius:1%;
+  }
+  #submitFamListBtn {
+    margin: auto;
+    margin-top: 5%;
+    width: 100%;
+    border-radius:1%;
+  }
+  #adultDropDown{
+    width:100%;
+    margin: auto;
+    margin-top:5%;
+  }
+}
+/*
 ##    ## #### ########       ######  #### 
 ##   ##   ##  ##     ##     ##    ##  ##  
 ##  ##    ##  ##     ##     ##        ##  
