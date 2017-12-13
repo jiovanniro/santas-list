@@ -9,9 +9,9 @@ $routeProvider
         templateUrl: 'views/home.html'
     })
 
-    .when('/thankyou', {
-        templateUrl: 'views/thankyou.html'
-        //controller: 'productsController'
+    .when('/thankyou/:id', {
+        templateUrl: 'views/thankyou.html',
+        controller: 'ThankyouController'
         // requiresLogin: true
     })
     .when('/adultSignUp', {

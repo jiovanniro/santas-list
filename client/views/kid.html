@@ -73,9 +73,9 @@
     </div>
     <div class="row">
         <div class="col-md-6">
-            <div id="toyList" class="row" ng-blur="removeFilteredItems()">
+            <div id="toy-list" class="row">
                 <div id="toy-items" class="col-6 col-sm-6">
-                    <input type='text' id="item1" ng-model="gifts.item1" ng-keyup="search(gifts.item1, $event)" ng-enter="selectItem(gifts.item1)">
+                    <input type='text' id="item1" ng-model="gifts.item1" ng-keyup="search(gifts.item1, $event)" ng-enter="removeFilteredItems()">
                 </div>
                 <div id="list-group">
                     <ul ng-hide="hidethis" style="color:#000">

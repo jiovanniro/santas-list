@@ -82,8 +82,6 @@ angular.module('santasList.controllers', [])
     };
 }])
 
-
-
 .controller('AdultController', ['$scope', 'Adult', 'ChildUser', 'Child', 'UserService', '$location', '$routeParams','SEOService', function($scope, Adult, ChildUser, Child, UserService, $location, $routeParams, SEOService) {
 
     let adultId = localStorage.getItem('famList');
@@ -299,7 +297,7 @@ angular.module('santasList.controllers', [])
         var max_fields = 10; //maximum input boxes allowed
     
         if(x < max_fields){ //max input box allowed
-            var $div = $(`<div><input type="text" id="item${x}" ng-model="gifts.item${x}" ng-keyup="search(gifts.item${x}, $event)" my-enter="addToList(gifts.item${x})"/></div>`); //add input box            
+            var $div = $(`<div><input type="text" id="item${x}" ng-model="gifts.item${x}" ng-keyup="search(gifts.item${x}, $event)" ng-enter="removeFilteredItems()"/></div>`); //add input box            
             var $target = $("#toy-items");
             angular.element($target).injector().invoke(function($compile) {
                 var $scope = angular.element($target).scope();
@@ -310,6 +308,7 @@ angular.module('santasList.controllers', [])
     };
 
     $scope.search = function(string, event) {
+        console.log('inside search');
         let target = event.target.id; 
 
         searchService.searchInput(string)
@@ -338,9 +337,9 @@ angular.module('santasList.controllers', [])
         }
 
         $scope.removeFilteredItems = function() {
-            console.log('enter button was pressed');
-            // $scope.hidethis = true;
-            $('#send-list').focus();
+            $scope.hidethis = true;
+            $(`#${target}`).blur();
+            $('.letterBG').focus();
         }
         
         $scope.addToList = function(gifts) {
@@ -361,7 +360,7 @@ angular.module('santasList.controllers', [])
 
                 wishList.$save({id: userId}, 
                     function(success){
-                    // $scope.gifts = new Gift.query({id: userId});
+                    $location.path(`/thankyou/${userId}`);
                         console.log(success);
                     }, function(err){
                         console.log(err);
@@ -369,4 +368,11 @@ angular.module('santasList.controllers', [])
             });
         }
     }
+}])
+
+.controller('ThankyouController', ['$scope', 'ChildUser', '$location', '$routeParams', 'Gift', 'SEOService', function($scope, ChildUser, $location, $routeParams, Gift, SEOService){
+
 }]);
+
+
+
