@@ -75,17 +75,17 @@
         <div class="col-md-6">
             <div id="toyList" class="row" ng-blur="removeFilteredItems()">
                 <div id="toy-items" class="col-6 col-sm-6">
-                    <input type='text' id="item1" ng-model="item1" ng-keyup="search(item1, $event)" my-enter="addToList(item1)">
+                    <input type='text' id="item1" ng-model="gifts.item1" ng-keyup="search(gifts.item1, $event)" ng-enter="selectItem(gifts.item1)">
                 </div>
-                <div>
-                    <ul class="list-group" ng-hide="hidethis" style="color:#000">
+                <div id="list-group">
+                    <ul ng-hide="hidethis" style="color:#000">
                         <li class="list-group-item" style="color:#000" ng-repeat="item in filteredItems" ng-click="selectItem(item)">{{item}}</li>
                     </ul>
                 </div>
             </div>
             <div class="add-new-toy col-md-12">
-                <input type="button" id="btn-new-toy" class="text-center" value="Add A New Toy" ng-click="addNewToy()">                    
-                <!-- <input type="button" class="newToy text-center" value="Add A New Toy" ng-click="addToy('toyList')"> -->
+                <input type="button" id="new-field" class="text-center" value="Add A New Toy" ng-click="addNewToy()">
+                <input type="button" id="send-list" class="text-center" value="Send To Santa" ng-click="addToList(gifts)">       
             </div> 
             <div class="col-md-12">
                 <p ng-repeat="gift in gifts">{{gift.item_name}}</p>
