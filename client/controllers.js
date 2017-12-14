@@ -333,265 +333,152 @@ angular.module('santasList.controllers', [])
 }])
 
 .controller('ChildController', ['$scope', '$parse', '$location', '$routeParams', 'ChildUser', 'User', 'UserService', 'searchService', 'Child', 'Gift', 'SEOService', 'AdultUser', function($scope, $parse, $location, $routeParams, ChildUser, User, UserService, searchService, Child, Gift, SEOService, AdultUser) {
-        let childname = $scope.name; 
-        // let behavior = $scope.behavior; 
-        // let message = $scope.message; 
+    let childname = $scope.name; 
+    // let behavior = $scope.behavior; 
+    // let message = $scope.message; 
+
+    //create child user
+    $scope.createChildUser = function() {
+        let userId = localStorage.getItem("childID");
+        var u = new ChildUser({
+            username: $scope.NewUser.username,
+            password: $scope.NewUser.password,
+            adultId:  userId 
+        });
+        u.$save(function(success){
+            console.log(success);
+            goToAdultPage(); //Might just set location to this
+        }, function(err){
+            console.log(err);
+        });
+    };
+
+    function goToAdultPage() { //might need to be changed later on
+        var dest = $location.search().dest;
+        if (!dest) { dest = '/adult' }
+        $location.replace().path(dest).search('dest', null);
+    }
+
+    let x = 2; //initlal text box count
+    $scope.addNewToy = function() {
+        var max_fields = 5; //maximum input boxes allowed
     
-        //create child user
-        $scope.createChildUser = function() {
-            let userId = localStorage.getItem("childID");
-            var u = new ChildUser({
-                username: $scope.NewUser.username,
-                password: $scope.NewUser.password,
-                adultId:  userId 
+        if(x < max_fields){ //max input box allowed
+            var $div = $(`<input style="border: 1px solid purple; float: left; margin-bottom: 0.1em" type="text" id="item${x}" class="kidInput" ng-model="gifts.item${x}" ng-keyup="search(gifts.item${x}, $event)" ng-enter="removeFilteredItems()"/>`); //add input box            
+            var $target = $("#gift-list");
+            angular.element($target).injector().invoke(function($compile) {
+                var $scope = angular.element($target).scope();
+                $target.append($compile($div)($scope));
             });
-            u.$save(function(success){
-                console.log(success);
-                goToAdultPage(); //Might just set location to this
-            }, function(err){
-                console.log(err);
-            });
-        };
-    
-        function goToAdultPage() { //might need to be changed later on
-            var dest = $location.search().dest;
-            if (!dest) { dest = '/adult' }
-            $location.replace().path(dest).search('dest', null);
+            x++; //text box increment
         }
-    
-        let x = 2; //initlal text box count
-        $scope.addNewToy = function() {
-            var max_fields = 5; //maximum input boxes allowed
-        
-            if(x < max_fields){ //max input box allowed
-                var $div = $(`<input style="border: 1px solid purple; float: left; margin-bottom: 0.1em" type="text" id="item${x}" class="kidInput" ng-model="gifts.item${x}" ng-keyup="search(gifts.item${x}, $event)" ng-enter="removeFilteredItems()"/>`); //add input box            
-                var $target = $("#gift-list");
-                angular.element($target).injector().invoke(function($compile) {
-                    var $scope = angular.element($target).scope();
-                    $target.append($compile($div)($scope));
-                });
-                x++; //text box increment
-            }
-        };
-    
-        $scope.search = function(string, event) {
-            let target = event.target.id;
-    
-            console.log('in search');
-            searchService.searchInput(string)
-            .then(function(data){
-                suggestions(data); 
-             });
-    
-            function suggestions(data) {
-                topSuggestions = [data[0], data[1], data[2]];
-                var output = [];
+    };
 
-                angular.forEach(topSuggestions, function(input) {
-                    if(input.toLowerCase().indexOf(string.toLowerCase()) >= 0) {
-                        output.push(input);
-                    }
-                });
-                $scope.filteredItems = output;
-                showSuggestions();
-            } 
+    $scope.search = function(string, event) {
+        let target = event.target.id;
 
-            function showSuggestions() {
-                console.log('showing suggestions');
-                console.log($(`#${target}`));
-                $(`#${target}`).append("<p style='color: #fff'>vghvhgvh</p>");
-                $scope.hidethis = false;
-            }
-    
-            $scope.selectItem = function(item) {
-                console.log('inside select item'); 
-                console.log(item);
-                var ref = `gifts.${target}`;
-                getter = $parse(ref);
-                getter.assign($scope, item);
-                $scope.hidethis = true;
-            }
-    
-            $scope.removeFilteredItems = function() {
-                $scope.hidethis = true;
-                $(`#${target}`).blur();
-                $('.letterBG').focus();
-            }
-            
-            $scope.addToList = function(gifts) {
-                $scope.hidethis = true;
-                $scope.item1 = "";
-                let userId = localStorage.getItem('famList');
-                
-                console.log('add to list');
-                wishListItems = Object.values(gifts);
-    
-                wishListItems.forEach(function(item) {
-                    console.log(userId);
-                    var wishList = new Child({
-                        item: item,
-                        userId: userId
-                    });
-    
-                    console.log("wishListItems: " + wishListItems);
-    
-                    wishList.$save({id: userId}, 
-                        function(success){
-                        prepMessageToParent();
-                        //$location.path(`/thankyou/${userId}`);
-                            console.log(success);
-                        }, function(err){
-                            console.log(err);
-                        })
-                });
-            }
-    
-            function prepMessageToParent() {
-                console.log('send message to parent');
-                let userId = localStorage.getItem("childID");
+        console.log('in search');
+        searchService.searchInput(string)
+        .then(function(data){
+            suggestions(data); 
+         });
 
-                function getChildInfo(userId) {
-                    $scope.child = ChildUser.get({id: userId}, function(success){
-                        getChildsParent($scope.child.adult_id)
-                        console.log(success);
-                    }, function(err){
-                        console.log('no kid');
-                    });
+        function suggestions(data) {
+            topSuggestions = [data[0], data[1], data[2]];
+            var output = [];
+
+            angular.forEach(topSuggestions, function(input) {
+                if(input.toLowerCase().indexOf(string.toLowerCase()) >= 0) {
+                    output.push(input);
                 }
+            });
+            $scope.filteredItems = output;
+            showSuggestions();
+        } 
 
-                function getChildsParent(id) {
-                    console.log('getting childs parent info')
-                    $scope.parent = AdultUser.get({id: id}, function(success) {
-                        sendMessageToParent($scope.parent.username, $scope.parent.email)
-                        console.log(success);
-                        //sendMessageToParent($scope.child, $scope.parent);
-                    }, function(err){
-                        console.log('no adult');
-                    })
-                }
-
-                getChildInfo(userId);
-            }
-
-            function sendMessageToParent(parentUsername, parentEmail) {
-                console.log("child " + $scope.name);
-                console.log("parent " + parentEmail);
-                // console.log('userid: ' + userId);
-                // console.log('child: ' + $scope.child); 
-                // console.log('adult: ' + $scope.parent);
-                // let letterToSanta = new Letter({
-                //     name: , 
-                //     behavior: , 
-                //     message: , 
-                //     wishlist: 
-                // });
-            }
-            
-         }
-    }])
-    
-    .controller('ThankyouController', ['$scope', '$parse', '$location', '$routeParams', 'Child', 'Adult', 'Gift', 'searchService', 'Letter', 'SEOService', function($scope, $parse, $location, $routeParams, Child, Adult, Gift, searchService, Letter, SEOService){
-        $scope.hidethis = true;
-        $scope.hidesuggestions = true;
-        $scope.hideconfirmation = true;
-        $scope.addToList = function() {
-            console.log('open the add div');
+        function showSuggestions() {
+            console.log('showing suggestions');
+            console.log($(`#${target}`));
+            $(`#${target}`).append("<p style='color: #fff'>vghvhgvh</p>");
             $scope.hidethis = false;
         }
-    
-        let x = 2; //initlal text box count
-        $scope.addNewToy = function() {
-            var max_fields = 10; //maximum input boxes allowed
-        
-            if(x < max_fields){ //max input box allowed
-                var $div = $(`<div><input type="text" id="item${x}" class="kidInput" ng-model="gifts.item${x}" ng-keyup="search(gifts.item${x}, $event)" ng-enter="removeFilteredItems()"/></div>`); //add input box            
-                var $target = $("#toy-items");
-                angular.element($target).injector().invoke(function($compile) {
-                    var $scope = angular.element($target).scope();
-                    $target.append($compile($div)($scope));
-                });
-                x++; //text box increment
-            }
-        };
-    
-    
-        $scope.search = function(string, event) {
-            console.log('inside search');
-            let target = event.target.id; 
-            console.log(target);
-            
-    
-            searchService.searchInput(string)
-            .then(function(data){
-                suggestions(data); 
-            });
-    
-            function suggestions(data) {
-                topSuggestions = [data[0], data[1], data[2]];
-                $scope.hidesuggestions = false;            
-                var output = [];
-                angular.forEach(topSuggestions, function(input) {
-                    if(input.toLowerCase().indexOf(string.toLowerCase()) >= 0) {
-                        output.push(input);
-                    }
-                });
-                $scope.filteredItems = output;
-            } 
-    
-            $scope.selectItem = function(string) {
-                console.log('inside select item'); 
-                console.log(string);
-                var ref = `gifts.${target}`;
-                getter = $parse(ref);
-                getter.assign($scope, string);
-                $scope.hidesuggestions = true;
-            }
-    
-            $scope.removeFilteredItems = function() {
-                $scope.hidethis = true;
-                $(`#${target}`).blur();
-                $('.letterBG').focus();
-            }
-            
-            $scope.sendToList = function(gifts) {
-                $scope.hidesuggestions = true;
-                $scope.item1 = "";
-                let userId = localStorage.getItem('famList');
-                
-                console.log('add to list');
-                wishListItems = Object.values(gifts);
-    
-                wishListItems.forEach(function(item) {
-                    var wishList = new Child({
-                        item: item,
-                        userId: userId
-                    });
-    
-                    console.log("wishListItems: " + wishListItems);
-    
-                    wishList.$save({id: userId}, 
-                        function(success){
-                            $scope.hidethis = true;
-                            $scope.hideoptions = true;
-                            $scope.hideconfirmation = false;
-                            sendMessageToParent();
-                            console.log(success);
-                        }, function(err){
-                            console.log(err);
-                        })
-                });
-            }
+
+        $scope.selectItem = function(item) {
+            console.log('inside select item'); 
+            console.log(item);
+            var ref = `gifts.${target}`;
+            getter = $parse(ref);
+            getter.assign($scope, item);
+            $scope.hidethis = true;
         }
-    
-        function sendMessageToParent() {
-            let userId = localStorage.getItem("famList");
-            $scope.child = new Child.query({id: userId}); 
-            $scope.adult = new Adult.query({id: userId});
-    
-            console.log('inside send message to parent');
-            console.log('userid: ' + userId);
-            console.log('child: ' + $scope.child); 
-            console.log('adult: ' + $scope.adult);
+
+        $scope.removeFilteredItems = function() {
+            $scope.hidethis = true;
+            $(`#${target}`).blur();
+            $('.letterBG').focus();
+        }
+        
+        $scope.addToList = function(gifts) {
+            $scope.hidethis = true;
+            $scope.item1 = "";
+            let userId = localStorage.getItem('famList');
+            
+            console.log('add to list');
+            wishListItems = Object.values(gifts);
+
+            wishListItems.forEach(function(item) {
+                console.log(userId);
+                var wishList = new Child({
+                    item: item,
+                    userId: userId
+                });
+
+                console.log("wishListItems: " + wishListItems);
+
+                wishList.$save({id: userId}, 
+                    function(success){
+                    prepMessageToParent();
+                    //$location.path(`/thankyou/${userId}`);
+                        console.log(success);
+                    }, function(err){
+                        console.log(err);
+                    })
+            });
+        }
+
+        function prepMessageToParent() {
+            console.log('send message to parent');
+            let userId = localStorage.getItem("childID");
+
+            function getChildInfo(userId) {
+                $scope.child = ChildUser.get({id: userId}, function(success){
+                    getChildsParent($scope.child.adult_id)
+                    console.log(success);
+                }, function(err){
+                    console.log('no kid');
+                });
+            }
+
+            function getChildsParent(id) {
+                console.log('getting childs parent info')
+                $scope.parent = AdultUser.get({id: id}, function(success) {
+                    sendMessageToParent($scope.parent.username, $scope.parent.email)
+                    console.log(success);
+                    //sendMessageToParent($scope.child, $scope.parent);
+                }, function(err){
+                    console.log('no adult');
+                })
+            }
+
+            getChildInfo(userId);
+        }
+
+        function sendMessageToParent(parentUsername, parentEmail) {
+            console.log("child " + $scope.name);
+            console.log("parent " + parentEmail);
+            // console.log('userid: ' + userId);
+            // console.log('child: ' + $scope.child); 
+            // console.log('adult: ' + $scope.parent);
             // let letterToSanta = new Letter({
             //     name: , 
             //     behavior: , 
@@ -599,7 +486,125 @@ angular.module('santasList.controllers', [])
             //     wishlist: 
             // });
         }
-    }]);
+        
+     }
+}])
+
+.controller('ThankyouController', ['$scope', '$parse', '$location', '$routeParams', 'Child', 'Adult', 'Gift', 'searchService', 'Letter', 'SEOService', function($scope, $parse, $location, $routeParams, Child, Adult, Gift, searchService, Letter, SEOService){
+    $scope.hidethis = true;
+    $scope.hidesuggestions = true;
+    $scope.hideconfirmation = true;
+    $scope.addToList = function() {
+        console.log('open the add div');
+        $scope.hidethis = false;
+    }
+
+    let x = 2; //initlal text box count
+    $scope.addNewToy = function() {
+        var max_fields = 10; //maximum input boxes allowed
+    
+        if(x < max_fields){ //max input box allowed
+            var $div = $(`<div><input type="text" id="item${x}" class="kidInput" ng-model="gifts.item${x}" ng-keyup="search(gifts.item${x}, $event)" ng-enter="removeFilteredItems()"/></div>`); //add input box            
+            var $target = $("#toy-items");
+            angular.element($target).injector().invoke(function($compile) {
+                var $scope = angular.element($target).scope();
+                $target.append($compile($div)($scope));
+            });
+            x++; //text box increment
+        }
+    };
+
+
+    $scope.search = function(string, event) {
+        console.log('inside search');
+        let target = event.target.id; 
+        console.log(target);
+        
+
+        searchService.searchInput(string)
+        .then(function(data){
+            suggestions(data); 
+        });
+
+        function suggestions(data) {
+            topSuggestions = [data[0], data[1], data[2]];
+            $scope.hidesuggestions = false;            
+            var output = [];
+            angular.forEach(topSuggestions, function(input) {
+                if(input.toLowerCase().indexOf(string.toLowerCase()) >= 0) {
+                    output.push(input);
+                }
+            });
+            $scope.filteredItems = output;
+        } 
+
+        $scope.selectItem = function(string) {
+            console.log('inside select item'); 
+            console.log(string);
+            var ref = `gifts.${target}`;
+            getter = $parse(ref);
+            getter.assign($scope, string);
+            $scope.hidesuggestions = true;
+        }
+
+        $scope.removeFilteredItems = function() {
+            $scope.hidethis = true;
+            $(`#${target}`).blur();
+            $('.letterBG').focus();
+        }
+        
+        $scope.sendToList = function(gifts) {
+            $scope.hidesuggestions = true;
+            $scope.item1 = "";
+            let userId = localStorage.getItem('famList');
+            
+            console.log('add to list');
+            wishListItems = Object.values(gifts);
+
+            wishListItems.forEach(function(item) {
+                var wishList = new Child({
+                    item: item,
+                    userId: userId
+                });
+
+                console.log("wishListItems: " + wishListItems);
+
+                wishList.$save({id: userId}, 
+                    function(success){
+                        $scope.hidethis = true;
+                        $scope.hideoptions = true;
+                        $scope.hideconfirmation = false;
+                        sendMessageToParent();
+                        console.log(success);
+                    }, function(err){
+                        console.log(err);
+                    })
+            });
+        }
+    }
+
+    function sendMessageToParent() {
+        let userId = localStorage.getItem("famList");
+        $scope.child = new Child.query({id: userId}); 
+        $scope.adult = new Adult.query({id: userId});
+
+        console.log('inside send message to parent');
+        console.log('userid: ' + userId);
+        console.log('child: ' + $scope.child); 
+        console.log('adult: ' + $scope.adult);
+        // let letterToSanta = new Letter({
+        //     name: , 
+        //     behavior: , 
+        //     message: , 
+        //     wishlist: 
+        // });
+    }
+}]);
+
+
+
+
+
     
     
 
