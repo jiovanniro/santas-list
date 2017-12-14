@@ -302,39 +302,40 @@ angular.module('santasList.controllers', [])
 
 }])
 
+
 .controller('ChildLoginController', ['$scope', 'Child', '$location', '$routeParams', 'UserService','SEOService', function($scope, Child, $location, $routeParams, UserService, SEOService) {
-
-    console.log('In the childLoginController');
-
-    $scope.login = function() {
-        UserService.loginChild($scope.Username, $scope.Password)
-        .then(() => {
-            let userId = UserService.user().id;
-            let userIdString = JSON.stringify(userId);
-            localStorage.setItem('childID', userIdString);
-            console.log('boomsauce!!!!!!!!');
-            $location.path('/kid');
-        }, (err) => {
-            bootbox.alert({
-                message: "Incorrect Username/Password",
-                backdrop: true,
+    
+        console.log('In the childLoginController');
+    
+        $scope.login = function() {
+            UserService.loginChild($scope.Username, $scope.Password)
+            .then(() => {
+                let userId = UserService.user().id;
+                let userIdString = JSON.stringify(userId);
+                localStorage.setItem('childID', userIdString);
+                console.log('boomsauce!!!!!!!!');
+                $location.path('/kid');
+            }, (err) => {
+                bootbox.alert({
+                    message: "Incorrect Username/Password",
+                    backdrop: true,
+                });
             });
-        });
-    };
-
-    // * post item needs more work. Only set up for one item to pass through.
-    $scope.sendItem = function() {
-        var item = new Child({
-            itemName: $scope.Items
-        });
-        item.$save({id: UserService.userId()}, function(success){
-            console.log(success);
-        }, function(err){
-            console.log(err);
-        })
-    }
+        };
+    
+        // * post item needs more work. Only set up for one item to pass through.
+        $scope.sendItem = function() {
+            var item = new Child({
+                itemName: $scope.Items
+            });
+            item.$save({id: UserService.userId()}, function(success){
+                console.log(success);
+            }, function(err){
+                console.log(err);
+            })
+        }
 }])
-
+    
 .controller('ChildController', ['$scope', '$parse', '$location', '$routeParams', 'ChildUser', 'User', 'UserService', 'searchService', 'Child', 'Gift', 'SEOService', 'AdultUser', function($scope, $parse, $location, $routeParams, ChildUser, User, UserService, searchService, Child, Gift, SEOService, AdultUser) {
     let childname = $scope.name; 
     // let behavior = $scope.behavior; 
@@ -367,7 +368,7 @@ angular.module('santasList.controllers', [])
         var max_fields = 5; //maximum input boxes allowed
     
         if(x < max_fields){ //max input box allowed
-            var $div = $(`<input style="border: 1px solid purple; float: left; margin-bottom: 0.1em" type="text" id="item${x}" class="kidInput" ng-model="gifts.item${x}" ng-keyup="search(gifts.item${x}, $event)" ng-enter="removeFilteredItems()"/>`); //add input box            
+            var $div = $(`<input list="suggestions" style="border: 1px solid purple; margin-bottom: 0.1em" type="text" id="item${x}" class="kidInput" ng-model="gifts.item${x}" ng-keyup="search(gifts.item${x}, $event)" ng-enter="removeFilteredItems()"/>`); //add input box            
             var $target = $("#gift-list");
             angular.element($target).injector().invoke(function($compile) {
                 var $scope = angular.element($target).scope();
@@ -387,7 +388,7 @@ angular.module('santasList.controllers', [])
          });
 
         function suggestions(data) {
-            topSuggestions = [data[0], data[1], data[2]];
+            topSuggestions = [data[0], data[1], data[2], data[3], data[4]];
             var output = [];
 
             angular.forEach(topSuggestions, function(input) {
@@ -396,6 +397,7 @@ angular.module('santasList.controllers', [])
                 }
             });
             $scope.filteredItems = output;
+            console.log($scope.filteredItems);
             showSuggestions();
         } 
 
