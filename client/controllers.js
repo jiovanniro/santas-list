@@ -299,6 +299,40 @@ angular.module('santasList.controllers', [])
 
 }])
 
+
+.controller('ChildLoginController', ['$scope', 'Child', '$location', '$routeParams', 'UserService','SEOService', function($scope, Child, $location, $routeParams, UserService, SEOService) {
+    
+        console.log('In the childLoginController');
+    
+        $scope.login = function() {
+            UserService.loginChild($scope.Username, $scope.Password)
+            .then(() => {
+                let userId = UserService.user().id;
+                let userIdString = JSON.stringify(userId);
+                localStorage.setItem('childID', userIdString);
+                console.log('boomsauce!!!!!!!!');
+                $location.path('/kid');
+            }, (err) => {
+                bootbox.alert({
+                    message: "Incorrect Username/Password",
+                    backdrop: true,
+                });
+            });
+        };
+    
+        // * post item needs more work. Only set up for one item to pass through.
+        $scope.sendItem = function() {
+            var item = new Child({
+                itemName: $scope.Items
+            });
+            item.$save({id: UserService.userId()}, function(success){
+                console.log(success);
+            }, function(err){
+                console.log(err);
+            })
+        }
+}])
+    
 .controller('ChildController', ['$scope', '$parse', '$location', '$routeParams', 'ChildUser', 'User', 'UserService', 'searchService', 'Child', 'Gift', 'SEOService', 'AdultUser', function($scope, $parse, $location, $routeParams, ChildUser, User, UserService, searchService, Child, Gift, SEOService, AdultUser) {
     let childname = $scope.name; 
     // let behavior = $scope.behavior; 
