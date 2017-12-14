@@ -339,7 +339,6 @@ angular.module('santasList.controllers', [])
                 password: $scope.NewUser.password,
                 adultId:  userId 
             });
-<<<<<<< HEAD
             x++; //text box increment
         }
     };
@@ -364,13 +363,11 @@ angular.module('santasList.controllers', [])
                 if(input.toLowerCase().indexOf(string.toLowerCase()) >= 0) {
                     output.push(input);
                 }
-=======
             u.$save(function(success){
                 console.log(success);
                 goToAdultPage(); //Might just set location to this
             }, function(err){
                 console.log(err);
->>>>>>> 2329b343bde50d9198f97c959f6d65af5a426c77
             });
         };
     
