@@ -48,7 +48,7 @@ router.post('/createChild', function(req, res){
 
 //are we calling the right procedure?
 router.get('/createChild/:id', function(req, res){
-    procedures.getItems(req.params.id)
+    procedures.getChildUserById(req.params.id)
     .then(function(item){
         res.send(item);
     }).catch(function(err){
@@ -67,9 +67,8 @@ router.get('/gifts/:id', function(req, res){
     });
 });
 
-
-
 router.post('/:id', function(req, res){
+    console.log('inside adding item');
     procedures.addItem(req.body.item, req.body.userId)
     .then(function(item){
         res.send(item);

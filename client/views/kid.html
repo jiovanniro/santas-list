@@ -1,54 +1,74 @@
 <div class="letterBG">
-    <div class="row">
-        <div id="santaLetter" class="col-md-6">
+    <div class="instructions" style="color: #fff; text-align: center; margin: 0 auto; border: 2px solid yellow; width: 50%; line-height: 10px;">
+        <h1>Merry Christmas {{child.name}}</h1>
+        <p>Finish the letter below to send your list to Santa!</p>
+        <p>Ho! Ho! Ho!</p>
+    </div>
+    <div class="letter" style="border: 1px solid #000; width: 80%; margin: 0 auto">
+        <form>                         
+        <div class="startLetter" style="border: 1px solid purple;">
             <div id="salutation" class="col-md-12">Dear Santa,</div>
-            <form>
-                <div class="form-row">
-                    <div class="form-group col-md-6">
-                        <label for="inputName">My name is</label>
-                    </div>  
-                    <div class="form-group col-md-6">
-                        <input type="name" class="form-control" id="inputName" placeholder="Name" ng-model="name">
-                    </div>
-                </div>
-                <div class="form-row">
-                    <div class="form-group col-md-6">
-                        <label for="form-check-label">This year I have been</label>
-                    </div>
-                    <div class="form-group col-md-6">
-                        <div class="form-check">
-                            <label class="form-check-label">
-                            <input class="form-check-input" type="radio" value="1" name="naughtyNice" id="naughtyNice1" ng-model="behavior">
-                            Good
-                            </label>
-                        </div>
-                        <div class="form-check">
-                            <label class="form-check-label">
-                            <input class="form-check-input" type="radio" value="2" name="naughtyNice" id="naughtyNice2" ng-model="behavior">
-                            Very Good
-                            </label>
-                        </div>
-                        <div class="form-check">
-                            <label class="form-check-label">
-                            <input class="form-check-input" type="radio" value="3" name="naughtyNice" id="naughtyNice3" ng-model="behavior">
-                            Only Sort of Good
-                            </label>
-                        </div>
-                    </div>
-                </div>  
-                <div class="form-group">
-                    <textarea type="text" class="form-control" id="inputBody" rows="6" ng-model="message"></textarea>
-                </div>
-                <div class="form-row">
-                    <div class="form-group col-md-12">Thank you so much!
-                    </div>
-                </div>
-            </form>
-        </div>
-        <div id="funnySanta" class="col-md-6">
-            <div class="topMessage">
-                    <h1>Merry</h1>
+            <div>
+                <label id="childname" style="color: #fff;" for="name">My Name is:</label>
+                <input type="name" class="name" id="inputName" placeholder="Name" ng-model="name" style="width: 30%;">
             </div>
+            <div>
+                <div class="form-check">
+                    <p id="behavior">This year I have been:</p>
+                    <label class="form-check-label">
+                    <input class="form-check-input" type="radio" value="1" name="naughtyNice" id="naughtyNice1" ng-model="behavior">
+                    Good
+                    </label>
+                </div>
+                <div class="form-check">
+                    <label class="form-check-label">
+                    <input class="form-check-input" type="radio" value="2" name="naughtyNice" id="naughtyNice2" ng-model="behavior">
+                    Very Good
+                    </label>
+                </div>
+                <div class="form-check">
+                    <label class="form-check-label">
+                    <input class="form-check-input" type="radio" value="3" name="naughtyNice" id="naughtyNice3" ng-model="behavior">
+                    Only Sort of Good
+                    </label>
+                </div>
+            </div>
+            <div>
+                <h2 id="iWant">What I want for Christmas:</h2>
+            </div>
+            <div class="add-new-toy col-md-12">
+                <input type="button" id="new-field" class="clickButton text-center" value="Add A New Toy" ng-click="addNewToy()">
+            </div> 
+            <div style="border: 2px solid yellow; overflow: auto;">
+                <div id="toyList" class="row">
+                    <div id="toyItems">
+                        <ul id="gift-list" style="border: 2px solid orange; width: 100%;">
+                            <input style="border: 1px solid purple; float: left; margin-bottom: 0.1em" type="text" id="item1" class="kidInput" ng-model="gifts.item1" ng-keyup="search(gifts.item1, $event)" ng-enter="removeFilteredItems()"/>
+                        </ul>
+                        <ul class="list-group" ng-hide="hidethis" style="color:#000; z-index: -1; float: left; border: 1px solid pink">
+                            <li class="list-group-item" style="color:#000" ng-repeat="item in filteredItems" ng-click="selectItem(item)">{{item}}</li>
+                        </ul>
+                    </div>
+                    <!-- <div style="border: 1px solid pink">
+                        <ul class="list-group" ng-hide="hidethis" style="color:#000; z-index: -1; border: 1px solid pink">
+                            <li class="list-group-item" style="color:#000" ng-repeat="item in filteredItems" ng-click="selectItem(item)">{{item}}</li>
+                        </ul>
+                    </div> -->
+                </div>
+            </div>
+        </div>
+        <div class="myList" style="border: 1px solid orange;">
+            <div>
+                <label id="messageToSanta" for="message">Write something special to Santa:</label>
+                <textarea type="text" name="message" class="form-control" id="inputBody" rows="6" ng-model="message" style="width: 50%"></textarea>
+            </div>
+            <!-- <div>
+                <input type="submit" id="create-list" class="clickButton text-center" value="Send To Santa" ng-submit="addToList(gifts)">        
+            </div> -->
+        </div>
+        </form>
+    </div>
+    <!-- <div id="funnySanta" class="santa" style="border: 1px solid #000; width: 40%; float: left">
             <div class="window">
                 <div class="santa">
                     <div class="head">
@@ -69,42 +89,5 @@
                     <div class="body"></div>
                 </div>
             </div>
-            <div class="bottomMessage">
-                    <h1>Christmas!</h1>
-            </div>
-        </div>
-    </div>
-    <div class="row">
-        <div class="col-md-6">
-<<<<<<< HEAD
-            <div id="toyList" class="row">
-                <div class="col-6 col-sm-6">
-                    <input id="kidInput" type="text" placeholder="Present 1">
-=======
->>>>>>> 2329b343bde50d9198f97c959f6d65af5a426c77
-            <div id="toy-list" class="row">
-                <div id="toy-items" class="col-6 col-sm-6">
-                    <input type='text' id="item1" ng-model="gifts.item1" ng-keyup="search(gifts.item1, $event)" my-enter="removeFilteredItems">
-                </div>
-                <div>
-                    <ul class="list-group" ng-hide="hidethis" style="color:#000">
-                        <li class="list-group-item" style="color:#000" ng-repeat="item in filteredItems" ng-click="selectItem(item)">{{item}}</li>
-                    </ul>
-                </div>
-            </div>
-            <div class="add-new-toy col-md-12">
-                <input type="button" id="new-field" class="clickButton text-center" value="Add A New Toy" ng-click="addNewToy()">
-                <input type="button" id="create-list" class="clickButton text-center" value="Send To Santa" ng-click="addToList(gifts)">       
-                <!-- <input type="button" class="newToy text-center" value="Add A New Toy" ng-click="addToy('toyList')"> -->
-            </div> 
-            <div class="col-md-12">
-<<<<<<< HEAD
-                <input type="button" class="clickButton text-center" value="Add A New Toy" ng-click="addInput('toyList')">
-=======
->>>>>>> 2329b343bde50d9198f97c959f6d65af5a426c77
-                <p ng-repeat="gift in gifts">{{gift.item_name}}</p>
-            </div> 
-        </div>         
-        <div id="instructions" class="col-md-6"></div>
-    </div>
+    </div> -->
 </div>

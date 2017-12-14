@@ -15,3 +15,7 @@ export function getComments(id: number){
 export function getItems(id: number){
     return rows('get_item', [id]);
 }
+
+export function getChildUserById(id: number){
+    return row('get_childUser_by_id', [id]);
+}

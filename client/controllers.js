@@ -1,77 +1,3 @@
-var c = document.getElementById('canvas');
-canvas.width = window.innerWidth;
-canvas.height = window.innerHeight;
-
-var ctx = c.getContext('2d');
-
-var w = window.innerWidth;
-var h = window.innerHeight;
-var rate = 50;
-var arc = 500;
-var time;
-var count;
-var size = 2;
-var speed = 5;
-var light = new Array;
-var colors = ["#eee"];
-
-window.addEventListener('resize', function(){
-    canvas.width = window.innerWidth;
-    canvas.height = window.innerHeight;
-    w = canvas.width;
-    h = canvas.height;
-    init();
-    bubble()
-})
-
-function init(){
-    time = 0;
-    count = 0;
-    
-    for(var i = 0; i < arc; i++) {
-        light[i] = {
-            x: Math.ceil(Math.random() * w),
-            y: Math.ceil(Math.random() * h),
-            toX: Math.random() * 5 + 1,
-            toY: Math.random() * 5 + 1,
-            col: colors[Math.floor(Math.random()*colors.length)],
-            size: Math.random() * size
-        }
-    }
-}
-
-function bubble(){
-    ctx.clearRect(0,0,w,h);
-
-    for(var i = 0; i < arc; i++) {
-        var li = light[i]
-
-        ctx.beginPath();
-        ctx.arc(li.x,li.y,li.size,0,Math.PI*2,false);
-        ctx.fillStyle = li.col;
-        ctx.fill();
-
-        li.x = li.x + li.toX * (time * 0.05);
-        li.y = li.y + li.toY * (time * 0.05);
-        
-        if(li.x > w) { li.x = 0; }
-        if(li.y > h) { li.y = 0; }
-        if(li.x < 0) { li.x = w; }
-        if(li.y < 0) { li.y = h; }
-    }
-    
-    if(time < speed) {
-        time++;
-    }
-
-    timerID = setTimeout(bubble,1000/rate);
-}
-
-init();
-bubble();
-
-
-
 angular.module('santasList.controllers', [])
 .controller('LoginController', ['$scope', '$location', '$routeParams', 'UserService', 'User', function($scope, $location, $routeParams, UserService, User){
     console.log('in login controller');
@@ -298,77 +224,77 @@ angular.module('santasList.controllers', [])
         }
     }
 
-    // var c = document.getElementById('canvas');
-    // canvas.width = window.innerWidth;
-    // canvas.height = window.innerHeight;
+    var c = document.getElementById('canvas');
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
 
-    // var ctx = c.getContext('2d');
+    var ctx = c.getContext('2d');
 
-    // var w = window.innerWidth;
-    // var h = window.innerHeight;
-    // var rate = 50;
-    // var arc = 500;
-    // var time;
-    // var count;
-    // var size = 2;
-    // var speed = 5;
-    // var light = new Array;
-    // var colors = ["#eee"];
+    var w = window.innerWidth;
+    var h = window.innerHeight;
+    var rate = 50;
+    var arc = 500;
+    var time;
+    var count;
+    var size = 2;
+    var speed = 10;
+    var light = new Array;
+    var colors = ["#eee"];
 
-    // window.addEventListener('resize', function(){
-    //     canvas.width = window.innerWidth;
-    //     canvas.height = window.innerHeight;
-    //     w = canvas.width;
-    //     h = canvas.height;
-    //     init();
-    //     bubble()
-    // })
+    window.addEventListener('resize', function(){
+        canvas.width = window.innerWidth;
+        canvas.height = window.innerHeight;
+        w = canvas.width;
+        h = canvas.height;
+        init();
+        bubble()
+    })
 
-    // function init(){
-    //     time = 0;
-    //     count = 0;
+    function init(){
+        time = 0;
+        count = 0;
         
-    //     for(var i = 0; i < arc; i++) {
-    //         light[i] = {
-    //             x: Math.ceil(Math.random() * w),
-    //             y: Math.ceil(Math.random() * h),
-    //             toX: Math.random() * 5 + 1,
-    //             toY: Math.random() * 5 + 1,
-    //             col: colors[Math.floor(Math.random()*colors.length)],
-    //             size: Math.random() * size
-    //         }
-    //     }
-    // }
+        for(var i = 0; i < arc; i++) {
+            light[i] = {
+                x: Math.ceil(Math.random() * w),
+                y: Math.ceil(Math.random() * h),
+                toX: Math.random() * 5 + 1,
+                toY: Math.random() * 5 + 1,
+                col: colors[Math.floor(Math.random()*colors.length)],
+                size: Math.random() * size
+            }
+        }
+    }
 
-    // function bubble(){
-    //     ctx.clearRect(0,0,w,h);
+    function bubble(){
+        ctx.clearRect(0,0,w,h);
 
-    //     for(var i = 0; i < arc; i++) {
-    //         var li = light[i]
+        for(var i = 0; i < arc; i++) {
+            var li = light[i]
 
-    //         ctx.beginPath();
-    //         ctx.arc(li.x,li.y,li.size,0,Math.PI*2,false);
-    //         ctx.fillStyle = li.col;
-    //         ctx.fill();
+            ctx.beginPath();
+            ctx.arc(li.x,li.y,li.size,0,Math.PI*2,false);
+            ctx.fillStyle = li.col;
+            ctx.fill();
 
-    //         li.x = li.x + li.toX * (time * 0.05);
-    //         li.y = li.y + li.toY * (time * 0.05);
+            li.x = li.x + li.toX * (time * 0.05);
+            li.y = li.y + li.toY * (time * 0.05);
             
-    //         if(li.x > w) { li.x = 0; }
-    //         if(li.y > h) { li.y = 0; }
-    //         if(li.x < 0) { li.x = w; }
-    //         if(li.y < 0) { li.y = h; }
-    //     }
+            if(li.x > w) { li.x = 0; }
+            if(li.y > h) { li.y = 0; }
+            if(li.x < 0) { li.x = w; }
+            if(li.y < 0) { li.y = h; }
+        }
         
-    //     if(time < speed) {
-    //         time++;
-    //     }
+        if(time < speed) {
+            time++;
+        }
 
-    //     timerID = setTimeout(bubble,1000/rate);
-    // }
+        timerID = setTimeout(bubble,1000/rate);
+    }
 
-    // init();
-    // bubble();
+    init();
+    bubble();
 
 }])
 
@@ -379,6 +305,9 @@ angular.module('santasList.controllers', [])
     $scope.login = function() {
         UserService.loginChild($scope.Username, $scope.Password)
         .then(() => {
+            let userId = UserService.user().id;
+            let userIdString = JSON.stringify(userId);
+            localStorage.setItem('childID', userIdString);
             console.log('boomsauce!!!!!!!!');
             $location.path('/kid');
         }, (err) => {
@@ -388,7 +317,6 @@ angular.module('santasList.controllers', [])
             });
         });
     };
-
 
     // * post item needs more work. Only set up for one item to pass through.
     $scope.sendItem = function() {
@@ -403,40 +331,19 @@ angular.module('santasList.controllers', [])
     }
 }])
 
-.controller('ChildController', ['$scope', '$parse', '$location', '$routeParams', 'ChildUser', 'User', 'UserService', 'searchService', 'Child', 'Adult', 'Gift','SEOService', function($scope, $parse, $location, $routeParams, ChildUser, User, UserService, searchService, Adult, Child, Gift, SEOService) {
+.controller('ChildController', ['$scope', '$parse', '$location', '$routeParams', 'ChildUser', 'User', 'UserService', 'searchService', 'Child', 'Gift', 'SEOService', 'AdultUser', function($scope, $parse, $location, $routeParams, ChildUser, User, UserService, searchService, Child, Gift, SEOService, AdultUser) {
+        let childname = $scope.name; 
+        // let behavior = $scope.behavior; 
+        // let message = $scope.message; 
     
         //create child user
         $scope.createChildUser = function() {
-            let userId = localStorage.getItem("famList");
+            let userId = localStorage.getItem("childID");
             var u = new ChildUser({
                 username: $scope.NewUser.username,
                 password: $scope.NewUser.password,
                 adultId:  userId 
             });
-            x++; //text box increment
-        }
-    };
-
-            newdiv.className = 'col-6 col-sm-6';
-            input.placeholder = 'Present ' + newCount;
-            input.type = 'text';
-            input.id = 'kidInput';
-    $scope.search = function(string, event) {
-        console.log('inside search');
-        let target = event.target.id; 
-
-        searchService.searchInput(string)
-        .then(function(data){
-            suggestions(data); 
-        });
-
-        function suggestions(data) {
-            $scope.hidethis = false;
-            var output = [];
-            angular.forEach(data, function(input) {
-                if(input.toLowerCase().indexOf(string.toLowerCase()) >= 0) {
-                    output.push(input);
-                }
             u.$save(function(success){
                 console.log(success);
                 goToAdultPage(); //Might just set location to this
@@ -453,11 +360,11 @@ angular.module('santasList.controllers', [])
     
         let x = 2; //initlal text box count
         $scope.addNewToy = function() {
-            var max_fields = 10; //maximum input boxes allowed
+            var max_fields = 5; //maximum input boxes allowed
         
             if(x < max_fields){ //max input box allowed
-                var $div = $(`<div><input type="text" id="item${x}" ng-model="gifts.item${x}" ng-keyup="search(gifts.item${x}, $event)" ng-enter="removeFilteredItems()"/></div>`); //add input box            
-                var $target = $("#toy-items");
+                var $div = $(`<input style="border: 1px solid purple; float: left; margin-bottom: 0.1em" type="text" id="item${x}" class="kidInput" ng-model="gifts.item${x}" ng-keyup="search(gifts.item${x}, $event)" ng-enter="removeFilteredItems()"/>`); //add input box            
+                var $target = $("#gift-list");
                 angular.element($target).injector().invoke(function($compile) {
                     var $scope = angular.element($target).scope();
                     $target.append($compile($div)($scope));
@@ -476,15 +383,24 @@ angular.module('santasList.controllers', [])
              });
     
             function suggestions(data) {
-                $scope.hidethis = false;
+                topSuggestions = [data[0], data[1], data[2]];
                 var output = [];
-                angular.forEach(data, function(input) {
+
+                angular.forEach(topSuggestions, function(input) {
                     if(input.toLowerCase().indexOf(string.toLowerCase()) >= 0) {
                         output.push(input);
                     }
                 });
                 $scope.filteredItems = output;
+                showSuggestions();
             } 
+
+            function showSuggestions() {
+                console.log('showing suggestions');
+                console.log($(`#${target}`));
+                $(`#${target}`).append("<p style='color: #fff'>vghvhgvh</p>");
+                $scope.hidethis = false;
+            }
     
             $scope.selectItem = function(item) {
                 console.log('inside select item'); 
@@ -510,6 +426,7 @@ angular.module('santasList.controllers', [])
                 wishListItems = Object.values(gifts);
     
                 wishListItems.forEach(function(item) {
+                    console.log(userId);
                     var wishList = new Child({
                         item: item,
                         userId: userId
@@ -519,7 +436,7 @@ angular.module('santasList.controllers', [])
     
                     wishList.$save({id: userId}, 
                         function(success){
-                        //sendMessageToParent();
+                        prepMessageToParent();
                         //$location.path(`/thankyou/${userId}`);
                             console.log(success);
                         }, function(err){
@@ -528,12 +445,36 @@ angular.module('santasList.controllers', [])
                 });
             }
     
-            function sendMessageToParent() {
+            function prepMessageToParent() {
                 console.log('send message to parent');
-                let userId = localStorage.getItem("famList");
-                // $scope.child = new Child.query({id: userId}); 
-                // $scope.parent = new Adult.query({id: userId});
-        
+                let userId = localStorage.getItem("childID");
+
+                function getChildInfo(userId) {
+                    $scope.child = ChildUser.get({id: userId}, function(success){
+                        getChildsParent($scope.child.adult_id)
+                        console.log(success);
+                    }, function(err){
+                        console.log('no kid');
+                    });
+                }
+
+                function getChildsParent(id) {
+                    console.log('getting childs parent info')
+                    $scope.parent = AdultUser.get({id: id}, function(success) {
+                        sendMessageToParent($scope.parent.username, $scope.parent.email)
+                        console.log(success);
+                        //sendMessageToParent($scope.child, $scope.parent);
+                    }, function(err){
+                        console.log('no adult');
+                    })
+                }
+
+                getChildInfo(userId);
+            }
+
+            function sendMessageToParent(parentUsername, parentEmail) {
+                console.log("child " + $scope.name);
+                console.log("parent " + parentEmail);
                 // console.log('userid: ' + userId);
                 // console.log('child: ' + $scope.child); 
                 // console.log('adult: ' + $scope.parent);
@@ -544,7 +485,8 @@ angular.module('santasList.controllers', [])
                 //     wishlist: 
                 // });
             }
-        }
+            
+         }
     }])
     
     .controller('ThankyouController', ['$scope', '$parse', '$location', '$routeParams', 'Child', 'Adult', 'Gift', 'searchService', 'Letter', 'SEOService', function($scope, $parse, $location, $routeParams, Child, Adult, Gift, searchService, Letter, SEOService){
@@ -561,7 +503,7 @@ angular.module('santasList.controllers', [])
             var max_fields = 10; //maximum input boxes allowed
         
             if(x < max_fields){ //max input box allowed
-                var $div = $(`<div><input type="text" id="item${x}" ng-model="gifts.item${x}" ng-keyup="search(gifts.item${x}, $event)" ng-enter="removeFilteredItems()"/></div>`); //add input box            
+                var $div = $(`<div><input type="text" id="item${x}" class="kidInput" ng-model="gifts.item${x}" ng-keyup="search(gifts.item${x}, $event)" ng-enter="removeFilteredItems()"/></div>`); //add input box            
                 var $target = $("#toy-items");
                 angular.element($target).injector().invoke(function($compile) {
                     var $scope = angular.element($target).scope();
@@ -584,9 +526,10 @@ angular.module('santasList.controllers', [])
             });
     
             function suggestions(data) {
+                topSuggestions = [data[0], data[1], data[2]];
                 $scope.hidesuggestions = false;            
                 var output = [];
-                angular.forEach(data, function(input) {
+                angular.forEach(topSuggestions, function(input) {
                     if(input.toLowerCase().indexOf(string.toLowerCase()) >= 0) {
                         output.push(input);
                     }
@@ -656,6 +599,7 @@ angular.module('santasList.controllers', [])
             // });
         }
     }]);
+    
     
 
 

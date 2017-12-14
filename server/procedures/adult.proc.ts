@@ -15,3 +15,7 @@ export function checked(id: number, checked: string){
 export function destroy(id: number){
     return empty('remove_item', [id]);
 }
+
+export function getAdultUser(id: number){
+    return row('get_user_by_id', [id]);
+}

@@ -15,6 +15,15 @@ router.post('/', function(req, res){
     });
 })
 
+router.get('/user/:id', function(req, res){
+    procedures.getAdultUser(req.params.id)
+    .then(function(item){
+        res.send(item);
+    }).catch(function(err){
+        res.status(500).send(err);
+    });
+}) 
+
 router.get('/:id', function(req, res){
     procedures.getFamList(req.params.id)
     .then(function(item){
@@ -22,7 +31,7 @@ router.get('/:id', function(req, res){
     }).catch(function(err){
         res.status(500).send(err);
     });
-})
+}) 
 
 router.post('/:id', function(req, res){
     procedures.checked(req.params.id, req.body.purchased)
