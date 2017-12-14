@@ -57,11 +57,11 @@ button:focus {
  ######  ##        ######## ##     ##  ######  ##     ##
  */
 .homeBG {
-  background: url(../images/homeBackground.jpg) no-repeat center center fixed;
+  /* background: url(../images/homeBackground.jpg) no-repeat center center fixed;
   -webkit-background-size: cover;
   -moz-background-size: cover;
   -o-background-size: cover;
-  background-size: cover;
+  background-size: cover; */
   min-height: 100vh;
 }
 .parentPost {
@@ -74,7 +74,7 @@ button:focus {
   margin-left: 29.5em;
   margin-top: -105px;
 }
-#snow {
+/* #snow {
   overflow: hidden;
   background: none;
   font-family: Androgyne;
@@ -89,8 +89,8 @@ button:focus {
   -moz-animation: snow 15s linear infinite;
   -ms-animation: snow 15s linear infinite;
   animation: snow 15s linear infinite;
-}
-@keyframes snow {
+} */
+/* @keyframes snow {
   0% {
     background-position: 0px 0px, 0px 0px, 0px 0px;
   }
@@ -133,7 +133,7 @@ button:focus {
   100% {
     background-position: 500px 1000px, 200px 400px, -100px 300px;
   }
-}
+} */
 /*
    ###    ########  ##     ## ##       ########      ######  #### 
   ## ##   ##     ## ##     ## ##          ##        ##    ##  ##  
@@ -1132,4 +1132,95 @@ button:focus {
 }
 #funnySanta {
   height: 30em;
+}
+
+
+
+
+#snowHills{
+  position:absolute;
+   bottom:0;
+    z-index:-1
+}
+
+
+.viewContainer{
+  position: relative;
+}
+.viewContainer > .view.ng-animate {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+}
+.view.ng-enter, .view.ng-leave{
+    transition: 1s linear all;
+}
+.view.ng-enter{
+  transform: translateX(100%);
+}
+.view.ng-enter.ng-enter-active, .view.ng-leave{
+  transform: translateX(0%);
+}
+.view.ng-leave.ng-leave-active {
+  transform: translateX(-100%);
+}
+
+
+/* #view.ng-leave {
+  /* position: absolute;
+  z-index: 1; */
+  /* transition: 1s ease-out all;
+  transform: translateX(0);
+}
+#view.ng-leave.ng-leave-active {
+  transform: translateX(-100%);
+} */ 
+/* #view.ng-enter {
+  /* z-index: 1; */
+  /*position: absolute;
+  transition: 1s ease-in all;
+  transform: translateX(100%);
+}
+#view.ng-enter.ng-enter-active {
+  transform: translateX(0);
+} */
+
+/* #view.ng-leave        {
+  -webkit-animation:slideOutLeft 1s both ease-in;
+  -moz-animation:slideOutLeft 1s both ease-in;
+  animation:slideOutLeft 1s both ease-in;   
+}
+#view.ng-enter 		{  
+  -webkit-animation:slideInRight 1s both ease-in;
+  -moz-animation:slideInRight 1s both ease-in;
+  animation:slideInRight 1s both ease-in;    
+} */
+
+
+
+
+
+@keyframes slideInRight {
+	from 	{ transform:translateX(100%); }
+	to 		{ transform: translateX(0); }
+}
+@-moz-keyframes slideInRight {
+	from 	{ -moz-transform:translateX(100%); }
+	to 		{ -moz-transform: translateX(0); }
+}
+@-webkit-keyframes slideInRight {
+	from 	{ -webkit-transform:translateX(100%); }
+	to 		{ -webkit-transform: translateX(0); }
+}
+
+@keyframes slideOutLeft {
+	to 		{ transform: translateX(-100%); }
+}
+@-moz-keyframes slideOutLeft {	
+	to 		{ -moz-transform: translateX(-100%); }
+}
+@-webkit-keyframes slideOutLeft {
+	to 		{ -webkit-transform: translateX(-100%); }
 }

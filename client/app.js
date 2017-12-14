@@ -1,4 +1,4 @@
-var app = angular.module('santasList', ['ngRoute', 'ngResource', 'santasList.controllers', 'santasList.factories', 'santasList.directive','santasList.services']);
+var app = angular.module('santasList', ['ngRoute', 'ngResource', 'ngAnimate', 'santasList.controllers', 'santasList.factories', 'santasList.directive','santasList.services']);
 
 app.config(['$routeProvider', '$locationProvider', function($routeProvider, $locationProvider){
 
