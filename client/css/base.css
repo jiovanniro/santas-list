@@ -1,4 +1,4 @@
-#kidInput {
+.kidInput {
   background-color: #ca0000;
   font-family: Comic Sans MS, Arial;
   font-size: 16px;
@@ -85,14 +85,14 @@
   max-width: 100%;
 }
 .letterBG {
-  background: url(../images/letterBackground.jpg) no-repeat center center fixed;
-  -webkit-background-size: cover;
-  -moz-background-size: cover;
-  -o-background-size: cover;
-  background-size: cover;
   min-height: 100vh;
   max-width: 100%;
 }
+
+#santaLetter {
+  z-index: 0;
+}
+
 .label {
   color: white;
   font-family: 'Lobster', cursive;
