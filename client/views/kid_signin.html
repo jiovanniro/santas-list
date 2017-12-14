@@ -2,24 +2,26 @@
     <div class="row">
         <div class="kidHeader col-md-12 text-center">Log In To Santa's List!</div>
     </div>
+    <br><br>
     <div class="row">
         <div class="col-md-6">
-            <label class="label text-center">Username:</label>
+            <label class="label text-right">Username:</label>
         </div>
         <div class="col-md-6 text-center">
-            <input id="kidUser" class="input" type="text" name="user" autofocus placeholder="your name" ng-model="Username">
+            <input id="kidInput" class="kidUser" type="text" name="user" autofocus placeholder="your name" ng-model="Username">
         </div>
     </div>
     <div class="row">
         <div class="col-md-6">
-            <label class="label text-center">Password:</label>
+            <label class="label text-right">Password:</label>
         </div>
         <div class="col-md-6 text-center">
-            <input id="kidPass" type="password" name="password" placeholder="s3cr3t!" ng-model="Password">
+            <input id="kidInput" class="kidPass" type="password" name="password" placeholder="s3cr3t!" ng-model="Password">
         </div>
     </div>
     <div class="row">
         <div class="col-md-12 text-center">
+            <br><br>
             <button type="submit" id="logButton" class="clickButton" ng-click="login()">Login</button>
         </div>
     </div>

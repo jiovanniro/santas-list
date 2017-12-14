@@ -46,6 +46,9 @@
             </form>
         </div>
         <div id="funnySanta" class="col-md-6">
+            <div class="topMessage">
+                    <h1>Merry</h1>
+            </div>
             <div class="window">
                 <div class="santa">
                     <div class="head">
@@ -66,13 +69,19 @@
                     <div class="body"></div>
                 </div>
             </div>
-            <div class="message">
-                    <h1>Merry Christmas!</h1>
+            <div class="bottomMessage">
+                    <h1>Christmas!</h1>
             </div>
         </div>
     </div>
     <div class="row">
         <div class="col-md-6">
+<<<<<<< HEAD
+            <div id="toyList" class="row">
+                <div class="col-6 col-sm-6">
+                    <input id="kidInput" type="text" placeholder="Present 1">
+=======
+>>>>>>> 2329b343bde50d9198f97c959f6d65af5a426c77
             <div id="toy-list" class="row">
                 <div id="toy-items" class="col-6 col-sm-6">
                     <input type='text' id="item1" ng-model="gifts.item1" ng-keyup="search(gifts.item1, $event)" my-enter="removeFilteredItems">
@@ -89,9 +98,13 @@
                 <!-- <input type="button" class="newToy text-center" value="Add A New Toy" ng-click="addToy('toyList')"> -->
             </div> 
             <div class="col-md-12">
+<<<<<<< HEAD
+                <input type="button" class="clickButton text-center" value="Add A New Toy" ng-click="addInput('toyList')">
+=======
+>>>>>>> 2329b343bde50d9198f97c959f6d65af5a426c77
                 <p ng-repeat="gift in gifts">{{gift.item_name}}</p>
             </div> 
         </div>         
-        <div id="instructions" class="col-md-6">Instructions</div>
+        <div id="instructions" class="col-md-6"></div>
     </div>
 </div>

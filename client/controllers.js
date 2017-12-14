@@ -413,6 +413,30 @@ angular.module('santasList.controllers', [])
                 password: $scope.NewUser.password,
                 adultId:  userId 
             });
+            x++; //text box increment
+        }
+    };
+
+            newdiv.className = 'col-6 col-sm-6';
+            input.placeholder = 'Present ' + newCount;
+            input.type = 'text';
+            input.id = 'kidInput';
+    $scope.search = function(string, event) {
+        console.log('inside search');
+        let target = event.target.id; 
+
+        searchService.searchInput(string)
+        .then(function(data){
+            suggestions(data); 
+        });
+
+        function suggestions(data) {
+            $scope.hidethis = false;
+            var output = [];
+            angular.forEach(data, function(input) {
+                if(input.toLowerCase().indexOf(string.toLowerCase()) >= 0) {
+                    output.push(input);
+                }
             u.$save(function(success){
                 console.log(success);
                 goToAdultPage(); //Might just set location to this
