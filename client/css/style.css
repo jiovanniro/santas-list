@@ -1,10 +1,8 @@
-html{
-  overflow-y: hidden;
-  overflow-x: hidden;
+body {
+  padding-bottom: 60px;
 }
 .footer {
   position: absolute;
-  bottom: 0;
   height: 60px;
   width: 100%;
   line-height: 60px;
@@ -58,84 +56,6 @@ button:focus {
 ##    ## ##        ##       ##     ## ##    ## ##     ## 
  ######  ##        ######## ##     ##  ######  ##     ##
  */
-.homeBG {
-  /* background: url(../images/homeBackground.jpg) no-repeat center center fixed;
-  -webkit-background-size: cover;
-  -moz-background-size: cover;
-  -o-background-size: cover;
-  background-size: cover; */
-  min-height: 100vh;
-}
-.parentPost {
-  position: absolute;
-  margin-left: 7em;
-  margin-top: 11em;
-}
-.kidPost {
-  position: absolute;
-  margin-left: 29.5em;
-  margin-top: -105px;
-}
-/* #snow {
-  overflow: hidden;
-  background: none;
-  font-family: Androgyne;
-  background-image: url('http://www.wearewebstars.dk/codepen/img/s1.png'), url('http://www.wearewebstars.dk/codepen/img//s2.png'), url('http://www.wearewebstars.dk/codepen/img//s3.png');
-  height: 100%;
-  left: 0;
-  position: absolute;
-  top: 0;
-  width: 100%;
-  z-index: 1;
-  -webkit-animation: snow 15s linear infinite;
-  -moz-animation: snow 15s linear infinite;
-  -ms-animation: snow 15s linear infinite;
-  animation: snow 15s linear infinite;
-} */
-/* @keyframes snow {
-  0% {
-    background-position: 0px 0px, 0px 0px, 0px 0px;
-  }
-  50% {
-    background-position: 500px 500px, 100px 200px, -100px 150px;
-  }
-  100% {
-    background-position: 500px 1000px, 200px 400px, -100px 300px;
-  }
-}
-@-moz-keyframes snow {
-  0% {
-    background-position: 0px 0px, 0px 0px, 0px 0px;
-  }
-  50% {
-    background-position: 500px 500px, 100px 200px, -100px 150px;
-  }
-  100% {
-    background-position: 400px 1000px, 200px 400px, 100px 300px;
-  }
-}
-@-webkit-keyframes snow {
-  0% {
-    background-position: 0px 0px, 0px 0px, 0px 0px;
-  }
-  50% {
-    background-position: 500px 500px, 100px 200px, -100px 150px;
-  }
-  100% {
-    background-position: 500px 1000px, 200px 400px, -100px 300px;
-  }
-}
-@-ms-keyframes snow {
-  0% {
-    background-position: 0px 0px, 0px 0px, 0px 0px;
-  }
-  50% {
-    background-position: 500px 500px, 100px 200px, -100px 150px;
-  }
-  100% {
-    background-position: 500px 1000px, 200px 400px, -100px 300px;
-  }
-} */
 /*
    ###    ########  ##     ## ##       ########      ######  #### 
   ## ##   ##     ## ##     ## ##          ##        ##    ##  ##  
@@ -180,81 +100,6 @@ button:focus {
   top: 60%;
   transform: translateY(-60%);
   padding: 0 2em;
-}
-/*
-   ###    ########  ##     ## ##       ######## 
-  ## ##   ##     ## ##     ## ##          ##    
- ##   ##  ##     ## ##     ## ##          ##    
-##     ## ##     ## ##     ## ##          ##    
-######### ##     ## ##     ## ##          ##   
-##     ## ##     ## ##     ## ##          ##    
-##     ## ########   #######  ########    ##   
-*/
-
-.adultButton{
-  cursor: pointer;
-  box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2), 0 3px 10px 0 rgba(0,0,0,0.19);
-  background: rgb(238, 233, 233);
-  border: none;
-  border-radius: 5%
-}
-
-#adultDropDown{
-  cursor: pointer;
-  box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2), 0 3px 10px 0 rgba(0,0,0,0.19);
-  text-align: center;
-}
-
-#logoutBtn {
-  float: right; 
-  margin-top:5%
-}
-#addChildBtn {
-  float: right;
-  margin-right:1%;
-  margin-top:5%
-}
-#purchaseRemove {
-  float: right;
-}
-
-@media screen and (max-width: 600px){
-  #purchaseRemove{
-    float: none;
-    text-align: center; 
-  }
-  #itemNameHeading{
-    text-align: center;
-  }
-}
-
-
-@media screen and (max-width: 400px) {
-  #logoutBtn {
-    margin: auto;
-    float: none;
-    margin-top: 5%;
-    width: 100%;
-    border-radius: 1%;
-  }
-  #addChildBtn {
-    margin: auto;
-    float: none;
-    margin-top: 5%;
-    width: 100%;
-    border-radius:1%;
-  }
-  #submitFamListBtn {
-    margin: auto;
-    margin-top: 5%;
-    width: 100%;
-    border-radius:1%;
-  }
-  #adultDropDown{
-    width:100%;
-    margin: auto;
-    margin-top:5%;
-  }
 }
 /*
 ##    ## #### ########       ######  #### 
@@ -1157,73 +1002,4 @@ button:focus {
 }
 #funnySanta {
   height: 30em;
-}
-
-
-
-
-#snowHills{
-  position: relative;;
-   bottom:0;
-    z-index:-1;
-    transform: translateY(-100%)
-}
-
-
-.viewContainer{
-  position: relative;
-}
-.viewContainer > .view.ng-animate {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-}
-/* .view.ng-enter, .view.ng-leave{
-    transition: 1.5s linear all;
-}
-.view.ng-enter{
-  transform: translateX(100%);
-}
-.view.ng-enter.ng-enter-active, .view.ng-leave{
-  transform: translateX(0%);
-}
-.view.ng-leave.ng-leave-active {
-  transform: translateX(-100%);
-} */
-
-
-.view.ng-leave{
-  -webkit-animation: slideOutLeft 1.5s both ease-in-out;
-  -moz-animation: slideOutLeft 1.5s both ease-in-out;
-  animation:slideOutLeft 1.5s both ease-in-out;
-}
-.view.ng-enter{
-  -webkit-animation: slideInRight 1.5s both ease-in-out;
-  -moz-animation: slideInRight 1.5s both ease-in-out;
-  animation:slideInRight 1.5s both ease-in-out;
-}
-
-@keyframes slideInRight {
-	from 	{ transform:translateX(100%); }
-	to 		{ transform: translateX(0); }
-}
-@-moz-keyframes slideInRight {
-	from 	{ -moz-transform:translateX(100%); }
-	to 		{ -moz-transform: translateX(0); }
-}
-@-webkit-keyframes slideInRight {
-	from 	{ -webkit-transform:translateX(100%); }
-	to 		{ -webkit-transform: translateX(0); }
-}
-
-@keyframes slideOutLeft {
-	to 		{ transform: translateX(-100%); }
-}
-@-moz-keyframes slideOutLeft {	
-	to 		{ -moz-transform: translateX(-100%); }
-}
-@-webkit-keyframes slideOutLeft {
-	to 		{ -webkit-transform: translateX(-100%); }
 }
