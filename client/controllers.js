@@ -156,6 +156,11 @@ angular.module('santasList.controllers', [])
             console.log(err);
         });
     };
+
+    $scope.SignIn = function(){
+        $location.path("/adultSignIn");
+    }
+
 }])
 
 .controller('AdultController', ['$scope', 'Adult', 'Gift', 'ChildUser', 'Child', 'UserService', '$location', '$routeParams','SEOService', function($scope, Adult, Gift, ChildUser, Child, UserService, $location, $routeParams, SEOService) {
@@ -323,6 +328,10 @@ angular.module('santasList.controllers', [])
             });
         };
     
+        $scope.Home = function(){
+            $location.path("/");
+        }
+
         // * post item needs more work. Only set up for one item to pass through.
         $scope.sendItem = function() {
             var item = new Child({
@@ -377,6 +386,12 @@ angular.module('santasList.controllers', [])
             x++; //text box increment
         }
     };
+
+
+    $scope.Home = function(){
+        $location.path("/adult");
+    }
+
 
     $scope.search = function(string, event) {
         let target = event.target.id;
