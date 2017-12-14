@@ -1,42 +1,42 @@
+
 <div style="height: 100vh">
-    <!-- <canvas id="canvas" style="z-index:-2; position:absolute; background-color:rgb(87, 115, 230);"></canvas>     -->
-    <div class="container" style="height:80vh; overflow-x:hidden">
-        <div class="container" style="background-color:rgba(252, 252, 252, 0);">
-                <select id="adultDropDown">
-                    <option ng-repeat="kid in childList" value="{{kid.id}}">{{ kid.username }}</option>
-                </select>
-                <button class="adultButton" id="submitFamListBtn" type="submit" ng-click="Items()" style="margin-top:10%">Select</button>
-                <button class="adultButton" id="logoutBtn" ng-click="logout()">Log Out</button>
-                <button class="adultButton" id="addChildBtn" ng-click="AddChild()">Add Child</button>
-                <br />
-                <br />
-                <h1 style="text-align:center; width:100%; margin-top:2rem; margin-bottom:2rem">{{ ItemList[0].username }}</span></h1>
-            <div class="container" style="padding-bottom:2rem; overflow-y:auto">
-                <div class="container">
-                    <div class="row" ng-repeat="item in ItemList" style="padding-top: 2rem; width:100%">
-                        <h5 id="itemNameHeading" style="color:rgb(29, 27, 27); width: 100%">{{ item.item_name }} 
-                            <span id="purchaseRemove">
-                                <h6>Purchased <input id="purchasedCheckBox{{ item.id }}" type="checkbox" ng-checked="{{ item.purchased }}" ng-click="Purchased(item.id)"> Remove <i class="fa fa-times-circle" ng-click="RemoveItem(item.id)"></i></h6>
-                            </span>
-                        </h5>
-                        <!-- add in the comments here -->
-                        <!-- <button class="btnComments" id="btnComments{{ item.id }}" ng-click="Comments(item.id)">Veiw Comments</button>
-                        <button class="btnHideComments" id="btnHideComments{{ item.id }}" ng-click="HideComments(item.id)">Hide Comments</button>
-                        <br /> -->
-                        <div class="container" id="divContainer{{item.id}}" style="width:100%" ng-init="Comments(item.id)">
-                            <div class="col-md-8 col-sm-12 col-xs-12" id="div{{ item.id }}id"  style="border:none; background-color:rgba(170, 161, 221, 0.24); color:aliceblue; float: left; overflow-y:auto; height:10.5rem"></div> 
-                            <div class="col-md-4 col-sm-12 col-xs-12" style="float:left; border:none">
-                                <input class="col-md-12 col-sm-12 col-xs-12" id="username{{ item.id }}" placeholder="Name" type="text" style="background-color:rgba(87, 85, 97, 0.75); color:aliceblue;">
-                                <br />
-                                <textarea class="col-md-12 col-sm-12 col-xs-12" id="message{{ item.id }}" placeholder="Message" cols="40%" rows="4" style="background-color:rgba(87, 85, 97, 0.75); color:aliceblue;"></textarea>
-                                <br />
-                                <button class="adultButton" type="submit" ng-click="SendComment(item.id)">Add Comment</button>
+        <div class="container" style="height:80vh; overflow-x:hidden">
+            <div class="container" style="background-color:rgba(252, 252, 252, 0);">
+                    <select id="adultDropDown">
+                        <option ng-repeat="kid in childList" value="{{kid.id}}">{{ kid.username }}</option>
+                    </select>
+                    <button class="adultButton" id="submitFamListBtn" type="submit" ng-click="Items()" style="margin-top:10%">Select</button>
+                    <button class="adultButton" id="logoutBtn" ng-click="logout()">Log Out</button>
+                    <button class="adultButton" id="addChildBtn" ng-click="AddChild()">Add Child</button>
+                    <br />
+                    <br />
+                    <h1 style="text-align:center; width:100%; margin-top:2rem; margin-bottom:2rem">{{ ItemList[0].username }}</span></h1>
+                <div class="container" style="padding-bottom:2rem; overflow-y:auto">
+                    <div class="container">
+                        <div class="row" ng-repeat="item in ItemList" style="padding-top: 2rem; width:100%">
+                            <h5 id="itemNameHeading" style="color:rgb(29, 27, 27); width: 100%">{{ item.item_name }} 
+                                <span id="purchaseRemove">
+                                    <h6>Purchased <input id="purchasedCheckBox{{ item.id }}" type="checkbox" ng-checked="{{ item.purchased }}" ng-click="Purchased(item.id)"> Remove <i class="fa fa-times-circle" ng-click="RemoveItem(item.id)"></i></h6>
+                                </span>
+                            </h5>
+                            <!-- add in the comments here -->
+                            <!-- <button class="btnComments" id="btnComments{{ item.id }}" ng-click="Comments(item.id)">Veiw Comments</button>
+                            <button class="btnHideComments" id="btnHideComments{{ item.id }}" ng-click="HideComments(item.id)">Hide Comments</button>
+                            <br /> -->
+                            <div class="container" id="divContainer{{item.id}}" style="width:100%" ng-init="Comments(item.id)">
+                                <div class="col-md-8 col-sm-12 col-xs-12" id="div{{ item.id }}id"  style="border:none; background-color:rgba(170, 161, 221, 0.24); color:aliceblue; float: left; overflow-y:auto; height:10.5rem"></div> 
+                                <div class="col-md-4 col-sm-12 col-xs-12" style="float:left; border:none">
+                                    <input class="col-md-12 col-sm-12 col-xs-12" id="username{{ item.id }}" placeholder="Name" type="text" style="background-color:rgba(87, 85, 97, 0.75); color:aliceblue;">
+                                    <br />
+                                    <textarea class="col-md-12 col-sm-12 col-xs-12" id="message{{ item.id }}" placeholder="Message" cols="40%" rows="4" style="background-color:rgba(87, 85, 97, 0.75); color:aliceblue;"></textarea>
+                                    <br />
+                                    <button class="adultButton" type="submit" ng-click="SendComment(item.id)">Add Comment</button>
+                                </div>
                             </div>
-                        </div>
+                        </div>  
                     </div>  
                 </div>  
-            </div>  
+            </div>
         </div>
+        <img id="snowHills" src="../images/snowHills.png" width="100%">
     </div>
-    <img id="snowHills" src="../images/snowHills.png" width="100%">
-</div>
