@@ -1,18 +1,18 @@
 <div style="height: 100vh">
-        <div class="container" style="height:80vh; overflow-x:hidden">
+        <div class="container" id="adultContainerPage" style="height:80vh; overflow-x:hidden">
             <div class="container" style="background-color:rgba(252, 252, 252, 0);">
                     <select id="adultDropDown">
-                        <option ng-repeat="kid in childList" value="{{kid.id}}">{{ kid.username }}</option>
+                        <option class="adultDropDownOptions" ng-repeat="kid in childList" value="{{kid.id}}">{{ kid.username }}</option>
                     </select>
                     <button class="adultButton" id="submitFamListBtn" type="submit" ng-click="Items()" style="margin-top:10%">Select</button>
-                    <button class="adultButton" id="logoutBtn" ng-click="logout()">Log Out</button>
-                    <button class="adultButton" id="addChildBtn" ng-click="AddChild()">Add Child</button>
+                    <button class="adultButton" id="logoutBtn" ng-click="logout()" style="margin-top:10%">Log Out</button>
+                    <button class="adultButton" id="addChildBtn" ng-click="AddChild()" style="margin-top:10%">Add Child</button>
                     <br />
                     <br />
-                    <h1 style="text-align:center; width:100%; margin-top:2rem; margin-bottom:2rem">{{ ItemList[0].username }}</span></h1>
-                <div class="container" style="padding-bottom:2rem; overflow-y:auto">
+                    <h1 class="kidHeader" style="text-align:center; width:100%; margin-top:1rem; margin-bottom:1rem">{{ ItemList[0].username }}</span></h1>
+                <div class="container" style="padding-bottom:1rem; overflow-y:auto">
                     <div class="container">
-                        <div class="row" ng-repeat="item in ItemList" style="padding-top: 2rem; width:100%">
+                        <div class="row" ng-repeat="item in ItemList" style="padding-top: 1rem; width:100%">
                             <h5 id="itemNameHeading" style="color:rgb(29, 27, 27); width: 100%">{{ item.item_name }} 
                                 <span id="purchaseRemove">
                                     <h6>Purchased <input id="purchasedCheckBox{{ item.id }}" type="checkbox" ng-checked="{{ item.purchased }}" ng-click="Purchased(item.id)"> Remove <i class="fa fa-times-circle" ng-click="RemoveItem(item.id)"></i></h6>
@@ -23,7 +23,7 @@
                             <button class="btnHideComments" id="btnHideComments{{ item.id }}" ng-click="HideComments(item.id)">Hide Comments</button>
                             <br /> -->
                             <div class="container" id="divContainer{{item.id}}" style="width:100%" ng-init="Comments(item.id)">
-                                <div class="col-md-8 col-sm-12 col-xs-12" id="div{{ item.id }}id"  style="border:none; background-color:rgba(170, 161, 221, 0.24); color:aliceblue; float: left; overflow-y:auto; height:10.5rem"></div> 
+                                <div class="col-md-8 col-sm-12 col-xs-12 divComment" id="div{{ item.id }}id"  style="border:none; background-color:rgba(170, 161, 221, 0.24); color:aliceblue; float: left; overflow-y:auto; height:10.5rem;"></div> 
                                 <div class="col-md-4 col-sm-12 col-xs-12" style="float:left; border:none">
                                     <input class="col-md-12 col-sm-12 col-xs-12" id="username{{ item.id }}" placeholder="Name" type="text" style="background-color:rgba(87, 85, 97, 0.75); color:aliceblue;">
                                     <br />
