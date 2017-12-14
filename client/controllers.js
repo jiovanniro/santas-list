@@ -98,6 +98,9 @@ angular.module('santasList.controllers', [])
         $location.replace().path(dest).search('dest', null);
     }
 
+    $scope.Home = function(){
+        $location.path("/");
+    }
         //create user dont believe those console lies
     $scope.CreateUser = function() {
         console.log('pressed create user btn');

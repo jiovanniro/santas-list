@@ -1,6 +1,6 @@
 <div class="adultBG" style="height:100vh">
     <div class="row">
-        <div class="kidHeader col-md-12 text-center">Parent Log In To Santa's List!</div>
+        <div class="kidHeader col-md-12 text-center" id="parentHeader">Parent Log In To Santa's List!</div>
     </div>
   <div class="formSI">
     <form class="passForm col-md-6">
@@ -13,9 +13,14 @@
         <label class="label" for="exampleInputPassword1">Password</label>
             <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Password" ng-model="Password">
       </div>
-      <button type="submit" class="clickButton" ng-click="login()">Login</button>
+      <row class="col-md-12 col-sm-12 col-md-12">
+        <div>
+          <button id="adultLoginBtn" type="submit" class="clickButton" ng-click="login()">Login</button>
+          <button id="cancelLoginBtn" type="submit" class="clickButton" ng-click="Home()">Cancel</button>
+        </div>
+      </row>
       <br>
-      <span class="text">Don't have an account? Register for free <a class="regLink" href="/adultSignUp">HERE!</a></span>
+      <span class="text col-md-12 col-sm-12 col-xs-12">Don't have an account? Register for free <a class="regLink" href="/adultSignUp">HERE!</a></span>
     </form>
     </div>
 
