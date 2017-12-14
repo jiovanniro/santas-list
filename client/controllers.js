@@ -7,7 +7,7 @@ var ctx = c.getContext('2d');
 var w = window.innerWidth;
 var h = window.innerHeight;
 var rate = 50;
-var arc = 500;
+var arc = 700;
 var time;
 var count;
 var size = 2;
@@ -135,6 +135,9 @@ angular.module('santasList.controllers', [])
         $location.replace().path(dest).search('dest', null);
     }    
 
+    $scope.SignIn = function(){
+        $location.path("/adultSignIn");
+    }
 
 }])
 
@@ -182,8 +185,12 @@ angular.module('santasList.controllers', [])
     function getChildList() {
         $scope.childList = Adult.query({id: adultIdParse}, function(success){
                 console.log('working');
-                console.log(success[0].id);
-                firstChildList(success[0].id); //find a way to make this work when page loads
+                // if(success[0] === undefined){
+                //     $location.path("/kidSignUp");
+                // } else {
+                //     firstChildList(success[0].id); //find a way to make this work when page loads
+                // }
+                firstChildList(success[0].id);
             }, function(err){
                 console.log('no kids in list');
                 createKidProfile();
