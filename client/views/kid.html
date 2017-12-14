@@ -4,32 +4,31 @@
         <p>Finish the letter below to send your list to Santa!</p>
         <p>Ho! Ho! Ho!</p>
     </div>
-    <div class="letter" style="border: 1px solid #000; width: 80%; margin: 0 auto">
-        <form>                         
+    <div id="santaLetter" style="border: 1px solid #000; width: 80%; margin: 0 auto;">
+        <form>                     
         <div class="startLetter" style="border: 1px solid purple;">
-            <div id="salutation" class="col-md-12">Dear Santa,</div>
-            <div>
+            <div id="salutation" style="text-align: center;" class="col-md-12">Dear Santa,</div>
+            <div style="border: 2px solid yellow; width: 45%;">
                 <label id="childname" style="color: #fff;" for="name">My Name is:</label>
                 <input type="name" class="name" id="inputName" placeholder="Name" ng-model="name" style="width: 30%;">
             </div>
-            <div>
-                <div class="form-check">
+            <div style="border: 2px solid #fff; width: 45%; ">
+
+                <div id="behaviorCheck" class="form-check">
                     <p id="behavior">This year I have been:</p>
                     <label class="form-check-label">
-                    <input class="form-check-input" type="radio" value="1" name="naughtyNice" id="naughtyNice1" ng-model="behavior">
-                    Good
+                    <input class="form-check-input" style="width: 1em; height: 1em;" type="radio" value="1" name="naughtyNice" id="naughtyNice1" ng-model="behavior">
+                    <p style="margin: 0 1em;" >Good</p>
                     </label>
-                </div>
-                <div class="form-check">
+
                     <label class="form-check-label">
-                    <input class="form-check-input" type="radio" value="2" name="naughtyNice" id="naughtyNice2" ng-model="behavior">
-                    Very Good
+                    <input class="form-check-input" style="width: 1em; height: 1em;" type="radio" value="2" name="naughtyNice" id="naughtyNice2" ng-model="behavior">
+                    <p style="margin: 0 1em;">Very Good</p>
                     </label>
-                </div>
-                <div class="form-check">
+
                     <label class="form-check-label">
-                    <input class="form-check-input" type="radio" value="3" name="naughtyNice" id="naughtyNice3" ng-model="behavior">
-                    Only Sort of Good
+                    <input class="form-check-input" style="width: 1em; height: 1em;" type="radio" value="3" name="naughtyNice" id="naughtyNice3" ng-model="behavior">
+                    <p style="margin: 0 1em;">Only Sort of Good</p>
                     </label>
                 </div>
             </div>
@@ -42,12 +41,15 @@
             <div style="border: 2px solid yellow; overflow: auto;">
                 <div id="toyList" class="row">
                     <div id="toyItems">
-                        <ul id="gift-list" style="border: 2px solid orange; width: 100%;">
-                            <input style="border: 1px solid purple; float: left; margin-bottom: 0.1em" type="text" id="item1" class="kidInput" ng-model="gifts.item1" ng-keyup="search(gifts.item1, $event)" ng-enter="removeFilteredItems()"/>
+
+                        <ul id="gift-list">
+                            <input list="suggestions" id="item1" class="kidInput" ng-model="gifts.item1" ng-keyup="search(gifts.item1, $event)" ng-enter="removeFilteredItems()">
                         </ul>
-                        <ul class="list-group" ng-hide="hidethis" style="color:#000; z-index: -1; float: left; border: 1px solid pink">
-                            <li class="list-group-item" style="color:#000" ng-repeat="item in filteredItems" ng-click="selectItem(item)">{{item}}</li>
-                        </ul>
+
+                        <datalist id="suggestions">
+                            <option class="list-group-item" ng-repeat="item in filteredItems" value="{{item}}">
+                        </datalist> 
+
                     </div>
                     <!-- <div style="border: 1px solid pink">
                         <ul class="list-group" ng-hide="hidethis" style="color:#000; z-index: -1; border: 1px solid pink">
@@ -62,9 +64,9 @@
                 <label id="messageToSanta" for="message">Write something special to Santa:</label>
                 <textarea type="text" name="message" class="form-control" id="inputBody" rows="6" ng-model="message" style="width: 50%"></textarea>
             </div>
-            <!-- <div>
+            <div>
                 <input type="submit" id="create-list" class="clickButton text-center" value="Send To Santa" ng-submit="addToList(gifts)">        
-            </div> -->
+            </div>
         </div>
         </form>
     </div>
