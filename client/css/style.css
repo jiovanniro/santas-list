@@ -140,22 +140,6 @@ button:focus {
   font-family: Henny Penny, cursive;
   font-size: 400%;
 }
-
-#iWant {
-  font-family: Henny Penny, cursive;
-  color: white;
-  margin-top: 0.5em;
-}
-
-#childname, 
-#behavior,
-#messageToSanta,
-#behaviorStatement {
-  color: white;
-  font-family: henny penny, cursive;
-  font-size: 170%;
-}
-
 #eminem {
   color: white;
   font-family: henny penny, cursive;
