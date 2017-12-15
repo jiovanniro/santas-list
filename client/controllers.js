@@ -517,7 +517,7 @@ angular.module('santasList.controllers', [])
      }
 }])
 
-.controller('ThankyouController', ['$scope', '$parse', '$location', '$routeParams', 'Child', 'Adult', 'Gift', 'searchService', 'Letter', 'ChildUser', 'AdultUser', 'SEOService', function($scope, $parse, $location, $routeParams, Child, Adult, Gift, searchService, Letter, ChildUser, AdultUser, SEOService){
+.controller('ThankyouController', ['$scope', '$parse', '$location', '$routeParams', 'UserService', 'Child', 'Adult', 'Gift', 'searchService', 'Letter', 'ChildUser', 'AdultUser', 'SEOService', function($scope, $parse, $location, $routeParams, UserService, Child, Adult, Gift, searchService, Letter, ChildUser, AdultUser, SEOService){
     $scope.hidethis = true;
     $scope.hidesuggestions = true;
     $scope.hideconfirmation = true;
@@ -532,7 +532,7 @@ angular.module('santasList.controllers', [])
     $scope.addToList = function() {
         $scope.hidethis = false;
     };
-
+    
     let x = 2; //initlal text box count
     $scope.addNewToy = function() {
         var max_fields = 5; //maximum input boxes allowed
