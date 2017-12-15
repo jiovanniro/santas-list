@@ -9,14 +9,14 @@ const router = Router();
 // actually /api/sendlist
 router.post('/:id', (req, res) => {
     console.log('in the send controller');
-    // console.log(req.body.child);
-    // console.log(req.body.name);
-    // console.log(req.body.email);
-    // console.log(req.body.behavior);
-    // console.log(req.body.message);
-    // console.log(req.body.wishlist);
+    console.log(req.body.child);
+    console.log(req.body.name);
+    console.log(req.body.email);
+    console.log(req.body.behavior);
+    console.log(req.body.message);
+    console.log(req.body.wishlist);
     
-    sendEmail('jnrrosario@gmail.com', req.body.child, "Christmas List", req.body.wishlist)
+    sendEmail('jnrrosario@gmail.com', req.body.name, 'New contact form submission', req.body.message)
     .then((response) => {
         res.sendStatus(201);
     }).catch((err) => {
