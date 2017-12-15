@@ -147,6 +147,19 @@ button:focus {
 ##   ##   ##  ##     ## ### ##    ##  ##  
 ##    ## #### ########  ###  ######  #### 
 */
+@media screen and (max-width: 500px){
+  .kidInput{
+    width: 90%;
+    margin:auto;
+  }
+  #giftList{
+    width:90%;
+  }
+}
+
+
+
+
 .kidUser,
 .kidPass {
   margin-top: 25px;

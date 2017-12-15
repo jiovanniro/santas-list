@@ -5,7 +5,7 @@ export let pool =  mySql.createPool({
     host: 'localhost',
     user: 'santaListUser',
     password: 'checkingItTwice',
-    database: 'santaslist'
+    database: 'santa_list'
 });
 
 

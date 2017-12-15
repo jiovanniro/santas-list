@@ -1,8 +1,4 @@
-<<<<<<< HEAD
 <!-- <div class="letterBG" style="height:100vh; overflow:auto;">
-=======
-<div class="letterBG">
->>>>>>> b6aa38bb45e8f9edc18aa7bc2136ea4ea674cfbd
         <div class="instructions" style="color: #fff; text-align: center; margin: 0 auto; border: 2px solid yellow; width: 50%; line-height: 10px;">
             <h1>Merry Christmas {{child.name}}</h1>
             <p>Finish the letter below to send your list to Santa!</p>
@@ -91,7 +87,6 @@
                         <div class="body"></div>
                     </div>
                 </div>
-<<<<<<< HEAD
         </div>
     </div> -->
 
@@ -122,16 +117,16 @@
 
 
 
-    <div class="letterBG" style="height:100vh; overflow:auto;">
-    <div style="margin-bottom: 10%">    
-        <div class="instructions" style="color: #fff; text-align: center; margin: 0 auto; border: 2px solid yellow; width: 50%; line-height: 10px;">
+    <div class="letterBG" style="height:100vh; overflow-y:auto;">
+    <div class="container" style="margin-bottom: 10%">    
+        <div class="instructions" style="color: #fff; text-align: center; margin: 0 auto; width: 50%; line-height: 10px;">
             <h1>Merry Christmas {{child.name}}</h1>
             <p>Finish the letter below to send your list to Santa!</p>
             <p>Ho! Ho! Ho!</p>
         </div>
-        <div id="santaLetter" style="border: 1px solid #000; width: 80%; margin: 0 auto;">
+        <div id="santaLetter" class="container" style="width: 80%; margin: 0 auto;background-color:rgba(36, 36, 80, 0.671); border-radius:5%; padding-bottom:2%">
             <form>                     
-            <div class="startLetter" style="border: 1px solid purple;">
+            <div class="startLetter">
                 <div id="salutation" style="margin-bottom:2%" class="col-md-12">Dear Santa, </div>
 
                 <!-- <div style="border: 2px solid yellow; width: 45%;">
@@ -141,7 +136,7 @@
                 <div>
                     <p id="eminem">This Christmas, I am <input type="text" placeholder="age"> years old!</p>
                 </div>
-                <div style="border: 2px solid #fff; width: 45%; ">
+                <div style="width: 100%; ">
     
                     <div id="behaviorCheck" class="form-check">
                         <p id="eminem">This year I have been:</p>
@@ -167,12 +162,12 @@
                 <!-- <div class="add-new-toy col-md-12">
                     <input type="button" id="new-field" class="clickButton text-center" value="Add A New Toy" ng-click="addNewToy()">
                 </div>  -->
-                <div style="border: 2px solid yellow; overflow: auto;">
+                <div style="overflow-y: auto; overflow-x:hidden;">
                     <div id="toyList" class="row">
                         <div id="toyItems">
     
                             <ul id="gift-list">
-                                <input list="suggestions" id="item1" class="kidInput" ng-model="gifts.item1" ng-keyup="search(gifts.item1, $event)" ng-enter="removeFilteredItems()">
+                                <input list="suggestions" id="item1" class="kidInput" ng-model="gifts.item1" style="margin-bottom:2%;" ng-keyup="search(gifts.item1, $event)" ng-enter="removeFilteredItems()">
                             </ul>
     
                             <datalist id="suggestions">
@@ -183,26 +178,29 @@
                     </div>
                 </div>
             </div>
-            <div class="myList" style="border: 1px solid orange;">
+            <div class="myList">
                 <div>
                     <p id="eminem">
                         Merry Christmas, Santa! I'll be waiting for you on Christmas Eve with cookies and milk!
                     <!-- </p> -->
                     <br />
                     <span style="float:right">
-                    <!-- <p> -->
+                    <p style="float:right; margin-right:5%" id="eminem">
                         Love,
-                    <!-- </p> -->
-                    <br />
-                        <input type="name" class="name" id="inputName" placeholder="Name" ng-model="name" style="width: 80%;">
+                    </p>
+                    <div class="row">
+                        <input type="name" class="name" id="inputName" placeholder="Name" ng-model="name" style="width: 60%;float: right;">
+                    </div>
                     </span>
                 </p>
                 </div>
+                </div>
+            <div>
                 <div class="add-new-toy col-md-6" style="margin-top:4%">
-                    <input type="button" id="new-field" class="clickButton text-center" value="Add A New Toy" ng-click="addNewToy()">
+                    <input type="button" id="new-field" class="adultButton text-center" value="Add A New Toy" ng-click="addNewToy()">
                 </div> 
                 <div class="col-md-6" style="margin-top:2%">
-                    <input type="submit" id="create-list" class="clickButton text-center" value="Send To Santa" ng-click="sendList(gifts)">        
+                    <input type="submit" id="create-list" class="adultButton text-center" value="Send To Santa" ng-click="sendList(gifts)">        
                 </div>
             </div>
             </form>
@@ -228,8 +226,6 @@
                         <div class="body"></div>
                     </div>
                 </div>
-=======
->>>>>>> b6aa38bb45e8f9edc18aa7bc2136ea4ea674cfbd
         </div> -->
     </div>
     </div>
