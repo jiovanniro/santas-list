@@ -1,20 +1,19 @@
 <div class="thankyouBG" style="height:100vh">
         <div class="thankyou-message">
-            <h2>HO! HO! HO!</h2>
-            <p>Merry Christmas {{child.username}}</p>
+            <h2 id="hoH2">HO! HO! HO!</h2>
+            <p>Merry Christmas {{child.username}}!</p>
             <p>Thank you for sending me your Christmas list!</p>
             <p>I hope you are having a lot of winter-time fun. Mrs. Claus and I have been working hard
-                and having fun getting ready to deliver your gifts!</p>
-            <p>I know the Elves are making something special for you, and I'm sure you're going to love it!</p>
-            <p>Rudolph and all of the other reindeer cant wait to visit you. Dont forget to leave some carrots out for them!</p>
-    
-            <h2>Have a very Merry Christmas,</h2>
+                and having fun getting ready to deliver your gifts!</p><br>
+            <p>I know the Elves are making something special for you, and I'm sure you're going to love it!</p><br>
+            <p>Rudolph and all of the other reindeer cant wait to visit you. Dont forget to leave some carrots out for them!</p><br>
+            <h2 id="hoH2">Have a very Merry Christmas,</h2>
             <h4>Santa Claus</h4>
         </div>
     
         <div class="thankyou-options" ng-hide="hideoptions">
             <label for="add">Did you forget to add something?</label>
-            <input type="button" name="add" class="add-item" value="Add A New Item" ng-click="addToList()">
+            <input type="button" name="add" class="clickButton" value="Add A New Item" ng-click="addToList()">
         </div>
     
         <div class="confirmation" ng-hide="hideconfirmation">
@@ -47,5 +46,26 @@
                 </div> 
             </div>         
         </div>
+    <div class="window">
+        <div class="santa">
+            <div class="head">
+                <div class="face">
+                    <div class="redhat">
+                        <div class="whitepart"></div>
+                        <div class="redpart"></div>
+                        <div class="hatball"></div>
+                    </div>
+                    <div class="eyes"></div>
+                    <div class="beard">
+                        <div class="nose"></div>
+                        <div class="mouth"></div>
+                    </div>
+                </div>
+                <div class="ears"></div>
+            </div>
+        <div class="body"></div>
+        </div>
+    </div>
+</div>
     </div>
     <img id="snowHills" src="../images/snowHills.png" width="100%">
