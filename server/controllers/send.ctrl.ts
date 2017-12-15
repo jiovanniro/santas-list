@@ -9,6 +9,7 @@ const router = Router();
 // actually /api/sendlist
 router.post('/:id', (req, res) => {
     console.log('in the send controller');
+    console.log(req.body.child);
     console.log(req.body.name);
     console.log(req.body.email);
     console.log(req.body.behavior);

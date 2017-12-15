@@ -9,7 +9,7 @@ $routeProvider
         templateUrl: 'views/home.html'
     })
 
-    .when('/thankyou/:id', {
+    .when('/thankyou', {
         templateUrl: 'views/thankyou.html',
         controller: 'ThankyouController'
         // requiresLogin: true

@@ -414,7 +414,7 @@ angular.module('santasList.controllers', [])
             $('.letterBG').focus();
         }
         
-        $scope.addToList = function(gifts) {
+        $scope.sendList = function(gifts) {
             console.log('inside add to list');
             
             console.log('add to list');
@@ -469,8 +469,9 @@ angular.module('santasList.controllers', [])
         function sendMessageToParent(parentUsername, parentEmail) {
 
             let letterToSanta = new Letter({
-                name: $scope.name, 
+                child: $scope.name, 
                 email: parentEmail,
+                name: parentUsername,
                 behavior: $scope.behavior, 
                 message: $scope.message, 
                 wishlist: wishListItems
@@ -478,10 +479,10 @@ angular.module('santasList.controllers', [])
 
             letterToSanta.$save({id: userId}, 
                 function(success){
-                    $location.path(`/thankyou/${userId}`);
+                    $location.path("/thankyou");
                 }, function(err){
                     console.log('not successful');
-                    $location.path(`/thankyou/${userId}`);
+                    $location.path("/thankyou");
                     console.log(err);
                 })
         }
@@ -489,16 +490,14 @@ angular.module('santasList.controllers', [])
      }
 }])
 
-.controller('ThankyouController', ['$scope', '$parse', '$location', '$routeParams', 'Child', 'Adult', 'Gift', 'searchService', 'Letter', 'SEOService', function($scope, $parse, $location, $routeParams, Child, Adult, Gift, searchService, Letter, SEOService){
+.controller('ThankyouController', ['$scope', '$parse', '$location', '$routeParams', 'Child', 'Adult', 'Gift', 'searchService', 'Letter', 'ChildUser', 'AdultUser', 'SEOService', function($scope, $parse, $location, $routeParams, Child, Adult, Gift, searchService, Letter, ChildUser, AdultUser, SEOService){
     $scope.hidethis = true;
     $scope.hidesuggestions = true;
     $scope.hideconfirmation = true;
-    $scope.child = Child.query({id: $routeParams.id});
-    console.log('this is the child ' + $scope.child);
 
+    let userId = localStorage.getItem('childID');
 
     $scope.addToList = function() {
-        console.log('open the add div');
         $scope.hidethis = false;
     }
 
@@ -556,10 +555,10 @@ angular.module('santasList.controllers', [])
             $('.letterBG').focus();
         }
         
-        $scope.sendToList = function(gifts) {
-            $scope.hidesuggestions = true;
+        $scope.sendList = function(gifts) {
+            // $scope.hidesuggestions = true;
             $scope.item1 = "";
-            let userId = localStorage.getItem('famList');
+            let userId = localStorage.getItem('childID');
             
             console.log('add to list');
             wishListItems = Object.values(gifts);
@@ -577,7 +576,7 @@ angular.module('santasList.controllers', [])
                         $scope.hidethis = true;
                         $scope.hideoptions = true;
                         $scope.hideconfirmation = false;
-                        sendMessageToParent();
+                        prepMessageToParent();
                         console.log(success);
                     }, function(err){
                         console.log(err);
@@ -586,21 +585,53 @@ angular.module('santasList.controllers', [])
         }
     }
 
-    function sendMessageToParent() {
-        let userId = localStorage.getItem("famList");
-        $scope.child = new Child.query({id: userId}); 
-        $scope.adult = new Adult.query({id: userId});
+    function prepMessageToParent() {
+        console.log('send message to parent');
+        // let userId = localStorage.getItem("childID");
 
-        console.log('inside send message to parent');
-        console.log('userid: ' + userId);
-        console.log('child: ' + $scope.child); 
-        console.log('adult: ' + $scope.adult);
-        // let letterToSanta = new Letter({
-        //     name: , 
-        //     behavior: , 
-        //     message: , 
-        //     wishlist: 
-        // });
+        function getChildInfo(userId) {
+            $scope.child = ChildUser.get({id: userId}, function(success){
+                getChildsParent($scope.child.adult_id)
+                console.log(success);
+            }, function(err){
+                console.log('no kid');
+            });
+        }
+
+        function getChildsParent(id) {
+            console.log('getting childs parent info')
+            $scope.parent = AdultUser.get({id: id}, function(success) {
+                sendMessageToParent($scope.parent.username, $scope.parent.email)
+                console.log(success);
+            }, function(err){
+                console.log('no adult');
+            })
+        }
+
+        getChildInfo(userId);
+    }
+
+    function sendMessageToParent(parentUsername, parentEmail) {
+
+        console.log("parentUsername " + parentUsername);
+        
+        let letterToSanta = new Letter({
+            child: $scope.name, 
+            email: parentEmail,
+            name: parentUsername,
+            behavior: $scope.behavior, 
+            message: "I want to the following to my Christmas List:", 
+            wishlist: wishListItems
+        });
+
+        letterToSanta.$save({id: userId}, 
+            function(success){
+                $location.path("/thankyou");
+            }, function(err){
+                console.log('not successful');
+                $location.path("/thankyou");
+                console.log(err);
+            })
     }
 }]);
 
