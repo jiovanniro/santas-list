@@ -146,9 +146,6 @@ angular.module('santasList.controllers', [])
     $scope.createChildUser = function() {
         var userId = localStorage.getItem('adultId');
         var userIdParse = JSON.parse(userId);
-        console.log(userIdParse)
-        console.log($scope.NewUser.Username);
-        console.log($scope.NewUser.Password);
         var u = new ChildUser({
             username: $scope.NewUser.Username,
             password: $scope.NewUser.Password,
@@ -179,7 +176,7 @@ angular.module('santasList.controllers', [])
     };
 
     $scope.AddChild = function(){
-        $location.path('kidSignUp');
+        $location.path('kidSignUpAdult');
     }
 
 
@@ -354,12 +351,9 @@ angular.module('santasList.controllers', [])
     // let behavior = $scope.behavior; 
     // let message = $scope.message; 
     let userId = localStorage.getItem("childID");    
-
     $scope.SignIn = function(){
         $location.path("/adultSignIn");
     }
-
-
     $scope.logout = function() {
         console.log("Pressed logout");
         UserService.logout().then($location.path('/'));
@@ -373,9 +367,6 @@ angular.module('santasList.controllers', [])
             password: $scope.NewUser.Password,
             adultId:  userId 
         });
-
-        console.log("username " + $scope.NewUser.Username);
-        console.log("Password " + $scope.NewUser.Password);
 
         u.$save(function(success){
             console.log(success);
@@ -454,7 +445,9 @@ angular.module('santasList.controllers', [])
                     userId: userId
                 });
 
-                console.log("wishListItems: " + wishListItems);
+                console.log("wishListItems: " + typeof wishListItems);
+
+                let itemsToString = wishListItems.toString();
 
                 wishList.$save({id: userId}, 
                     function(success){
@@ -500,9 +493,14 @@ angular.module('santasList.controllers', [])
                 email: parentEmail,
                 name: parentUsername,
                 behavior: $scope.behavior, 
-                message: $scope.message, 
-                wishlist: wishListItems
+                message: `${$scope.name} has made a Christmas List. They have been ${$scope.behavior} all year and have asked for the following: ${wishListItems.toString()}`,
+                wishlist: wishListItems.toString()
             });
+
+
+            
+            let childBehavior = JSON.stringify( $scope.behavior);
+            let childBehaviorParsed = localStorage.setItem('behavior', childBehavior);
 
             letterToSanta.$save({id: userId}, 
                 function(success){
@@ -531,7 +529,7 @@ angular.module('santasList.controllers', [])
     
     $scope.addToList = function() {
         $scope.hidethis = false;
-    };
+    }
 
     let x = 2; //initlal text box count
     $scope.addNewToy = function() {
@@ -612,10 +610,10 @@ angular.module('santasList.controllers', [])
                         console.log(success);
                     }, function(err){
                         console.log(err);
-                    });
+                    })
             });
-        };
-    };
+        }
+    }
 
     function prepMessageToParent() {
         console.log('send message to parent');
@@ -645,15 +643,17 @@ angular.module('santasList.controllers', [])
 
     function sendMessageToParent(parentUsername, parentEmail) {
 
-        console.log("parentUsername " + parentUsername);
+        let childBehavior = localStorage.getItem('behavior');
+        console.log(childBehavior);
+        
         
         let letterToSanta = new Letter({
-            child: $scope.name, 
+            child: $scope.child.username, 
             email: parentEmail,
             name: parentUsername,
-            behavior: $scope.behavior, 
-            message: "I want to the following to my Christmas List:", 
-            wishlist: wishListItems
+            behavior: childBehavior, 
+            message: `${$scope.child.username} wants to add the following to their Christmas List: `, 
+            wishlist:  wishListItems.toString()
         });
 
         letterToSanta.$save({id: userId}, 
