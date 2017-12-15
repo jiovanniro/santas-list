@@ -101,6 +101,9 @@ angular.module('santasList.controllers', [])
     $scope.Home = function(){
         $location.path("/");
     }
+    $scope.SignIn = function(){
+        $location.path("/adultSignIn");
+    }
         //create user dont believe those console lies
     $scope.CreateUser = function() {
         console.log('pressed create user btn');
@@ -144,8 +147,8 @@ angular.module('santasList.controllers', [])
         var userId = localStorage.getItem('adultId');
         var userIdParse = JSON.parse(userId);
         var u = new ChildUser({
-            username: $scope.NewUser.username,
-            password: $scope.NewUser.password,
+            username: $scope.NewUser.Username,
+            password: $scope.NewUser.Password,
             adultId:  userIdParse //check to make sure this works
         });
         u.$save(function(success){
@@ -155,6 +158,10 @@ angular.module('santasList.controllers', [])
         }, function(err){
             console.log(err);
         });
+    };
+    $scope.AdultPage = function() { //This isn't working
+        console.log('clicked');
+        $location.path("/adult");
     };
 }])
 
@@ -169,7 +176,7 @@ angular.module('santasList.controllers', [])
     };
 
     $scope.AddChild = function(){
-        $location.path('kidSignUp');
+        $location.path('kidSignUpAdult');
     }
 
 
@@ -334,6 +341,10 @@ angular.module('santasList.controllers', [])
                 console.log(err);
             })
         }
+
+        $scope.Home = function(){
+            $location.path("/");
+        }
 }])
 .controller('ChildController', ['$scope', '$parse', '$location', '$routeParams', 'ChildUser', 'User', 'UserService', 'searchService', 'Child', 'Gift', 'SEOService', 'AdultUser', 'Letter', function($scope, $parse, $location, $routeParams, ChildUser, User, UserService, searchService, Child, Gift, SEOService, AdultUser, Letter) {
     // let childname = $scope.name; 
@@ -341,14 +352,27 @@ angular.module('santasList.controllers', [])
     // let message = $scope.message; 
     let userId = localStorage.getItem("childID");    
 
+    $scope.SignIn = function(){
+        $location.path("/adultSignIn");
+    }
+
+
+    $scope.logout = function() {
+        console.log("Pressed logout");
+        UserService.logout().then($location.path('/'));
+    };
+
     //create child user
     $scope.createChildUser = function() {
         let userId = localStorage.getItem("famList");
         var u = new ChildUser({
-            username: $scope.NewUser.username,
-            password: $scope.NewUser.password,
+            username: $scope.NewUser.Username,
+            password: $scope.NewUser.Password,
             adultId:  userId 
         });
+
+        console.log("username " + $scope.NewUser.Username);
+        console.log("Password " + $scope.NewUser.Password);
 
         u.$save(function(success){
             console.log(success);
@@ -497,6 +521,11 @@ angular.module('santasList.controllers', [])
 
     let userId = localStorage.getItem('childID');
 
+    $scope.logout = function() {
+        console.log("Pressed logout");
+        UserService.logout().then($location.path('/'));
+    };
+    
     $scope.addToList = function() {
         $scope.hidethis = false;
     };
@@ -633,4 +662,13 @@ angular.module('santasList.controllers', [])
                 console.log(err);
             })
     }
-}]);
+}])
+
+.controller('WelcomeController', ['$scope', 'ChildUser', '$location', '$routeParams','SEOService', function($scope, ChildUser, $location, $routeParams, SEOService){
+    $scope.Kid = function(){
+        $location.path("/kidSignIn");
+    }
+    $scope.Adult = function(){
+        $location.path("/adultSignIn");
+    }
+}])
