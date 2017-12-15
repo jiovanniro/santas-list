@@ -633,13 +633,17 @@ angular.module('santasList.controllers', [])
                 console.log(err);
             })
     }
-}]);
+}])
 
+.controller('WelcomeController', ['$scope', '$parse', '$location', '$routeParams', 'Child', 'Adult', 'Gift', 'searchService', 'Letter', 'ChildUser', 'AdultUser', 'SEOService', function($scope, $parse, $location, $routeParams, Child, Adult, Gift, searchService, Letter, ChildUser, AdultUser, SEOService){
 
-
-
-
+    $scope.Kid = function() {
+        $location.path("/kidSignIn")
+    }
+    $scope.Adult = function() {
+        $location.path("/adultSignIn")
+    }
     
     
-
+}])
 
