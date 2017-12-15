@@ -335,7 +335,6 @@ angular.module('santasList.controllers', [])
             })
         }
 }])
-
 .controller('ChildController', ['$scope', '$parse', '$location', '$routeParams', 'ChildUser', 'User', 'UserService', 'searchService', 'Child', 'Gift', 'SEOService', 'AdultUser', 'Letter', function($scope, $parse, $location, $routeParams, ChildUser, User, UserService, searchService, Child, Gift, SEOService, AdultUser, Letter) {
     // let childname = $scope.name; 
     // let behavior = $scope.behavior; 
@@ -344,12 +343,13 @@ angular.module('santasList.controllers', [])
 
     //create child user
     $scope.createChildUser = function() {
-        // let userId = localStorage.getItem("childID");
+        let userId = localStorage.getItem("famList");
         var u = new ChildUser({
             username: $scope.NewUser.username,
             password: $scope.NewUser.password,
             adultId:  userId 
         });
+
         u.$save(function(success){
             console.log(success);
             goToAdultPage(); //Might just set location to this
@@ -634,12 +634,3 @@ angular.module('santasList.controllers', [])
             })
     }
 }]);
-
-
-
-
-
-    
-    
-
-
