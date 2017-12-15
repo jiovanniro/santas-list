@@ -531,14 +531,14 @@ angular.module('santasList.controllers', [])
     
     $scope.addToList = function() {
         $scope.hidethis = false;
-    }
+    };
 
     let x = 2; //initlal text box count
     $scope.addNewToy = function() {
         var max_fields = 5; //maximum input boxes allowed
     
         if(x < max_fields){ //max input box allowed
-            var $div = $(`<input list="suggestions" style="border: 1px solid purple; margin-bottom: 0.1em" type="text" id="item${x}" class="kidInput" ng-model="gifts.item${x}" ng-keyup="search(gifts.item${x}, $event)" ng-enter="removeFilteredItems()"/>`); //add input box            
+            var $div = $(`<input list="suggestions" style="margin-bottom: 0.1em" type="text" id="item${x}" class="kidInput" ng-model="gifts.item${x}" ng-keyup="search(gifts.item${x}, $event)" ng-enter="removeFilteredItems()"/>`); //add input box            
             var $target = $("#gift-list");
             angular.element($target).injector().invoke(function($compile) {
                 var $scope = angular.element($target).scope();
@@ -612,10 +612,10 @@ angular.module('santasList.controllers', [])
                         console.log(success);
                     }, function(err){
                         console.log(err);
-                    })
+                    });
             });
-        }
-    }
+        };
+    };
 
     function prepMessageToParent() {
         console.log('send message to parent');
