@@ -101,6 +101,9 @@ angular.module('santasList.controllers', [])
     $scope.Home = function(){
         $location.path("/");
     }
+    $scope.SignIn = function(){
+        $location.path("/adultSignIn");
+    }
         //create user dont believe those console lies
     $scope.CreateUser = function() {
         console.log('pressed create user btn');
