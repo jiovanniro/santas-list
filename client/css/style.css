@@ -1152,9 +1152,26 @@ button:focus {
 
 
 
+.poleContainer {
+  position: absolute;
+  bottom: 0;
+}
 
-
-
+.elfLogo {
+  max-width: 700px;
+  margin-top: 15px;
+}
+.welcomeText {
+  color: #dd4330;
+  font-family: 'Mountains of Christmas', cursive;
+  font-size: 600%;
+  height: 1.5em;
+  position: relative;
+  text-shadow: 5px 5px white
+}
+#homeButton {
+  margin-top: 2em;
+}
 
 
 #snowHills{
@@ -1163,7 +1180,12 @@ button:focus {
     z-index:-1;
     transform: translateY(-100%)
   }
-  
+  .poleSign {
+    position: relative;
+    bottom: 0;
+    transform: translateY(-40%);
+    max-width: 400px;
+  }
   
   .viewContainer{
     position: relative;
