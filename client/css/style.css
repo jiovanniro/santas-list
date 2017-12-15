@@ -354,9 +354,9 @@ button:focus {
   width: 340px;
   height: 340px;
   background: #a0d5d3;
-  position: absolute;
-  top: 65%;
-  left: 73%;
+  position: relative;
+  top: 19%;
+  left: 77%;
   border-radius: 50%;
   margin-top: -60px;
   -webkit-transform: translate(-50%, -50%);
