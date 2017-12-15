@@ -633,4 +633,13 @@ angular.module('santasList.controllers', [])
                 console.log(err);
             })
     }
-}]);
+}])
+
+.controller('WelcomeController', ['$scope', 'ChildUser', '$location', '$routeParams','SEOService', function($scope, ChildUser, $location, $routeParams, SEOService){
+    $scope.Kid = function(){
+        $location.path("/kidSignUp");
+    }
+    $scope.Adult = function(){
+        $location.path("/adultSignUp");
+    }
+}])
