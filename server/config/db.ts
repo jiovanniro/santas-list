@@ -12,7 +12,6 @@ export let pool =  mySql.createPool({
     // database: 'santalist'
 });
 
-
 export function rows(procedureName: string, args: any) {
     return callProcedure(procedureName, args)
         .then(function(resultsets:any) {
