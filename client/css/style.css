@@ -329,13 +329,8 @@ button:focus {
   #inputName {
     width: 50%;
   }
-<<<<<<< HEAD
-  #santaLetter {
-    height: 60vh;
-=======
   #santaLetter{
     height: 70vh;
->>>>>>> b7fce4364fc0e389e561c62c3d77fcecab47daa9
   }
 }
 @media screen and (max-width: 500px) {
@@ -1400,7 +1395,7 @@ button:focus {
 }
 #toyList input {
   font-size: 20px;
-  padding: 5px;
+  padding-right: 5px;
   float: left;
   margin-left: 10px;
 }
