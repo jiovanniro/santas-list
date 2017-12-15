@@ -146,6 +146,9 @@ angular.module('santasList.controllers', [])
     $scope.createChildUser = function() {
         var userId = localStorage.getItem('adultId');
         var userIdParse = JSON.parse(userId);
+        console.log(userIdParse)
+        console.log($scope.NewUser.Username);
+        console.log($scope.NewUser.Password);
         var u = new ChildUser({
             username: $scope.NewUser.Username,
             password: $scope.NewUser.Password,
@@ -176,7 +179,7 @@ angular.module('santasList.controllers', [])
     };
 
     $scope.AddChild = function(){
-        $location.path('kidSignUpAdult');
+        $location.path('kidSignUp');
     }
 
 
