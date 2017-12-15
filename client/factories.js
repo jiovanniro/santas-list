@@ -26,6 +26,6 @@ angular.module('santasList.factories', [])
     return $resource('/api/child/gifts/:id', { id: '@id' });  
 }])
 
-.factory('Letter', ['$resource', function($resource) {
-    return $resource('/api/sendlist/:id', { id: '@id' });
-}])
+.factory('Letter', ['$resource', function($resource){
+    return $resource('/api/send/:id', { id: '@id' });
+}]);

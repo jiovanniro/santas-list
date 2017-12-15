@@ -1,46 +1,51 @@
 <div class="thankyouBG" style="height:100vh">
-    <div class="thankyou-message">
-        <h2>Ho! Ho! Ho!</h2>
-        <p>Merry Christmas {{child.name}}</p>
-        <p>Thank you for sending me your christmas list.</p>
-        <p>I hope you are having a lot of winter-time fun. Mrs. Claus and I have been working hard
-            and having fun getting ready to deliver your gifts.</p>
-        <p>I know the Elfs are making something special for you and I'm sure you're going to love it!</p>
-        <p>Ruldolph and all the reindeer cant wait to visit you. Dont forget to leave out some carrots for them.</p>
-
-        <h2>Have a very Merry Christmas,</h2>
-        <h4>Santa Claus</h4>
-    </div>
-
-    <div class="thankyou-options" ng-hide="hideoptions">
-        <label for="add">Did you forget to add something?</label>
-        <input type="button" name="add" class="add-item" value="Add A New Item" ng-click="addToList()">
-    </div>
-
-    <div class="confirmation" ng-hide="hideconfirmation">
-        <p>Your new item is being sent to Santa!</p>
-    </div>
-
-    <div ng-hide="hidethis" class="row add-new-items">
-        <div class="col-md-6">
-            <div id="toy-list" class="row" ng-blur="removeFilteredItems()">
-                <div id="toy-items" class="col-6 col-sm-6">
-                    <input type='text' id="item1" ng-model="gifts.item1" ng-keyup="search(gifts.item1, $event)" ng-enter="removeFilteredItems()">
+        <div class="thankyou-message">
+            <h2>Ho! Ho! Ho!</h2>
+            <p>Merry Christmas {{child.name}}</p>
+            <p>Thank you for sending me your christmas list.</p>
+            <p>I hope you are having a lot of winter-time fun. Mrs. Claus and I have been working hard
+                and having fun getting ready to deliver your gifts.</p>
+            <p>I know the Elfs are making something special for you and I'm sure you're going to love it!</p>
+            <p>Ruldolph and all the reindeer cant wait to visit you. Dont forget to leave out some carrots for them.</p>
+    
+            <h2>Have a very Merry Christmas,</h2>
+            <h4>Santa Claus</h4>
+        </div>
+    
+        <div class="thankyou-options" ng-hide="hideoptions">
+            <label for="add">Did you forget to add something?</label>
+            <input type="button" name="add" class="add-item" value="Add A New Item" ng-click="addToList()">
+        </div>
+    
+        <div class="confirmation" ng-hide="hideconfirmation">
+            <p>Your new item is being sent to Santa!</p>
+        </div>
+    
+        <div ng-hide="hidethis" class="row add-new-items">
+            <div class="col-md-6">
+                <div id="toyList" class="row">
+                    <div class="add-new-toy col-md-12">
+                        <input type="button" id="new-field" class="clickButton text-center" value="Add A New Toy" ng-click="addNewToy()">
+                    </div> 
+                    <div>
+                        <input type="submit" id="create-list" class="clickButton text-center" value="Send To Santa" ng-click="addToList(gifts)">        
+                    </div>
+                    <div id="toyItems">
+    
+                        <ul id="gift-list">
+                            <input list="suggestions" id="item1" class="kidInput" ng-model="gifts.item1" ng-keyup="search(gifts.item1, $event)" ng-enter="removeFilteredItems()">
+                        </ul>
+    
+                        <datalist id="suggestions">
+                            <option class="list-group-item" ng-repeat="item in filteredItems" value="{{item}}">
+                        </datalist> 
+    
+                    </div>
                 </div>
-                <div id="list-group">
-                    <ul ng-hide="hidesuggestions" style="color:#000">
-                        <li class="list-group-item" style="color:#000" ng-repeat="item in filteredItems" ng-click="selectItem(item)">{{item}}</li>
-                    </ul>
-                </div>
-            </div>
-            <div class="add-new-toy col-md-12">
-                <input type="button" id="new-field" class="text-center" value="Add A New Toy" ng-click="addNewToy()">
-                <input type="button" id="send-list" class="text-center" value="Send To Santa" ng-click="addToList(gifts)">       
-            </div> 
-            <div class="col-md-12">
-                <p ng-repeat="gift in gifts">{{gift.item_name}}</p>
-            </div> 
-        </div>         
+                <div class="col-md-12">
+                    <p ng-repeat="gift in gifts">{{gift.item_name}}</p>
+                </div> 
+            </div>         
+        </div>
     </div>
-</div>
-<img id="snowHills" src="../images/snowHills.png" width="100%">
+    <img id="snowHills" src="../images/snowHills.png" width="100%">

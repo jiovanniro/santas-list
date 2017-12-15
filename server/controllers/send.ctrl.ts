@@ -7,11 +7,15 @@ console.log("inside of send list ctrl");
 const router = Router(); 
 
 // actually /api/sendlist
-router.post('/', (req, res) => {
-    console.log(req.body.from);
+router.post('/:id', (req, res) => {
+    console.log('in the send controller');
+    console.log(req.body.name);
+    console.log(req.body.email);
+    console.log(req.body.behavior);
     console.log(req.body.message);
+    console.log(req.body.wishlist);
     
-    sendEmail('jnrrosario@gmail.com', req.body.from, 'New contact form submission', req.body.message)
+    sendEmail('jnrrosario@gmail.com', req.body.name, 'New contact form submission', req.body.message)
     .then((response) => {
         res.sendStatus(201);
     }).catch((err) => {

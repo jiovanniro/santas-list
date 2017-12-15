@@ -7,7 +7,7 @@ var ctx = c.getContext('2d');
 var w = window.innerWidth;
 var h = window.innerHeight;
 var rate = 50;
-var arc = 700;
+var arc = 500;
 var time;
 var count;
 var size = 2;
@@ -135,9 +135,6 @@ angular.module('santasList.controllers', [])
         $location.replace().path(dest).search('dest', null);
     }    
 
-    $scope.SignIn = function(){
-        $location.path("/adultSignIn");
-    }
 
 }])
 
@@ -159,11 +156,6 @@ angular.module('santasList.controllers', [])
             console.log(err);
         });
     };
-
-    $scope.SignIn = function(){
-        $location.path("/adultSignIn");
-    }
-
 }])
 
 .controller('AdultController', ['$scope', 'Adult', 'Gift', 'ChildUser', 'Child', 'UserService', '$location', '$routeParams','SEOService', function($scope, Adult, Gift, ChildUser, Child, UserService, $location, $routeParams, SEOService) {
@@ -185,12 +177,8 @@ angular.module('santasList.controllers', [])
     function getChildList() {
         $scope.childList = Adult.query({id: adultIdParse}, function(success){
                 console.log('working');
-                // if(success[0] === undefined){
-                //     $location.path("/kidSignUp");
-                // } else {
-                //     firstChildList(success[0].id); //find a way to make this work when page loads
-                // }
-                firstChildList(success[0].id);
+                console.log(success[0].id);
+                firstChildList(success[0].id); //find a way to make this work when page loads
             }, function(err){
                 console.log('no kids in list');
                 createKidProfile();
@@ -335,10 +323,6 @@ angular.module('santasList.controllers', [])
             });
         };
     
-        $scope.Home = function(){
-            $location.path("/");
-        }
-
         // * post item needs more work. Only set up for one item to pass through.
         $scope.sendItem = function() {
             var item = new Child({
@@ -351,15 +335,16 @@ angular.module('santasList.controllers', [])
             })
         }
 }])
-    
-.controller('ChildController', ['$scope', '$parse', '$location', '$routeParams', 'ChildUser', 'User', 'UserService', 'searchService', 'Child', 'Gift', 'SEOService', 'AdultUser', function($scope, $parse, $location, $routeParams, ChildUser, User, UserService, searchService, Child, Gift, SEOService, AdultUser) {
-    let childname = $scope.name; 
+
+.controller('ChildController', ['$scope', '$parse', '$location', '$routeParams', 'ChildUser', 'User', 'UserService', 'searchService', 'Child', 'Gift', 'SEOService', 'AdultUser', 'Letter', function($scope, $parse, $location, $routeParams, ChildUser, User, UserService, searchService, Child, Gift, SEOService, AdultUser, Letter) {
+    // let childname = $scope.name; 
     // let behavior = $scope.behavior; 
     // let message = $scope.message; 
+    let userId = localStorage.getItem("childID");    
 
     //create child user
     $scope.createChildUser = function() {
-        let userId = localStorage.getItem("childID");
+        // let userId = localStorage.getItem("childID");
         var u = new ChildUser({
             username: $scope.NewUser.username,
             password: $scope.NewUser.password,
@@ -394,12 +379,6 @@ angular.module('santasList.controllers', [])
         }
     };
 
-
-    $scope.Home = function(){
-        $location.path("/adult");
-    }
-
-
     $scope.search = function(string, event) {
         let target = event.target.id;
 
@@ -420,15 +399,7 @@ angular.module('santasList.controllers', [])
             });
             $scope.filteredItems = output;
             console.log($scope.filteredItems);
-            showSuggestions();
         } 
-
-        function showSuggestions() {
-            console.log('showing suggestions');
-            console.log($(`#${target}`));
-            $(`#${target}`).append("<p style='color: #fff'>vghvhgvh</p>");
-            $scope.hidethis = false;
-        }
 
         $scope.selectItem = function(item) {
             console.log('inside select item'); 
@@ -436,19 +407,15 @@ angular.module('santasList.controllers', [])
             var ref = `gifts.${target}`;
             getter = $parse(ref);
             getter.assign($scope, item);
-            $scope.hidethis = true;
         }
 
         $scope.removeFilteredItems = function() {
-            $scope.hidethis = true;
             $(`#${target}`).blur();
             $('.letterBG').focus();
         }
         
         $scope.addToList = function(gifts) {
-            $scope.hidethis = true;
-            $scope.item1 = "";
-            let userId = localStorage.getItem('famList');
+            console.log('inside add to list');
             
             console.log('add to list');
             wishListItems = Object.values(gifts);
@@ -464,8 +431,8 @@ angular.module('santasList.controllers', [])
 
                 wishList.$save({id: userId}, 
                     function(success){
+                        console.log(success);
                     prepMessageToParent();
-                    //$location.path(`/thankyou/${userId}`);
                         console.log(success);
                     }, function(err){
                         console.log(err);
@@ -475,7 +442,7 @@ angular.module('santasList.controllers', [])
 
         function prepMessageToParent() {
             console.log('send message to parent');
-            let userId = localStorage.getItem("childID");
+            // let userId = localStorage.getItem("childID");
 
             function getChildInfo(userId) {
                 $scope.child = ChildUser.get({id: userId}, function(success){
@@ -491,7 +458,6 @@ angular.module('santasList.controllers', [])
                 $scope.parent = AdultUser.get({id: id}, function(success) {
                     sendMessageToParent($scope.parent.username, $scope.parent.email)
                     console.log(success);
-                    //sendMessageToParent($scope.child, $scope.parent);
                 }, function(err){
                     console.log('no adult');
                 })
@@ -501,17 +467,23 @@ angular.module('santasList.controllers', [])
         }
 
         function sendMessageToParent(parentUsername, parentEmail) {
-            console.log("child " + $scope.name);
-            console.log("parent " + parentEmail);
-            // console.log('userid: ' + userId);
-            // console.log('child: ' + $scope.child); 
-            // console.log('adult: ' + $scope.parent);
-            // let letterToSanta = new Letter({
-            //     name: , 
-            //     behavior: , 
-            //     message: , 
-            //     wishlist: 
-            // });
+
+            let letterToSanta = new Letter({
+                name: $scope.name, 
+                email: parentEmail,
+                behavior: $scope.behavior, 
+                message: $scope.message, 
+                wishlist: wishListItems
+            });
+
+            letterToSanta.$save({id: userId}, 
+                function(success){
+                    $location.path(`/thankyou/${userId}`);
+                }, function(err){
+                    console.log('not successful');
+                    $location.path(`/thankyou/${userId}`);
+                    console.log(err);
+                })
         }
         
      }
@@ -521,6 +493,10 @@ angular.module('santasList.controllers', [])
     $scope.hidethis = true;
     $scope.hidesuggestions = true;
     $scope.hideconfirmation = true;
+    $scope.child = Child.query({id: $routeParams.id});
+    console.log('this is the child ' + $scope.child);
+
+
     $scope.addToList = function() {
         console.log('open the add div');
         $scope.hidethis = false;
@@ -528,11 +504,11 @@ angular.module('santasList.controllers', [])
 
     let x = 2; //initlal text box count
     $scope.addNewToy = function() {
-        var max_fields = 10; //maximum input boxes allowed
+        var max_fields = 5; //maximum input boxes allowed
     
         if(x < max_fields){ //max input box allowed
-            var $div = $(`<div><input type="text" id="item${x}" class="kidInput" ng-model="gifts.item${x}" ng-keyup="search(gifts.item${x}, $event)" ng-enter="removeFilteredItems()"/></div>`); //add input box            
-            var $target = $("#toy-items");
+            var $div = $(`<input list="suggestions" style="border: 1px solid purple; margin-bottom: 0.1em" type="text" id="item${x}" class="kidInput" ng-model="gifts.item${x}" ng-keyup="search(gifts.item${x}, $event)" ng-enter="removeFilteredItems()"/>`); //add input box            
+            var $target = $("#gift-list");
             angular.element($target).injector().invoke(function($compile) {
                 var $scope = angular.element($target).scope();
                 $target.append($compile($div)($scope));
