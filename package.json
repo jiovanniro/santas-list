@@ -4,7 +4,7 @@
   "description": "christmas-list-for-kids",
   "main": "build/index.js",
   "scripts": {
-    "test": "source variables && npm run dev",
+    "test": "source variables.bat && npm run dev",
     "build:ts": "tsc -p . ",
     "server": "node build/index.js",
     "dev": "nodemon -e ts --dir server/ --exec \"npm run start\"",
