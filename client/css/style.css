@@ -83,7 +83,7 @@ button:focus {
 }
 .text {
   /* color: ivory; */
-  color: rgb(22, 22, 22)
+  color: rgb(22, 22, 22);
   font-size: small;
 }
 .regLink {
