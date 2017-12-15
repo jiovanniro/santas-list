@@ -117,14 +117,14 @@
 
 
 
-    <div class="letterBG" style="height:100vh; overflow-y:auto;">
+    <div class="letterBG" id="kidDiv" style="height:100vh; overflow-y:hidden;">
     <div class="container" style="margin-bottom: 10%">    
         <div class="instructions" style="color: #fff; text-align: center; margin: 0 auto; width: 50%; line-height: 10px;">
             <h1>Merry Christmas {{child.name}}</h1>
             <p>Finish the letter below to send your list to Santa!</p>
             <p>Ho! Ho! Ho!</p>
         </div>
-        <div id="santaLetter" class="container" style="width: 80%; margin: 0 auto;background-color:rgba(36, 36, 80, 0.671); border-radius:5%; padding-bottom:2%">
+        <div id="santaLetter" class="container">
             <form>                     
             <div class="startLetter">
                 <div id="salutation" style="margin-bottom:2%" class="col-md-12">Dear Santa, </div>
@@ -134,7 +134,7 @@
                     <input type="name" class="name" id="inputName" placeholder="Name" ng-model="name" style="width: 30%;">
                 </div> -->
                 <div>
-                    <p id="eminem">This Christmas, I am <input type="text" placeholder="age"> years old!</p>
+                    <p id="eminem">This Christmas, I am <input type="number" placeholder="age" style="width:25%"> years old!</p>
                 </div>
                 <div style="width: 100%; ">
     
@@ -167,7 +167,7 @@
                         <div id="toyItems">
     
                             <ul id="gift-list">
-                                <input list="suggestions" id="item1" class="kidInput" ng-model="gifts.item1" style="margin-bottom:2%;" ng-keyup="search(gifts.item1, $event)" ng-enter="removeFilteredItems()">
+                                <input list="suggestions" id="item1" class="kidInput" ng-model="gifts.item1" ng-keyup="search(gifts.item1, $event)" ng-enter="removeFilteredItems()">
                             </ul>
     
                             <datalist id="suggestions">
@@ -183,24 +183,27 @@
                     <p id="eminem">
                         Merry Christmas, Santa! I'll be waiting for you on Christmas Eve with cookies and milk!
                     <!-- </p> -->
-                    <br />
-                    <span style="float:right">
-                    <p style="float:right; margin-right:5%" id="eminem">
-                        Love,
+                        <br />
+                        <span style="float:right">
+                            <p style="float:right; margin-right:5%" id="eminem">
+                                Love,
+                            </p>
+                            <!-- <div class="row" style="float:right">
+                                <input type="name" class="name kidName" id="inputName" placeholder="Name" ng-model="name">
+                            </div> -->
+                        </span>
                     </p>
-                    <div class="row">
-                        <input type="name" class="name" id="inputName" placeholder="Name" ng-model="name" style="width: 60%;float: right;">
-                    </div>
-                    </span>
-                </p>
                 </div>
-                </div>
-            <div>
+            </div>
+            <div style="float:right; margin-top: 0.5rem; width:100%">
+                <input type="name" class="name kidName" id="inputName" placeholder="Name" ng-model="name">
+            </div>
+            <div style="width:100%">     
                 <div class="add-new-toy col-md-6" style="margin-top:4%">
-                    <input type="button" id="new-field" class="adultButton text-center" value="Add A New Toy" ng-click="addNewToy()">
+                    <input type="button" id="new-field" class="kidButton text-center" value="Add A New Toy" ng-click="addNewToy()">
                 </div> 
                 <div class="col-md-6" style="margin-top:2%">
-                    <input type="submit" id="create-list" class="adultButton text-center" value="Send To Santa" ng-click="sendList(gifts)">        
+                    <input type="submit" id="create-list" class="kidButton text-center" value="Send To Santa" ng-click="sendList(gifts)">        
                 </div>
             </div>
             </form>
