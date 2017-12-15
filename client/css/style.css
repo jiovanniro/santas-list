@@ -1078,6 +1078,9 @@ button:focus {
   position: relative;
   text-shadow: 5px 5px white
 }
+#homeButton {
+  margin-top: 2em;
+}
 
 
 #snowHills{
