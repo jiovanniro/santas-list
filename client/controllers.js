@@ -345,14 +345,21 @@ angular.module('santasList.controllers', [])
     // let message = $scope.message; 
     let userId = localStorage.getItem("childID");    
 
+    $scope.logout = function() {
+        console.log("Pressed logout");
+        UserService.logout().then($location.path('/'));
+    };
+
     //create child user
     $scope.createChildUser = function() {
         let userId = localStorage.getItem("famList");
         var u = new ChildUser({
-            username: $scope.NewUser.username,
-            password: $scope.NewUser.password,
+            username: $scope.NewUser.Username,
+            password: $scope.NewUser.Password,
             adultId:  userId 
         });
+
+        console.log("username " + $scope.NewUser.Username);
 
         u.$save(function(success){
             console.log(success);
@@ -501,6 +508,11 @@ angular.module('santasList.controllers', [])
 
     let userId = localStorage.getItem('childID');
 
+    $scope.logout = function() {
+        console.log("Pressed logout");
+        UserService.logout().then($location.path('/'));
+    };
+    
     $scope.addToList = function() {
         $scope.hidethis = false;
     }
