@@ -60,6 +60,15 @@ router.get('/gifts/:id', function(req, res){
     });
 });
 
+router.get('/createChild/:id', function(req, res){
+    procedures.getChildUserById(req.params.id)
+    .then(function(item){
+        res.send(item);
+    }).catch(function(err){
+        res.status(500).send(err);
+    });
+});
+
 router.post('/:id', function(req, res){
     console.log('inside adding item');
     procedures.addItem(req.body.item, req.body.userId)
@@ -79,12 +88,5 @@ router.get('/:id', function(req, res){
     });
 });
 
-router.get('/createChild/:id', function(req, res){
-    procedures.getChildUserById(req.params.id)
-    .then(function(item){
-        res.send(item);
-    }).catch(function(err){
-        res.status(500).send(err);
-    });
-});
+
 export default router;

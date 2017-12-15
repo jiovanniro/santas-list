@@ -1,6 +1,6 @@
 <div class="thankyouBG" style="height:100vh">
         <div class="thankyou-message">
-            <h2 id="hoH2">HO! HO! HO!</h2>
+            <h2 id="hoH2">HO! HO! HO!<span style="float:right"><button style="font-size:50%" class="kidButton" id="logoutBtn" ng-click="logout()">Log Out</button></span></h2>
             <p>Merry Christmas {{child.username}}!</p>
             <p>Thank you for sending me your Christmas list!</p>
             <p>I hope you are having a lot of winter-time fun. Mrs. Claus and I have been working hard
@@ -24,10 +24,10 @@
             <div class="col-md-6">
                 <div id="toyList" class="row">
                     <div class="add-new-toy col-md-12">
-                        <input type="button" id="new-field" class="clickButton text-center" value="Add A New Toy" ng-click="addNewToy()">
+                        <input type="button" id="new-field" class="kidButton text-center" value="Add A New Toy" ng-click="addNewToy()">
                     </div> 
                     <div>
-                        <input type="submit" id="create-list" class="clickButton text-center" value="Send To Santa" ng-click="sendList(gifts)">        
+                        <input type="submit" id="create-list" class="kidButton text-center" value="Send To Santa" ng-click="sendList(gifts)">        
                     </div>
                     <div id="toyItems">
     
