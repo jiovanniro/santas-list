@@ -134,7 +134,7 @@ angular.module('santasList.controllers', [])
     
     function createKidProfile() { //might need to be changed later on
         var dest = $location.search().dest;
-        if (!dest) { dest = '/kidSignUpAdult' }
+        if (!dest) { dest = '/kidSignUp' }
         $location.replace().path(dest).search('dest', null);
     }    
 
@@ -144,8 +144,10 @@ angular.module('santasList.controllers', [])
 
 .controller('ChildSignUpController', ['$scope', 'ChildUser', '$location', '$routeParams','SEOService', function($scope, ChildUser, $location, $routeParams, SEOService){
     $scope.createChildUser = function() {
-        var userId = localStorage.getItem('adultId');
+        var userId = localStorage.getItem('famList');
         var userIdParse = JSON.parse(userId);
+        console.log($scope.NewUser.Username);
+        console.log("userIdParse: " + userIdParse);
         var u = new ChildUser({
             username: $scope.NewUser.Username,
             password: $scope.NewUser.Password,
@@ -154,7 +156,7 @@ angular.module('santasList.controllers', [])
         u.$save(function(success){
             console.log(success);
             localStorage.removeItem('adultId');
-            $location.path('/');
+            $location.path('/adult');
         }, function(err){
             console.log(err);
         });
@@ -370,7 +372,7 @@ angular.module('santasList.controllers', [])
 
         u.$save(function(success){
             console.log(success);
-            goToAdultPage(); //Might just set location to this
+            $location.path("/adultSignIn") //Might just set location to this
         }, function(err){
             console.log(err);
         });
