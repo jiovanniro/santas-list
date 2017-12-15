@@ -334,6 +334,10 @@ angular.module('santasList.controllers', [])
                 console.log(err);
             })
         }
+
+        $scope.Home = function(){
+            $location.path("/");
+        }
 }])
 .controller('ChildController', ['$scope', '$parse', '$location', '$routeParams', 'ChildUser', 'User', 'UserService', 'searchService', 'Child', 'Gift', 'SEOService', 'AdultUser', 'Letter', function($scope, $parse, $location, $routeParams, ChildUser, User, UserService, searchService, Child, Gift, SEOService, AdultUser, Letter) {
     // let childname = $scope.name; 
@@ -637,9 +641,9 @@ angular.module('santasList.controllers', [])
 
 .controller('WelcomeController', ['$scope', 'ChildUser', '$location', '$routeParams','SEOService', function($scope, ChildUser, $location, $routeParams, SEOService){
     $scope.Kid = function(){
-        $location.path("/kidSignUp");
+        $location.path("/kidSignIn");
     }
     $scope.Adult = function(){
-        $location.path("/adultSignUp");
+        $location.path("/adultSignIn");
     }
 }])
