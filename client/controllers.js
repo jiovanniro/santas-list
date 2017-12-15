@@ -159,6 +159,10 @@ angular.module('santasList.controllers', [])
             console.log(err);
         });
     };
+    $scope.AdultPage = function() { //This isn't working
+        console.log('clicked');
+        $location.path("/adult");
+    };
 }])
 
 .controller('AdultController', ['$scope', 'Adult', 'Gift', 'ChildUser', 'Child', 'UserService', '$location', '$routeParams','SEOService', function($scope, Adult, Gift, ChildUser, Child, UserService, $location, $routeParams, SEOService) {
@@ -172,7 +176,7 @@ angular.module('santasList.controllers', [])
     };
 
     $scope.AddChild = function(){
-        $location.path('kidSignUp');
+        $location.path('kidSignUpAdult');
     }
 
 
@@ -347,6 +351,11 @@ angular.module('santasList.controllers', [])
     // let behavior = $scope.behavior; 
     // let message = $scope.message; 
     let userId = localStorage.getItem("childID");    
+
+    $scope.SignIn = function(){
+        $location.path("/adultSignIn");
+    }
+
 
     $scope.logout = function() {
         console.log("Pressed logout");
