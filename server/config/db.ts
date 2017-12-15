@@ -2,12 +2,6 @@ import * as mySql from 'mysql';
 
 export let pool =  mySql.createPool({
     connectionLimit: 10,
-<<<<<<< HEAD
-    host: 'localhost',
-    user: 'santaListUser',
-    password: 'checkingItTwice',
-    database: 'santa_list'
-=======
     host: process.env.DATABASE_URL, 
     user: process.env.DATABASE_USER, 
     password: process.env.DATABASE_PASSWORD, 
@@ -16,7 +10,6 @@ export let pool =  mySql.createPool({
     // user: 'santaListUser',
     // password: 'checkingItTwice',
     // database: 'santalist'
->>>>>>> c4c62c3d354bed461d94088261bcdf0e30a6bc43
 });
 
 export function rows(procedureName: string, args: any) {
