@@ -5,7 +5,8 @@ import configurePassport from './config/passport';
 
 import api from './api';
 import * as routing from './middleware/routing.mw';
- 
+
+let PORT = process.env.PORT || 3000; 
 let app = express(); 
 let clientPath = path.join(__dirname, '../client');
 app.use(bodyParser.json()); 
@@ -18,8 +19,8 @@ app.use('/api', api);
 
 app.get('*', routing.stateRouting);
 
-app.listen(process.env.PORT || 3000, function (){
-    console.log(`listening to port 3000`);
+app.listen(PORT, function (){
+    console.log(`listening to port ${PORT}`);
 });
 
 
