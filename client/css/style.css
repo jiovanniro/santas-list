@@ -63,10 +63,12 @@ button:focus {
 .poleContainer {
   position: absolute;
   bottom: 0;
+  transform: translate(45%, 15%);
 }
-.elfLogo {
+.newLogo {
   max-width: 700px;
-  margin-top: 15px;
+  margin-top: -15px;
+  
 }
 .welcomeText {
   color: #dd4330;
@@ -77,7 +79,7 @@ button:focus {
   text-shadow: 5px 5px white;
 }
 #homeButton {
-  margin-top: 2em;
+  margin-top: 10em;
 }
 #snowHills {
   position: relative;
@@ -88,7 +90,6 @@ button:focus {
 .poleSign {
   position: relative;
   bottom: 0;
-  transform: translateY(-40%);
   max-width: 400px;
 }
 /*
