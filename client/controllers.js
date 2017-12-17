@@ -134,7 +134,7 @@ angular.module('santasList.controllers', [])
     
     function createKidProfile() { //might need to be changed later on
         var dest = $location.search().dest;
-        if (!dest) { dest = '/kidSignUp' }
+        if (!dest) { dest = '/adultSignIn' }
         $location.replace().path(dest).search('dest', null);
     }    
 
