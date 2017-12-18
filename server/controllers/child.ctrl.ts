@@ -7,7 +7,6 @@ import configurePassport from '../config/passport';
 
 const router = express.Router();
 
-//might need to change location if it does not work
 router.post('/login', (req, res, next) => {
     console.log("inside of child ctrl login");
     console.log(req.body);
@@ -45,9 +44,6 @@ router.post('/createChild', function(req, res){
         res.sendStatus(500);
     });
 });
-
-//are we calling the right procedure?
-
 
 router.get('/gifts/:id', function(req, res){
     console.log('inside getting gifts');

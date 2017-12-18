@@ -13,7 +13,6 @@ $routeProvider
     .when('/thankyou', {
         templateUrl: 'views/thankyou.html',
         controller: 'ThankyouController'
-        // requiresLogin: true
     })
     .when('/adultSignUp', {
         templateUrl: 'views/adult_signup.html',
@@ -28,7 +27,6 @@ $routeProvider
     .when('/kidSignUp', {
         templateUrl: 'views/kid_signup.html',
         controller: 'ChildController'
-        // This might need requiresAdmin and requiresLogin
     })
     
     .when('/kidSignIn', {
@@ -58,7 +56,6 @@ $routeProvider
         redirectTo: '/'
     });
 }])
-    // * set for redirect path. This might be editted out later on. *
 .run(['$rootScope', '$location', 'UserService', function($rootScope, $location, UserService){
     $rootScope.$on('$rootChangeStart', function(event, nextRoute, previousRoute){
         if (nextRoute.$$route.requiresLogin && !UserService.isLoggedIn()) {

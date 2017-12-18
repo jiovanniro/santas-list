@@ -13,7 +13,6 @@ angular.module('santasList.factories', [])
     return $resource('/api/adult/:id', { id: '@id' });  
 }])
 
-//might not need this factory
 .factory('ChildUser', ['$resource', function($resource){
     return $resource('/api/child/createChild/:id', { id: '@id' });  
 }])

@@ -1,23 +1,12 @@
     <div class="letterBG" id="kidDiv" style="height:100vh; overflow-y:hidden;">
     <div class="container" style="margin-bottom: 10%">    
         <div class="instructions" style="color: #fff; text-align: center; margin: 0 auto; width: 50%; line-height: 10px;">
-            <!-- <span style="float:right"> -->
-                <button class="adultButton" id="logoutBtn" ng-click="logout()">Log Out</button>
-            <!-- </span>
-            <h1>Merry Christmas {{child.name}}</h1>
-            <p>Finish the letter below to send your list to Santa!</p>
-            <p>Ho! Ho! Ho!</p> -->
-
+            <button class="adultButton" id="logoutBtn" ng-click="logout()">Log Out</button>
         </div>
         <div id="santaLetter" class="container">
             <form>                     
             <div class="startLetter">
                 <div id="salutation" style="margin-bottom:2%" class="col-md-12">Dear Santa, </div>
-
-                <!-- <div style="border: 2px solid yellow; width: 45%;">
-                    <label id="childname" style="color: #fff;" for="name">My Name is:</label>
-                    <input type="name" class="name" id="inputName" placeholder="Name" ng-model="name" style="width: 30%;">
-                </div> -->
                 <div>
                     <p id="eminem" style="color:#dd4330">This Christmas, I am <input type="number" placeholder="age" style="width:25%"> years old!</p>
                 </div>
@@ -58,7 +47,6 @@
                             <datalist id="suggestions">
                                 <option class="list-group-item" ng-repeat="item in filteredItems" value="{{item}}">
                             </datalist> 
-    
                         </div>
                     </div>
                 </div>
@@ -67,15 +55,11 @@
                 <div>
                     <p id="eminem" style="color:#dd4330">
                         Merry Christmas, Santa! I'll be waiting for you on Christmas Eve with cookies and milk!
-                    <!-- </p> -->
                         <br />
                         <span style="float:right">
                             <p style="float:right; margin-right:5%;color:#dd4330" id="eminem">
                                 Love,
                             </p>
-                            <!-- <div class="row" style="float:right">
-                                <input type="name" class="name kidName" id="inputName" placeholder="Name" ng-model="name">
-                            </div> -->
                         </span>
                     </p>
                 </div>
@@ -85,7 +69,6 @@
             </div>
             <div style="width:100%">     
                 <div class="add-new-toy col-md-6" style="margin-top:4%">
-                    <!-- <input type="button" id="new-field" class="kidButton text-center" value="Add A New Toy" ng-click="addNewToy()"> -->
                 </div> 
                 <div class="col-md-6" style="margin-top:2%">
                         <input type="button" id="new-field" class="kidButton text-center" value="Add A New Toy" style="margin-bottom:3%" ng-click="addNewToy()">
@@ -94,28 +77,6 @@
             </div>
             </form>
         </div>
-        <!-- <div id="funnySanta" class="santa" style="border: 1px solid #000; width: 40%; float: left">
-                <div class="window">
-                    <div class="santa">
-                        <div class="head">
-                            <div class="face">
-                                <div class="redhat">
-                                    <div class="whitepart"></div>
-                                    <div class="redpart"></div>
-                                    <div class="hatball"></div>
-                                </div>
-                                <div class="eyes"></div>
-                                <div class="beard">
-                                    <div class="nose"></div>
-                                    <div class="mouth"></div>
-                                </div>
-                            </div>
-                            <div class="ears"></div>
-                        </div>
-                        <div class="body"></div>
-                    </div>
-                </div>
-        </div> -->
     </div>
     </div>
     <img id="snowHills" src="../images/snowHills.png" width="100%">

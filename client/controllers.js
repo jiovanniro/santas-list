@@ -82,7 +82,7 @@ angular.module('santasList.controllers', [])
             let userId = UserService.user().id;
             let userIdString = JSON.stringify(userId);
             localStorage.setItem('famList', userIdString);
-            redirect(); //might need to change this to redirect function
+            redirect(); 
         }, (err) => {
             bootbox.alert({
                 message: "Incorrect Username/Password",
@@ -92,7 +92,7 @@ angular.module('santasList.controllers', [])
         });
     };
 
-    function redirect() { //might need to be changed later on
+    function redirect() { 
         var dest = $location.search().dest;
         if (!dest) { dest = '/adult' }
         $location.replace().path(dest).search('dest', null);
@@ -132,7 +132,7 @@ angular.module('santasList.controllers', [])
         }
     };
     
-    function createKidProfile() { //might need to be changed later on
+    function createKidProfile() {
         var dest = $location.search().dest;
         if (!dest) { dest = '/adultSignIn' }
         $location.replace().path(dest).search('dest', null);
@@ -151,7 +151,7 @@ angular.module('santasList.controllers', [])
         var u = new ChildUser({
             username: $scope.NewUser.Username,
             password: $scope.NewUser.Password,
-            adultId:  userIdParse //check to make sure this works
+            adultId:  userIdParse 
         });
         u.$save(function(success){
             console.log(success);
@@ -161,7 +161,7 @@ angular.module('santasList.controllers', [])
             console.log(err);
         });
     };
-    $scope.AdultPage = function() { //This isn't working
+    $scope.AdultPage = function() { 
         console.log('clicked');
         $location.path("/adult");
     };
@@ -187,7 +187,7 @@ angular.module('santasList.controllers', [])
         $scope.childList = Adult.query({id: adultIdParse}, function(success){
                 console.log('working');
                 console.log(success[0].id);
-                firstChildList(success[0].id); //find a way to make this work when page loads
+                firstChildList(success[0].id); 
             }, function(err){
                 console.log('no kids in list');
                 createKidProfile();
@@ -205,7 +205,7 @@ angular.module('santasList.controllers', [])
         });
     }
 
-    function createKidProfile() { //might need to be changed later on
+    function createKidProfile() { 
         var dest = $location.search().dest;
         if (!dest) { dest = '/kidSignUp' }
         $location.replace().path(dest).search('dest', null);
@@ -332,7 +332,6 @@ angular.module('santasList.controllers', [])
             });
         };
     
-        // * post item needs more work. Only set up for one item to pass through.
         $scope.sendItem = function() {
             var item = new Child({
                 itemName: $scope.Items
@@ -349,9 +348,6 @@ angular.module('santasList.controllers', [])
         }
 }])
 .controller('ChildController', ['$scope', '$parse', '$location', '$routeParams', 'ChildUser', 'User', 'UserService', 'searchService', 'Child', 'Gift', 'SEOService', 'AdultUser', 'Letter', function($scope, $parse, $location, $routeParams, ChildUser, User, UserService, searchService, Child, Gift, SEOService, AdultUser, Letter) {
-    // let childname = $scope.name; 
-    // let behavior = $scope.behavior; 
-    // let message = $scope.message; 
     let userId = localStorage.getItem("childID");    
     $scope.SignIn = function(){
         $location.path("/adultSignIn");
@@ -372,13 +368,13 @@ angular.module('santasList.controllers', [])
 
         u.$save(function(success){
             console.log(success);
-            $location.path("/adultSignIn") //Might just set location to this
+            $location.path("/adultSignIn")
         }, function(err){
             console.log(err);
         });
     };
 
-    function goToAdultPage() { //might need to be changed later on
+    function goToAdultPage() {
         var dest = $location.search().dest;
         if (!dest) { dest = '/adult' }
         $location.replace().path(dest).search('dest', null);
@@ -395,7 +391,7 @@ angular.module('santasList.controllers', [])
                 var $scope = angular.element($target).scope();
                 $target.append($compile($div)($scope));
             });
-            x++; //text box increment
+            x++;
         }
     };
 
@@ -464,7 +460,6 @@ angular.module('santasList.controllers', [])
 
         function prepMessageToParent() {
             console.log('send message to parent');
-            // let userId = localStorage.getItem("childID");
 
             function getChildInfo(userId) {
                 $scope.child = ChildUser.get({id: userId}, function(success){
@@ -544,7 +539,7 @@ angular.module('santasList.controllers', [])
                 var $scope = angular.element($target).scope();
                 $target.append($compile($div)($scope));
             });
-            x++; //text box increment
+            x++; 
         }
     };
 
@@ -588,7 +583,6 @@ angular.module('santasList.controllers', [])
         }
         
         $scope.sendList = function(gifts) {
-            // $scope.hidesuggestions = true;
             $scope.item1 = "";
             let userId = localStorage.getItem('childID');
             
@@ -619,7 +613,6 @@ angular.module('santasList.controllers', [])
 
     function prepMessageToParent() {
         console.log('send message to parent');
-        // let userId = localStorage.getItem("childID");
 
         function getChildInfo(userId) {
             $scope.child = ChildUser.get({id: userId}, function(success){

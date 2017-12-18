@@ -5,7 +5,6 @@ let router = express.Router();
 
 //router.get('*', auth.isLoggedIn);
 
-// -- /api/cart
 router.route('/')
     .get(function(req, res) {
         procedures.all(req.body.productId)
@@ -35,5 +34,3 @@ router.route('/:id')
     })
 
 export default router;
-
-//Does not handle authentication right now
