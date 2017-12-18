@@ -1,3 +1,9 @@
 build/
 node_modules/
 notes.txt
+playground
+mysql/
+client/js/
+server/config/db.ts
+server/config/db.ts
+variables.bat
