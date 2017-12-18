@@ -1,0 +1,82 @@
+    <div class="letterBG" id="kidDiv" style="height:100vh; overflow-y:hidden;">
+    <div class="container" style="margin-bottom: 10%">    
+        <div class="instructions" style="color: #fff; text-align: center; margin: 0 auto; width: 50%; line-height: 10px;">
+            <button class="adultButton" id="logoutBtn" ng-click="logout()">Log Out</button>
+        </div>
+        <div id="santaLetter" class="container">
+            <form>                     
+            <div class="startLetter">
+                <div id="salutation" style="margin-bottom:2%" class="col-md-12">Dear Santa, </div>
+                <div>
+                    <p id="eminem" style="color:#dd4330">This Christmas, I am <input type="number" placeholder="age" style="width:25%"> years old!</p>
+                </div>
+                <div style="width: 100%; ">
+    
+                    <div id="behaviorCheck" class="form-check">
+                        <p id="eminem" style="color:#dd4330">This year I have been:</p>
+                        <label class="form-check-label">
+                        <input class="form-check-input" style="width: 1em; height: 1em;" type="radio" value="Good" name="naughtyNice" id="naughtyNice1" ng-model="behavior">
+                        <p style="margin: 0 1em;" >Good</p>
+                        </label>
+    
+                        <label class="form-check-label">
+                        <input class="form-check-input" style="width: 1em; height: 1em;" type="radio" value="Very Good" name="naughtyNice" id="naughtyNice2" ng-model="behavior">
+                        <p style="margin: 0 1em;">Very Good</p>
+                        </label>
+    
+                        <label class="form-check-label">
+                        <input class="form-check-input" style="width: 1em; height: 1em;" type="radio" value="Only Sort of Good" name="naughtyNice" id="naughtyNice3" ng-model="behavior">
+                        <p style="margin: 0 1em;">Only Sort of Good</p>
+                        </label>
+                    </div>
+                </div>
+                <div>
+                    <p id="eminem" style="color:#dd4330">What I want for Christmas:</p>
+                </div>
+                <!-- <div class="add-new-toy col-md-12">
+                    <input type="button" id="new-field" class="clickButton text-center" value="Add A New Toy" ng-click="addNewToy()">
+                </div>  -->
+                <div style="overflow-y: auto; overflow-x:hidden;">
+                    <div id="toyList" class="row">
+                        <div id="toyItems">
+    
+                            <ul id="gift-list">
+                                <input list="suggestions" id="item1" class="kidInput" ng-model="gifts.item1" ng-keyup="search(gifts.item1, $event)" ng-enter="removeFilteredItems()">
+                            </ul>
+    
+                            <datalist id="suggestions">
+                                <option class="list-group-item" ng-repeat="item in filteredItems" value="{{item}}">
+                            </datalist> 
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="myList">
+                <div>
+                    <p id="eminem" style="color:#dd4330">
+                        Merry Christmas, Santa! I'll be waiting for you on Christmas Eve with cookies and milk!
+                        <br />
+                        <span style="float:right">
+                            <p style="float:right; margin-right:5%;color:#dd4330" id="eminem">
+                                Love,
+                            </p>
+                        </span>
+                    </p>
+                </div>
+            </div>
+            <div style="float:right; margin-top: 0.5rem; width:100%">
+                <input type="name" class="name kidName" id="inputName" style="font-family: henny penny, cursive;font-size: 200%;" placeholder="Name" ng-model="name">
+            </div>
+            <div style="width:100%">     
+                <div class="add-new-toy col-md-6" style="margin-top:4%">
+                </div> 
+                <div class="col-md-6" style="margin-top:2%">
+                        <input type="button" id="new-field" class="kidButton text-center" value="Add A New Toy" style="margin-bottom:3%" ng-click="addNewToy()">
+                    <input type="submit" id="create-list" class="kidButton text-center" value="Send To Santa" ng-click="sendList(gifts)">        
+                </div>
+            </div>
+            </form>
+        </div>
+    </div>
+    </div>
+    <img id="snowHills" src="../images/snowHills.png" width="100%">

@@ -1,4 +1,4 @@
-var app = angular.module('myStore', ['ngRoute', 'ngResource', 'myStore.controllers', 'myStore.factories', 'myStore.directive','myStore.services']);
+var app = angular.module('santasList', ['ngRoute', 'ngResource', 'ngAnimate', 'santasList.controllers', 'santasList.factories', 'santasList.directive','santasList.services']);
 
 app.config(['$routeProvider', '$locationProvider', function($routeProvider, $locationProvider){
 
@@ -7,38 +7,63 @@ $locationProvider.html5Mode(true);
 $routeProvider
     .when('/', {
         templateUrl: 'views/home.html',
+        controller: 'WelcomeController'
     })
 
-    .when('/checkout', {
-        templateUrl: 'views/checkout.html', 
-        controller: 'cartController'
+    .when('/thankyou', {
+        templateUrl: 'views/thankyou.html',
+        controller: 'ThankyouController'
     })
-
-    .when('/cart', {
-        templateUrl: 'views/cart.html', 
-        controller: 'cartController'
-    })
-
-    .when('/contact', {
-        templateUrl: 'views/contact.html', 
-        controller: 'contactController'
-    })
-
-    .when('/products/:id', {
-        templateUrl: 'views/products.html',
-        controller: 'productsController',
-    })
-
-    .when('/misc/:id', {
-        templateUrl: 'views/misc.html', 
-        controller: 'productsController'
+    .when('/adultSignUp', {
+        templateUrl: 'views/adult_signup.html',
+        controller: 'LoginController'
     })
     
-    .when('/single/:id', {
-        templateUrl: 'views/single.html', 
-        controller: 'singleController'
+    .when('/adultSignIn', {
+        templateUrl: 'views/adult_signin.html',
+        controller: 'LoginController'
     })
+
+    .when('/kidSignUp', {
+        templateUrl: 'views/kid_signup.html',
+        controller: 'ChildController'
+    })
+    
+    .when('/kidSignIn', {
+        templateUrl: 'views/kid_signin.html',
+        controller: 'ChildLoginController'
+    })
+    
+    .when('/kid', {
+        templateUrl: 'views/kid.html',
+        controller: 'ChildController',
+        requiresLogin: true
+    })
+    
+    .when('/adult', {
+        templateUrl: 'views/adult.html',
+        controller: 'AdultController',
+        requiresLogin: true,
+        requiresAdmin: true
+    })
+
+    .when('/kidSignUpAdult', {
+        templateUrl: 'views/kid_signup_adult.html',
+        controller: 'ChildSignUpController'
+    })
+    
     .otherwise({
         redirectTo: '/'
+    });
+}])
+.run(['$rootScope', '$location', 'UserService', function($rootScope, $location, UserService){
+    $rootScope.$on('$rootChangeStart', function(event, nextRoute, previousRoute){
+        if (nextRoute.$$route.requiresLogin && !UserService.isLoggedIn()) {
+            event.preventDefault();
+            UserService.loginRedirect();
+        } else if (nextRoute.$$route.requiresAdmin && !UserService.isAdmin()){
+            event.preventDefault();
+            $location.replace().path('/kid');
+        }
     });
 }]);

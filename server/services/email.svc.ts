@@ -1,15 +1,20 @@
 import * as sendgrid from 'sendgrid'; //when we have types
 const helper = sendgrid.mail;
-const sg = sendgrid(process.env.SENDGRID_API_KEY || ''); //the || '' SATISFIES TYPESCRIPT 
+const sg = sendgrid("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" || ''); //the || '' SATISFIES TYPESCRIPT 
 
-export function sendEmail(to: string, from: string, subject: string, message: string) {
+// req.body.name, req.body.child, "created a Christmas List.", "The items they want are", req.body.wishlist
+// export function sendEmail(to: string, from: string, subject: string, message: string) {
+
+  export function sendEmail(to: string, from: string, subject: string, message: string) {    
   console.log("inside email service");
-  console.log(from);
-  console.log(message);
   
     let toEmail = new helper.Email(to);
     let fromEmail = new helper.Email(from);
     let emailContent = new helper.Content('text/html', message);
+
+    console.log(toEmail);
+    console.log(fromEmail);
+    console.log(emailContent);
     
     let mail = new helper.Mail(fromEmail, subject, toEmail, emailContent);
 
@@ -18,6 +23,7 @@ export function sendEmail(to: string, from: string, subject: string, message: st
       path: '/v3/mail/send',
       body: mail.toJSON(),
     });
+
 
     return sg.API(request);//result will be a promise
 }

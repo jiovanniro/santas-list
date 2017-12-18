@@ -1,14 +1,13 @@
 import * as express from 'express'; 
-import * as procedures from '../procedures/cart.proc';
+import * as procedures from '../procedures/posts.proc';
 
 let router = express.Router();
 
 //router.get('*', auth.isLoggedIn);
 
-// -- /api/cart
 router.route('/')
     .get(function(req, res) {
-        procedures.all()
+        procedures.all(req.body.productId)
         .then(function(item) {
             res.send(item);
         }).catch(function(err) {
@@ -16,7 +15,7 @@ router.route('/')
         });
     })
     .post(function(req, res){
-        procedures.post(req.body.productId, req.body.purchaseId)
+        procedures.add(req.body.productId, req.body.purchaseId)
         .then(function(item){
             res.send(item);
         }).catch(function(err){
@@ -26,7 +25,7 @@ router.route('/')
 
 router.route('/:id')
     .get(function(req, res){
-        procedures.listedItems(req.params.id)
+        procedures.single(req.params.id)
         .then(function(items){
             res.send(items);
         }).catch(function(err) {
@@ -35,5 +34,3 @@ router.route('/:id')
     })
 
 export default router;
-
-//Does not handle authentication right now

@@ -2,12 +2,15 @@ import * as mySql from 'mysql';
 
 export let pool =  mySql.createPool({
     connectionLimit: 10,
-    host: '',
-    user: '',
-    password: '',
-    database: ''
+    // host: process.env.DATABASE_URL, 
+    // user: process.env.DATABASE_USER, 
+    // password: process.env.DATABASE_PASSWORD, 
+    // database: process.env.DATABASE_NAME
+    host: 'localhost',
+    user: 'santaListUser',
+    password: 'checkingItTwice',
+    database: 'santa_list'
 });
-
 
 export function rows(procedureName: string, args: any) {
     return callProcedure(procedureName, args)
@@ -52,6 +55,7 @@ function callProcedure(procedureName: string, args: any){
                 let callString = 'CALL ' + procedureName + '(' + placeholders + ');';
                // console.log("Yo dawg I'm connected");
                 console.log("The callString: " + callString);
+                console.log(args);
                 connection.query(callString, args, function(err: any, resultsets:any){
                     connection.release();
                     if (err) {

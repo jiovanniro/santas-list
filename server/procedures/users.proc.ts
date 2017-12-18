@@ -1,0 +1,30 @@
+import {row, rows, empty} from '../config/db';  
+
+export function all(): Promise<Array<models.IUser>> {
+    return rows('GetUsers',[]);
+}
+
+export function read(user: string): Promise<models.IUser> {
+    return row('get_user_by_username', [user]);
+}
+
+export function readById(id: number): Promise<models.IUser> {
+    return row('get_user_by_id', [id]);
+}
+
+//Added for checking if child is logging in
+export function readChild(user: string): Promise<models.IUser> {
+    return row('get_childUser_by_username', [user]);
+}
+
+export function readChildById(id: number): Promise<models.IUser> {
+    return row('get_childUser_by_id', [id]);
+}
+
+export function create(username: string, email: string, password: string) {
+    return row('create_username', [username, email, password]);
+}
+
+export function destroy(id: number) {
+    return empty('DeleteUser', [id]);
+}

@@ -1,21 +1,30 @@
-var app = angular.module('myStore.factories', []);
+angular.module('santasList.factories', [])
 
-app.factory('Products', ['$resource', function($resource){
-    return $resource('/api/products/:id', { id: '@id' });  
-}]);
+.factory('User', ['$resource', function($resource){
+    console.log('In User factory');
+    return $resource('/api/users/:id', { id: '@id' }); 
+}])
 
-app.factory('Cart', ['$resource', function($resource){
-    return $resource('/api/cart/:id', { id: '@id' });
-}]); 
+.factory('Child', ['$resource', function($resource){
+    return $resource('/api/child/:id', { id: '@id' });  
+}])
 
-app.factory('Checkout', ['$resource', function($resource){
-    return $resource('/api/checkout/:id', { id: '@id' });
-}]); 
+.factory('Adult', ['$resource', function($resource){
+    return $resource('/api/adult/:id', { id: '@id' });  
+}])
 
-app.factory('Contact', ['$resource', function($resource){
-    return $resource('/api/contact/:id', { id: '@id' });
-}]);
+.factory('ChildUser', ['$resource', function($resource){
+    return $resource('/api/child/createChild/:id', { id: '@id' });  
+}])
 
-app.factory('Single', ['$resource', function($resource){
-    return $resource('/api/single/:id', { id: '@id' })
+.factory('AdultUser', ['$resource', function($resource){
+    return $resource('/api/adult/user/:id', { id: '@id' });  
+}])
+
+.factory('Gift', ['$resource', function($resource){
+    return $resource('/api/child/gifts/:id', { id: '@id' });  
+}])
+
+.factory('Letter', ['$resource', function($resource){
+    return $resource('/api/send/:id', { id: '@id' });
 }]);

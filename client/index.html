@@ -1,54 +1,51 @@
 <!DOCTYPE html>
-<html ng-app="myStore">
-<head>
-    <base href="/">
+<html ng-app="santasList">
+    <head>
+        <base href="/">
 
-    <title>{{ seo.title }}</title>
+        <title>Santas List</title>
 
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge, Chrome=1">
-    <meta name="viewport" content="user-scalable+no, maximum-scale=1, minimum-scale=1, width=device-width, initial-scale=1, shrink-to-fit=no">
-    
-    <meta name="fragment" content="!">
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge, Chrome=1">
+        <meta name="viewport" content="maximum-scale=1, minimum-scale=1, width=device-width, initial-scale=1, shrink-to-fit=no">
+        
 
-    <meta property="og:title" content="{{ seo.title }}">
-    <meta property="twitter:title" content="{{ seo.title }}">
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css" integrity="sha384-PsH8R72JQ3SOdhVi3uxftmaW6Vc51MKb0q5P2rRUpPvrszuE4W1povHYgTpBfshb" crossorigin="anonymous">
+        <link rel='stylesheet prefetch' href='http:////netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css'>
+        <!-- FONTS -->
+        <link href="https://fonts.googleapis.com/css?family=Rock+Salt" rel="stylesheet">
+        <link href="https://fonts.googleapis.com/css?family=Mountains+of+Christmas:700" rel="stylesheet">
+        <link href="https://fonts.googleapis.com/css?family=Henny+Penny" rel="stylesheet">
+        
+        <link rel="stylesheet" href="css/style.css">
+        <link rel="stylesheet" href="css/base.css">
+    </head>
+    <body>
+        
+        <canvas id="canvas" style="z-index:-2; position:absolute; background-color:rgb(87, 115, 230);"></canvas>  
+        <div class="viewContainer">
+            <div class="view" ng-view></div>
+        </div>
+        <santa-Foot></santa-Foot>
 
-    <meta property="og:image" content="{{ seo.image }}">
-    <meta property="twitter:image" content="{{ seo.image }}">
-    
-    <meta property="og:url" content="{{ seo.url }}">
-    <meta property="twitter:url" content="{{ seo.url }}">
-    
-    <meta property="description" content="{{ seo.description }}">
+        <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.3/umd/popper.min.js" integrity="sha384-vFJXuSJphROIrBnz7yo7oB41mKfc8JzQZiCq4NCceLEaO4IHwicKwpJf9c9IpFgh" crossorigin="anonymous"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/js/bootstrap.min.js" integrity="sha384-alpBpkh1PFOepccYVYDB4do5UnbKysX5WZXm3XxPqe5iKTfUKjNkCk9SaVuEZflJ" crossorigin="anonymous"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/bootbox.js/4.4.0/bootbox.min.js"></script>
 
-    <meta property="og:description" content="{{ seo.description }}">
-    <meta property="twitter:description" content="{{ seo.description }}">
+        <script src="https://use.fontawesome.com/146c71a149.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.6.5/angular.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.6.5/angular-resource.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.6.5/angular-route.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.6.5/angular-animate.min.js"></script>
 
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css" integrity="sha384-PsH8R72JQ3SOdhVi3uxftmaW6Vc51MKb0q5P2rRUpPvrszuE4W1povHYgTpBfshb" crossorigin="anonymous">
-    
-    <link href="https://fonts.googleapis.com/css?family=Merriweather" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css?family=Arvo" rel="stylesheet">    
-    <link rel="stylesheet" href="css/style.css">
-</head>
-<body>
-
-    <store-Nav></store-Nav>
-
-    <div ng-view></div>
-
-    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.3/umd/popper.min.js" integrity="sha384-vFJXuSJphROIrBnz7yo7oB41mKfc8JzQZiCq4NCceLEaO4IHwicKwpJf9c9IpFgh" crossorigin="anonymous"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/js/bootstrap.min.js" integrity="sha384-alpBpkh1PFOepccYVYDB4do5UnbKysX5WZXm3XxPqe5iKTfUKjNkCk9SaVuEZflJ" crossorigin="anonymous"></script>
-
-    <script src="https://use.fontawesome.com/146c71a149.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.6.5/angular.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.6.5/angular-resource.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.6.5/angular-route.js"></script>
-    
-    <script src="factories.js"></script>   
-    <script src="services.js"></script> 
-    <script src="controllers.js"></script>
-    <script src="directive.js"></script>
-    <script src="app.js"></script>
-</body>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/mdbootstrap/4.4.3/css/mdb.min.css"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/mdbootstrap/4.4.3/js/mdb.min.js"></script>
+        
+        <script src="factories.js"></script>   
+        <script src="services.js"></script> 
+        <script src="controllers.js"></script>
+        <script src="directive.js"></script>
+        <script src="app.js"></script>
+    </body>
+</html>

@@ -17,5 +17,3 @@ router.route('/:id')
     });
 
 export default router;
-
-//Does not handle authentication right now

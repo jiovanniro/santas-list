@@ -1,19 +1,15 @@
 import * as express from 'express'; 
 //import controllers 
-import cart from './controllers/cart.ctrl';
-import checkout from './controllers/checkout.ctrl';
-import contact from './controllers/contact.ctrl';
-import products from './controllers/products.ctrl';
-import single from './controllers/single.ctrl';
+import users from './controllers/users.ctrl';
+import child from './controllers/child.ctrl';
+import adult from './controllers/adult.ctrl';
+import send from './controllers/send.ctrl';
 
 const router = express.Router();
 
-router.use('/cart', cart);
-router.use('/checkout', checkout);
-router.use('/contact', contact);
-router.use('/products', products);
-router.use('/single', single);
-
-
+router.use('/users', users);
+router.use('/child', child);
+router.use('/adult', adult);
+router.use('/send', send);
 
 export default router;
